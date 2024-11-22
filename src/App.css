@@ -28,6 +28,21 @@
   color: #61dafb;
 }
 
+.unauthorized-container {
+  margin-top: 80px;
+  background-image: url("../public/img/unauthorized.jpg");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
