@@ -824,9 +824,498 @@ export default function Home() {
             <div className="swiper-pagination"></div>
           </div>
         </section>
+
+        <section id="team" class="team section">
+          <div class="container section-title" data-aos="fade-up">
+            <h2>Our Team</h2>
+            <p>
+              Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+              consectetur velit
+            </p>
+          </div>
+
+          <div class="container">
+            <div class="row gy-4">
+              <div
+                class="col-xl-3 col-md-6 d-flex"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <div class="member">
+                  <img
+                    src="/img/team/team-1.jpg"
+                    class="img-fluid"
+                    alt=""
+                  ></img>
+                  <h4>Walter White</h4>
+                  <span>Web Development</span>
+                  <div class="social">
+                    <a href="">
+                      <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-linkedin"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xl-3 col-md-6 d-flex"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <div class="member">
+                  <img
+                    src="/img/team/team-2.jpg"
+                    class="img-fluid"
+                    alt=""
+                  ></img>
+                  <h4>Sarah Jhinson</h4>
+                  <span>Marketing</span>
+                  <div class="social">
+                    <a href="">
+                      <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-linkedin"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xl-3 col-md-6 d-flex"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <div class="member">
+                  <img
+                    src="/img/team/team-3.jpg"
+                    class="img-fluid"
+                    alt=""
+                  ></img>
+                  <h4>William Anderson</h4>
+                  <span>Content</span>
+                  <div class="social">
+                    <a href="">
+                      <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-linkedin"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xl-3 col-md-6 d-flex"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
+                <div class="member">
+                  <img
+                    src="/img/team/team-4.jpg"
+                    class="img-fluid"
+                    alt=""
+                  ></img>
+                  <h4>Amanda Jepson</h4>
+                  <span>Accountant</span>
+                  <div class="social">
+                    <a href="">
+                      <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="">
+                      <i class="bi bi-linkedin"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pricing" class="pricing section">
+          <div class="container section-title" data-aos="fade-up">
+            <h2>Pricing</h2>
+            <p>
+              Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+              consectetur velit
+            </p>
+          </div>
+
+          <div class="container" data-aos="zoom-in" data-aos-delay="100">
+            <div class="row g-4">
+              <div class="col-lg-4">
+                <div class="pricing-item">
+                  <h3>Free Plan</h3>
+                  <div class="icon">
+                    <i class="bi bi-box"></i>
+                  </div>
+                  <h4>
+                    <sup>$</sup>0<span> / month</span>
+                  </h4>
+                  <ul>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Quam adipiscing vitae proin</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Nec feugiat nisl pretium</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Nulla at volutpat diam uteera</span>
+                    </li>
+                    <li class="na">
+                      <i class="bi bi-x"></i>{" "}
+                      <span>Pharetra massa massa ultricies</span>
+                    </li>
+                    <li class="na">
+                      <i class="bi bi-x"></i>{" "}
+                      <span>Massa ultricies mi quis hendrerit</span>
+                    </li>
+                  </ul>
+                  <div class="text-center">
+                    <a href="#" class="buy-btn">
+                      Buy Now
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-item featured">
+                  <h3>Business Plan</h3>
+                  <div class="icon">
+                    <i class="bi bi-rocket"></i>
+                  </div>
+
+                  <h4>
+                    <sup>$</sup>29<span> / month</span>
+                  </h4>
+                  <ul>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Quam adipiscing vitae proin</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Nec feugiat nisl pretium</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Nulla at volutpat diam uteera</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Pharetra massa massa ultricies</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Massa ultricies mi quis hendrerit</span>
+                    </li>
+                  </ul>
+                  <div class="text-center">
+                    <a href="#" class="buy-btn">
+                      Buy Now
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-item">
+                  <h3>Developer Plan</h3>
+                  <div class="icon">
+                    <i class="bi bi-send"></i>
+                  </div>
+                  <h4>
+                    <sup>$</sup>49<span> / month</span>
+                  </h4>
+                  <ul>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Quam adipiscing vitae proin</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Nec feugiat nisl pretium</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Nulla at volutpat diam uteera</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Pharetra massa massa ultricies</span>
+                    </li>
+                    <li>
+                      <i class="bi bi-check"></i>{" "}
+                      <span>Massa ultricies mi quis hendrerit</span>
+                    </li>
+                  </ul>
+                  <div class="text-center">
+                    <a href="#" class="buy-btn">
+                      Buy Now
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="contact section">
+          <div class="container section-title" data-aos="fade-up">
+            <h2>Contact</h2>
+            <p>
+              Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+              consectetur velit
+            </p>
+          </div>
+
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row gx-lg-0 gy-4">
+              <div class="col-lg-4">
+                <div class="info-container d-flex flex-column align-items-center justify-content-center">
+                  <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                  >
+                    <i class="bi bi-geo-alt flex-shrink-0"></i>
+                    <div>
+                      <h3>Address</h3>
+                      <p>A108 Adam Street, New York, NY 535022</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <i class="bi bi-telephone flex-shrink-0"></i>
+                    <div>
+                      <h3>Call Us</h3>
+                      <p>+1 5589 55488 55</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                  >
+                    <i class="bi bi-envelope flex-shrink-0"></i>
+                    <div>
+                      <h3>Email Us</h3>
+                      <p>info@example.com</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="info-item d-flex"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                  >
+                    <i class="bi bi-clock flex-shrink-0"></i>
+                    <div>
+                      <h3>Open Hours:</h3>
+                      <p>Mon-Sat: 11AM - 23PM</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-8">
+                <form
+                  action="forms/contact.php"
+                  method="post"
+                  class="php-email-form"
+                  data-aos="fade"
+                  data-aos-delay="100"
+                >
+                  <div class="row gy-4">
+                    <div class="col-md-6">
+                      <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Your Name"
+                        required=""
+                      ></input>
+                    </div>
+
+                    <div class="col-md-6 ">
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        placeholder="Your Email"
+                        required=""
+                      ></input>
+                    </div>
+
+                    <div class="col-md-12">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="subject"
+                        placeholder="Subject"
+                        required=""
+                      ></input>
+                    </div>
+
+                    <div class="col-md-12">
+                      <textarea
+                        class="form-control"
+                        name="message"
+                        rows="8"
+                        placeholder="Message"
+                        required=""
+                      ></textarea>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                      <div class="loading">Loading</div>
+                      <div class="error-message"></div>
+                      <div class="sent-message">
+                        Your message has been sent. Thank you!
+                      </div>
+
+                      <button type="submit">Send Message</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
+      <footer id="footer" class="footer accent-background">
+        <div class="container footer-top">
+          <div class="row gy-4">
+            <div class="col-lg-5 col-md-12 footer-about">
+              <a href="index.html" class="logo d-flex align-items-center">
+                <span class="sitename">Impact</span>
+              </a>
+              <p>
+                Cras fermentum odio eu feugiat lide par naso tierra. Justo eget
+                nada terra videa magna derita valies darta donna mare fermentum
+                iaculis eu non diam phasellus.
+              </p>
+              <div class="social-links d-flex mt-4">
+                <a href="">
+                  <i class="bi bi-twitter-x"></i>
+                </a>
+                <a href="">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a href="">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a href="">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+              </div>
+            </div>
 
+            <div class="col-lg-2 col-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <a href="#">Home</a>
+                </li>
+                <li>
+                  <a href="#">About us</a>
+                </li>
+                <li>
+                  <a href="#">Services</a>
+                </li>
+                <li>
+                  <a href="#">Terms of service</a>
+                </li>
+                <li>
+                  <a href="#">Privacy policy</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-2 col-6 footer-links">
+              <h4>Our Services</h4>
+              <ul>
+                <li>
+                  <a href="#">Web Design</a>
+                </li>
+                <li>
+                  <a href="#">Web Development</a>
+                </li>
+                <li>
+                  <a href="#">Product Management</a>
+                </li>
+                <li>
+                  <a href="#">Marketing</a>
+                </li>
+                <li>
+                  <a href="#">Graphic Design</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+              <h4>Contact Us</h4>
+              <p>A108 Adam Street</p>
+              <p>New York, NY 535022</p>
+              <p>United States</p>
+              <p class="mt-4">
+                <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+              </p>
+              <p>
+                <strong>Email:</strong> <span>info@example.com</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="container copyright text-center mt-4">
+          <p>
+            © <span>Copyright</span>{" "}
+            <strong class="px-1 sitename">Impact</strong>{" "}
+            <span>All Rights Reserved</span>
+          </p>
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
