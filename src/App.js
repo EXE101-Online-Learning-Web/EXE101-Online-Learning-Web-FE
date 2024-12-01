@@ -16,12 +16,15 @@ import "../src/public/assets/vendor/bootstrap/css/bootstrap.min.css";
 import "../src/public/assets/css/main.css";
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
+import test from "./components/test/test";
+
 
 const AppContent = () => {
   return (
     <>
       <Switch>
-        <Route path="" exact component={Home} />
+        <Route path="/" exact component={Home} />
+        <Route path="/test" exact component={test} />
       </Switch>
     </>
   );
@@ -30,7 +33,6 @@ const AppContent = () => {
 const App = () => (
   <Router>
     <AppContent />
-
     <ToastContainer />
   </Router>
 );
