@@ -9,6 +9,7 @@ import {
 
 import ScrollToTop from "./components/ScrollToTop/index";
 import useModal from "./hooks/useModal";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import "../src/public/assets/vendor/glightbox/css/glightbox.min.css";
 import "../src/public/assets/vendor/swiper/swiper-bundle.min.css";
 import "../src/public/assets/vendor/bootstrap-icons/bootstrap-icons.css";
@@ -17,6 +18,8 @@ import "../src/public/assets/css/main.css";
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
 import test from "./components/test/test";
+import AdminManagement from "./components/Admin/Admin";
+
 
 
 const AppContent = () => {
@@ -25,6 +28,7 @@ const AppContent = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/test" exact component={test} />
+        <Route path="/admin" exact component={AdminManagement} />
       </Switch>
     </>
   );
