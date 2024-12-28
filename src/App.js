@@ -1,15 +1,8 @@
 import "./App.css";
-import React, { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import ScrollToTop from "./components/ScrollToTop/index";
-import useModal from "./hooks/useModal";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../src/public/assets/vendor/glightbox/css/glightbox.min.css";
 import "../src/public/assets/vendor/swiper/swiper-bundle.min.css";
 import "../src/public/assets/vendor/bootstrap-icons/bootstrap-icons.css";
@@ -17,28 +10,22 @@ import "../src/public/assets/vendor/bootstrap/css/bootstrap.min.css";
 import "../src/public/assets/css/main.css";
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
-import test from "./components/test/test";
+import Login from "./components/Login/Login";
 import AdminManagement from "./components/Admin/Admin";
 
-
-
-const AppContent = () => {
-  return (
-    <>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/test" exact component={test} />
-        <Route path="/admin" exact component={AdminManagement} />
-      </Switch>
-    </>
-  );
-};
+const AppContent = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/admin" element={<AdminManagement />} />
+  </Routes>
+);
 
 const App = () => (
-  <Router>
+  <>
     <AppContent />
     <ToastContainer />
-  </Router>
+  </>
 );
 
 export default App;
