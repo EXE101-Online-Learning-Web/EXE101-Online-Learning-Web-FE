@@ -22,11 +22,11 @@ export default function Login() {
       );
 
       if (response.data && response.data.token) {
-        const token = response.data.token;
+        const token = response.data.token.result;
         localStorage.setItem("authToken", token);
 
         try {
-          const decodedToken = jwtDecode(token.result);
+          const decodedToken = jwtDecode(token);
           const role = decodedToken.role;
 
           if (role === "Admin") {
