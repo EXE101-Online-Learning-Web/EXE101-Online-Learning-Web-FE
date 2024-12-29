@@ -12,12 +12,14 @@ import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import AdminManagement from "./components/Admin/Admin";
+import TeacherList from "./components/Admin/Teacher/TeacherList";
 
 const AppContent = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/login" element={<Login />} />
     <Route path="/admin" element={<AdminManagement />} />
+    <Route path="/admin/teacher/teacherList" element={<TeacherList />} />
   </Routes>
 );
 

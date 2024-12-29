@@ -1,6 +1,12 @@
+
+import AdminLayout from "../../Common/Admin/AdminLayout";
+
 export default function TeacherList() {
   return (
-    <>
+    <AdminLayout>
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+      </div>
       <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800"></h1>
         <div class="card shadow mb-4">
@@ -43,6 +49,6 @@ export default function TeacherList() {
           </div>
         </div>
       </div>
-    </>
+    </AdminLayout>
   );
 }
