@@ -50,7 +50,7 @@ export function SidebarAdmin() {
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <Link class="collapse-item" >
+              <Link to={"/admin/student/studentList"} class="collapse-item" >
                 Student
               </Link>
               <Link to={"/admin/teacher/teacherList"} class="collapse-item" >

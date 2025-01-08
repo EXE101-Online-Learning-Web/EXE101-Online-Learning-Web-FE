@@ -18,6 +18,9 @@ export default function Login() {
         {
           email,
           password,
+        },
+        {
+          withCredentials: true,
         }
       );
 
@@ -32,7 +35,7 @@ export default function Login() {
           if (role === "Admin") {
             navigate("/admin");
           } else {
-            navigate("/home");
+            navigate("/");
           }
         } catch (error) {
           console.error("Error decoding token:", error);

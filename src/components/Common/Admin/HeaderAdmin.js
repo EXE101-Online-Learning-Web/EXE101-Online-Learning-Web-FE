@@ -132,7 +132,7 @@ export function HeaderAdmin() {
                 <div class="dropdown-list-image mr-3">
                   <img
                     class="rounded-circle"
-                    src="img/admin/undraw_profile_1.svg"
+                    src="/img/admin/undraw_profile_1.svg"
                     alt="..."
                   ></img>
                   <div class="status-indicator bg-success"></div>
@@ -149,7 +149,7 @@ export function HeaderAdmin() {
                 <div class="dropdown-list-image mr-3">
                   <img
                     class="rounded-circle"
-                    src="img/admin/undraw_profile_2.svg"
+                    src="/img/admin/undraw_profile_2.svg"
                     alt="..."
                   ></img>
                   <div class="status-indicator"></div>
@@ -166,7 +166,7 @@ export function HeaderAdmin() {
                 <div class="dropdown-list-image mr-3">
                   <img
                     class="rounded-circle"
-                    src="img/admin/undraw_profile_3.svg"
+                    src="/img/admin/undraw_profile_3.svg"
                     alt="..."
                   ></img>
                   <div class="status-indicator bg-warning"></div>
@@ -220,7 +220,7 @@ export function HeaderAdmin() {
               </span>
               <img
                 class="img-profile rounded-circle"
-                src="img/admin/undraw_profile.svg"
+                src="/img/admin/undraw_profile.svg"
               ></img>
             </a>
             <div
