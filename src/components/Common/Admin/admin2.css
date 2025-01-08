@@ -3334,7 +3334,7 @@
     min-height: 1.5rem;
     padding-left: 1.5rem;
     -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    print-color-adjust: exact;
   }
   .custom-control-inline {
     display: inline-flex;
@@ -10022,8 +10022,9 @@
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
   }
   .error {
-    color: #5a5c69;
-    font-size: 7rem;
+    color: red;
+    font-weight: 700;
+    font-size: 16px;
     position: relative;
     line-height: 1;
     width: 12.5rem;
