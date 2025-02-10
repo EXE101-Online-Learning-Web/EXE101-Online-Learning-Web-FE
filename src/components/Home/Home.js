@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import "../../public/assets/css/home.css";
+import "../../public/assets/css/heroSection.css";
 
 export default function Home() {
   return (
@@ -11,10 +13,10 @@ export default function Home() {
           <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
               <i class="bi bi-envelope d-flex align-items-center">
-                <a href="mailto:contact@example.com">contact@example.com</a>
+                <a href="mailto:contact@example.com">EduQuest.service@gmail.com</a>
               </i>
               <i class="bi bi-phone d-flex align-items-center ms-4">
-                <span>+1 5589 55488 55</span>
+                <span>+84386543757</span>
               </i>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
@@ -34,86 +36,27 @@ export default function Home() {
           </div>
         </div>
 
-        <div class="branding d-flex align-items-cente">
-          <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <h1 class="sitename">Impact</h1>
-              <span>.</span>
-            </a>
-
-            <nav id="navmenu" class="navmenu">
-              <ul>
-                <li>
-                  <a href="#hero" class="active">
-                    Home<br></br>
-                  </a>
-                </li>
-                <li>
-                  <a href="#about">About</a>
-                </li>
-                <li>
-                  <a href="#services">Services</a>
-                </li>
-                <li>
-                  <a href="#portfolio">Portfolio</a>
-                </li>
-                <li>
-                  <a href="#team">Team</a>
-                </li>
-                <li>
-                  <a href="blog.html">Blog</a>
-                </li>
-                <li class="dropdown">
-                  <a href="#">
-                    <span>Dropdown</span>{" "}
-                    <i class="bi bi-chevron-down toggle-dropdown"></i>
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="#">Dropdown 1</a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#">
-                        <span>Deep Dropdown</span>{" "}
-                        <i class="bi bi-chevron-down toggle-dropdown"></i>
-                      </a>
-                      <ul>
-                        <li>
-                          <a href="#">Deep Dropdown 1</a>
-                        </li>
-                        <li>
-                          <a href="#">Deep Dropdown 2</a>
-                        </li>
-                        <li>
-                          <a href="#">Deep Dropdown 3</a>
-                        </li>
-                        <li>
-                          <a href="#">Deep Dropdown 4</a>
-                        </li>
-                        <li>
-                          <a href="#">Deep Dropdown 5</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="#">Dropdown 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Dropdown 3</a>
-                    </li>
-                    <li>
-                      <a href="#">Dropdown 4</a>
-                    </li>
+        <div class="navbar">
+          <div class="container">
+              <a href="index.html" class="logo">
+                  <img src="/img/EduQuestLogo.png" alt="EduQuest Logo" class="logo-img"/>
+                  <h1 id="pageName">EduQuest</h1>
+                  <span>.</span>
+              </a>
+              <nav class="navmenu">
+                  <ul class="nav-links">
+                      <li><a href="#hero"><i class="fas fa-home"></i> Home</a></li>
+                      <li><a href="#courses"><i class="fas fa-book"></i> Courses</a></li>
+                      <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                      <li><a href="#pricing"><i class="fas fa-dollar-sign"></i> Pricing</a></li>
                   </ul>
-                </li>
-                <li>
-                  <a href="#contact">Contact</a>
-                </li>
-              </ul>
-              <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
+                  <div class="auth-buttons">
+                      <a href="login.html" class="login-btn">Login</a>
+                      <a href="register.html" class="register-btn">Register</a>
+                  </div>
+              </nav>
           </div>
-        </div>
+      </div>
       </header>
 
       <main class="main">
@@ -127,11 +70,13 @@ export default function Home() {
               <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
                 <h2>
                   <span>Welcome to </span>
-                  <span class="accent">Impact</span>
+                  <span id="accent">EduQuest</span>
                 </h2>
                 <p>
-                  Sed autem laudantium dolores. Voluptatem itaque ea consequatur
-                  eveniet. Eum quas beatae cumque eum quaerat.
+                  Building an intelligent online learning platform that incorporates AI technology to personalize the learning experience. 
+                  Designed to help teachers and trainers upload and manage their lectures, it also creates solutions to help students learn 
+                  more effectively through automation features such as creating quizzes based on course content and feedback to improve learning 
+                  performance.
                 </p>
                 <div class="d-flex">
                   <a href="#about" class="btn-get-started">
@@ -156,163 +101,190 @@ export default function Home() {
             </div>
           </div>
 
-          <div
-            class="icon-boxes position-relative"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div class="container position-relative">
-              <div class="row gy-4 mt-5">
-                <div class="col-xl-3 col-md-6">
-                  <div class="icon-box">
-                    <div class="icon">
-                      <i class="bi bi-easel"></i>
+        {/* <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+            <div class="container-fluid position-relative">
+                <div class="row gx-3 gy-3 mt-0">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bi bi-easel"></i></div>
+                            <h4 class="title"><a href="" class="stretched-link">Interactive Courses</a></h4>
+                        </div>
                     </div>
-                    <h4 class="title">
-                      <a href="" class="stretched-link">
-                        Lorem Ipsum
-                      </a>
-                    </h4>
-                  </div>
-                </div>
 
-                <div class="col-xl-3 col-md-6">
-                  <div class="icon-box">
-                    <div class="icon">
-                      <i class="bi bi-gem"></i>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bi bi-gem"></i></div>
+                            <h4 class="title"><a href="" class="stretched-link">AI-Powered Learning</a></h4>
+                        </div>
                     </div>
-                    <h4 class="title">
-                      <a href="" class="stretched-link">
-                        Sed ut perspiciatis
-                      </a>
-                    </h4>
-                  </div>
-                </div>
 
-                <div class="col-xl-3 col-md-6">
-                  <div class="icon-box">
-                    <div class="icon">
-                      <i class="bi bi-geo-alt"></i>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bi bi-geo-alt"></i></div>
+                            <h4 class="title"><a href="" class="stretched-link">Global Community</a></h4>
+                        </div>
                     </div>
-                    <h4 class="title">
-                      <a href="" class="stretched-link">
-                        Magni Dolores
-                      </a>
-                    </h4>
-                  </div>
-                </div>
 
-                <div class="col-xl-3 col-md-6">
-                  <div class="icon-box">
-                    <div class="icon">
-                      <i class="bi bi-command"></i>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="icon-box">
+                            <div class="icon"><i class="bi bi-command"></i></div>
+                            <h4 class="title"><a href="" class="stretched-link">Smart Automation</a></h4>
+                        </div>
                     </div>
-                    <h4 class="title">
-                      <a href="" class="stretched-link">
-                        Nemo Enim
-                      </a>
-                    </h4>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
+        </div> */}
+
         </section>
+
+    <section id="courses" class="courses section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="course-item">
+                            <img src="/img/courses/course-1.jpg" class="img-fluid" alt="Full-Stack Web Development"/>
+                            <div class="course-content">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <p class="category">Full-Stack Web Development</p>
+                                    <p class="price">$299</p>
+                                </div>
+                                <h3><a href="course-details.html">Become a Full-Stack Developer</a></h3>
+                                <p class="description">
+                                    Learn HTML, CSS, JavaScript, React, and Node.js to build dynamic and responsive web applications. 
+                                    Hands-on projects and real-world applications included.
+                                </p>
+                                <div class="trainer d-flex justify-content-between align-items-center">
+                                    <div class="trainer-profile d-flex align-items-center">
+                                        <img src="/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="John Doe"/>
+                                        <a href="" class="trainer-link">John Doe</a>
+                                    </div>
+                                    <div class="trainer-rank d-flex align-items-center">
+                                        <i class="bi bi-person user-icon"></i>&nbsp;120 
+                                        &nbsp;&nbsp;
+                                        <i class="bi bi-heart heart-icon"></i>&nbsp;98
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="course-item">
+                            <img src="/img/courses/course-2.jpg" class="img-fluid" alt="Digital Marketing"/>
+                            <div class="course-content">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <p class="category">Digital Marketing for IT</p>
+                                    <p class="price">$199</p>
+                                </div>
+                                <h3><a href="course-details.html">SEO & Social Media Strategies</a></h3>
+                                <p class="description">
+                                    Master SEO, content marketing, and social media strategies tailored for IT and tech businesses. 
+                                    Learn how to drive traffic and optimize brand presence online.
+                                </p>
+                                <div class="trainer d-flex justify-content-between align-items-center">
+                                    <div class="trainer-profile d-flex align-items-center">
+                                        <img src="/img/trainers/trainer-2-2.jpg" class="img-fluid" alt="Sarah Lee"/>
+                                        <a href="" class="trainer-link">Sarah Lee</a>
+                                    </div>
+                                    <div class="trainer-rank d-flex align-items-center">
+                                        <i class="bi bi-person user-icon"></i>&nbsp;85
+                                        &nbsp;&nbsp;
+                                        <i class="bi bi-heart heart-icon"></i>&nbsp;72
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="course-item">
+                            <img src="/img/courses/course-3.jpg" class="img-fluid" alt="AI Copywriting"/>
+                            <div class="course-content">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <p class="category">AI-Powered Copywriting</p>
+                                    <p class="price">$149</p>
+                                </div>
+                                <h3><a href="course-details.html">Write Better with AI</a></h3>
+                                <p class="description">
+                                    Leverage AI tools like ChatGPT and Jasper to create high-quality blog posts, landing pages, 
+                                    and ad copy that convert. Perfect for tech professionals and content creators.
+                                </p>
+                                <div class="trainer d-flex justify-content-between align-items-center">
+                                    <div class="trainer-profile d-flex align-items-center">
+                                        <img src="/img/trainers/trainer-3-2.jpg" class="img-fluid" alt="Michael Chen"/>
+                                        <a href="" class="trainer-link">Michael Chen</a>
+                                    </div>
+                                    <div class="trainer-rank d-flex align-items-center">
+                                        <i class="bi bi-person user-icon"></i>&nbsp;60
+                                        &nbsp;&nbsp;
+                                        <i class="bi bi-heart heart-icon"></i>&nbsp;80
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <section id="about" class="about section">
-          <div class="container section-title" data-aos="fade-up">
-            <h2>
-              About Us<br></br>
-            </h2>
-            <p>
-              Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-              consectetur velit
-            </p>
-          </div>
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Transforming Online Education with AI</h3>
+                        <img src="/img/about-2.jpg" class="img-fluid rounded-4 mb-4" alt="EduQuest AI Learning"/>
+                        <p>
+                            EduQuest leverages artificial intelligence to create adaptive learning paths, generate 
+                            personalized quizzes, and provide real-time feedback. Our goal is to revolutionize online 
+                            education by making learning more interactive, engaging, and tailored to individual needs.
+                        </p>
+                        <p>
+                            Whether you're a student seeking skill enhancement or an instructor looking to manage courses 
+                            efficiently, EduQuest offers powerful tools to streamline the process. With AI-driven analytics, 
+                            we ensure that every learner gets the most relevant and effective learning experience.
+                        </p>
+                    </div>
 
-          <div class="container">
-            <div class="row gy-4">
-              <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <h3>
-                  Voluptatem dignissimos provident laboris nisi ut aliquip ex ea
-                  commodo
-                </h3>
-                <img
-                  src="/img/about-2.jpg"
-                  class="img-fluid rounded-4 mb-4"
-                  alt=""
-                ></img>
-                <p>
-                  Ut fugiat ut sunt quia veniam. Voluptate perferendis
-                  perspiciatis quod nisi et. Placeat debitis quia recusandae
-                  odit et consequatur voluptatem. Dignissimos pariatur
-                  consectetur fugiat voluptas ea.
-                </p>
-                <p>
-                  Temporibus nihil enim deserunt sed ea. Provident sit expedita
-                  aut cupiditate nihil vitae quo officia vel. Blanditiis
-                  eligendi possimus et in cum. Quidem eos ut sint rem veniam
-                  qui. Ut ut repellendus nobis tempore doloribus debitis
-                  explicabo similique sit. Accusantium sed ut omnis beatae neque
-                  deleniti repellendus.
-                </p>
-              </div>
-              <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
-                <div class="content ps-0 ps-lg-5">
-                  <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check-circle-fill"></i>{" "}
-                      <span>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      </span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circle-fill"></i>{" "}
-                      <span>
-                        Duis aute irure dolor in reprehenderit in voluptate
-                        velit.
-                      </span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check-circle-fill"></i>{" "}
-                      <span>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate
-                        trideta storacalaperda mastiro dolore eu fugiat nulla
-                        pariatur.
-                      </span>
-                    </li>
-                  </ul>
-                  <p>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident
-                  </p>
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+                        <div class="content ps-0 ps-lg-5">
+                            <p class="fst-italic">
+                                Why choose EduQuest? Our platform is designed to bridge the gap between traditional 
+                                learning and modern AI-powered education.
+                            </p>
+                            <ul>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i> 
+                                    <span>AI-powered course recommendations tailored to each learner’s needs.</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i> 
+                                    <span>Automated quiz generation based on course content for efficient knowledge retention.</span>
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i> 
+                                    <span>Real-time analytics and progress tracking to optimize learning outcomes.</span>
+                                </li>
+                            </ul>
+                            <p>
+                                EduQuest empowers educators and learners by offering smart solutions for course management, 
+                                progress tracking, and interactive assessments. Join us in shaping the future of education!
+                            </p>
 
-                  <div class="position-relative mt-4">
-                    <img
-                      src="img/about-2.jpg"
-                      class="img-fluid rounded-4"
-                      alt=""
-                    ></img>
-                    <a
-                      href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
-                      class="glightbox pulsating-play-btn"
-                    ></a>
-                  </div>
+                            <div class="position-relative mt-4">
+                                <img src="/img/about-2.jpg" class="img-fluid rounded-4" alt="EduQuest Learning"/>
+                                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn">
+                                    {/* <i class="bi bi-play-circle"></i> */}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </section>
 
-        <section id="clients" className="clients section">
+
+        {/* <section id="clients" className="clients section">
           <div className="container">
             <Swiper
               modules={[Autoplay, Pagination]}
@@ -402,9 +374,9 @@ export default function Home() {
               </SwiperSlide>
             </Swiper>
           </div>
-        </section>
+        </section> */}
 
-        <section id="stats" class="stats section">
+        {/* <section id="stats" class="stats section">
           <div class="container" data-aos="fade-up" data-aos-delay="100">
             <div class="row gy-4 align-items-center">
               <div class="col-lg-5">
@@ -488,164 +460,38 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-
-        <section id="services" class="services section">
-          <div class="container section-title" data-aos="fade-up">
-            <h2>Our Services</h2>
-            <p>
-              Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-              consectetur velit
-            </p>
-          </div>
-
+        </section> */}
+       {/* <section id="services" class="services section">
           <div class="container">
-            <div class="row gy-4">
-              <div
-                class="col-lg-4 col-md-6"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                <div class="service-item  position-relative">
-                  <div class="icon">
-                    <i class="bi bi-activity"></i>
+              <div class="service-container">
+                  <div class="service-item" data-aos="fade-up" data-aos-delay="100">
+                      <div class="icon"><i class="bi bi-lightbulb"></i></div>
+                      <div class="content">
+                          <h3>AI-Powered Courses</h3>
+                          <p>Personalized course recommendations based on learning habits.</p>
+                      </div>
                   </div>
-                  <h3>Nesciunt Mete</h3>
-                  <p>
-                    Provident nihil minus qui consequatur non omnis maiores. Eos
-                    accusantium minus dolores iure perferendis tempore et
-                    consequatur.
-                  </p>
-                  <a
-                    href="service-details.html"
-                    class="readmore stretched-link"
-                  >
-                    Read more <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
 
-              <div
-                class="col-lg-4 col-md-6"
-                data-aos="fade-up"
-                data-aos-delay="200"
-              >
-                <div class="service-item position-relative">
-                  <div class="icon">
-                    <i class="bi bi-broadcast"></i>
+                  <div class="service-item" data-aos="fade-up" data-aos-delay="200">
+                      <div class="icon"><i class="bi bi-file-earmark-text"></i></div>
+                      <div class="content">
+                          <h3>Automated Quizzes</h3>
+                          <p>AI-generated quizzes after lessons for better retention.</p>
+                      </div>
                   </div>
-                  <h3>Eosle Commodi</h3>
-                  <p>
-                    Ut autem aut autem non a. Sint sint sit facilis nam iusto
-                    sint. Libero corrupti neque eum hic non ut nesciunt dolorem.
-                  </p>
-                  <a
-                    href="service-details.html"
-                    class="readmore stretched-link"
-                  >
-                    Read more <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
 
-              <div
-                class="col-lg-4 col-md-6"
-                data-aos="fade-up"
-                data-aos-delay="300"
-              >
-                <div class="service-item position-relative">
-                  <div class="icon">
-                    <i class="bi bi-easel"></i>
+                  <div class="service-item" data-aos="fade-up" data-aos-delay="300">
+                      <div class="icon"><i class="bi bi-graph-up-arrow"></i></div>
+                      <div class="content">
+                          <h3>Progress Tracking</h3>
+                          <p>AI-powered analytics for tracking and improving learning performance.</p>
+                      </div>
                   </div>
-                  <h3>Ledo Markt</h3>
-                  <p>
-                    Ut excepturi voluptatem nisi sed. Quidem fuga consequatur.
-                    Minus ea aut. Vel qui id voluptas adipisci eos earum
-                    corrupti.
-                  </p>
-                  <a
-                    href="service-details.html"
-                    class="readmore stretched-link"
-                  >
-                    Read more <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
               </div>
-
-              <div
-                class="col-lg-4 col-md-6"
-                data-aos="fade-up"
-                data-aos-delay="400"
-              >
-                <div class="service-item position-relative">
-                  <div class="icon">
-                    <i class="bi bi-bounding-box-circles"></i>
-                  </div>
-                  <h3>Asperiores Commodit</h3>
-                  <p>
-                    Non et temporibus minus omnis sed dolor esse consequatur.
-                    Cupiditate sed error ea fuga sit provident adipisci neque.
-                  </p>
-                  <a
-                    href="service-details.html"
-                    class="readmore stretched-link"
-                  >
-                    Read more <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div
-                class="col-lg-4 col-md-6"
-                data-aos="fade-up"
-                data-aos-delay="500"
-              >
-                <div class="service-item position-relative">
-                  <div class="icon">
-                    <i class="bi bi-calendar4-week"></i>
-                  </div>
-                  <h3>Velit Doloremque</h3>
-                  <p>
-                    Cumque et suscipit saepe. Est maiores autem enim facilis ut
-                    aut ipsam corporis aut. Sed animi at autem alias eius
-                    labore.
-                  </p>
-                  <a
-                    href="service-details.html"
-                    class="readmore stretched-link"
-                  >
-                    Read more <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div
-                class="col-lg-4 col-md-6"
-                data-aos="fade-up"
-                data-aos-delay="600"
-              >
-                <div class="service-item position-relative">
-                  <div class="icon">
-                    <i class="bi bi-chat-square-text"></i>
-                  </div>
-                  <h3>Dolori Architecto</h3>
-                  <p>
-                    Hic molestias ea quibusdam eos. Fugiat enim doloremque aut
-                    neque non et debitis iure. Corrupti recusandae ducimus enim.
-                  </p>
-                  <a
-                    href="service-details.html"
-                    class="readmore stretched-link"
-                  >
-                    Read more <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
-        </section>
+      </section> */}
 
-        <section id="testimonials" className="testimonials section">
+        {/* <section id="testimonials" className="testimonials section">
           <div className="container section-title" data-aos="fade-up">
             <h2>Testimonials</h2>
             <p>
@@ -823,9 +669,9 @@ export default function Home() {
             </Swiper>
             <div className="swiper-pagination"></div>
           </div>
-        </section>
-
-        <section id="team" class="team section">
+        </section> */}
+        {/* team */}
+        {/* <section id="team" class="team section">
           <div class="container section-title" data-aos="fade-up">
             <h2>Our Team</h2>
             <p>
@@ -957,141 +803,69 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-
+        </section> */}
+        {/* price */}
         <section id="pricing" class="pricing section">
-          <div class="container section-title" data-aos="fade-up">
-            <h2>Pricing</h2>
-            <p>
-              Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-              consectetur velit
-            </p>
-          </div>
+            <div class="container" data-aos="zoom-in" data-aos-delay="100">
+                <div class="row g-3 justify-content-center">
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pricing-item">
+                            <div class="icon">
+                                <i class="bi bi-box"></i>
+                            </div>
+                            <h4 class="fw-semibold fs-5">Free Plan</h4>
+                            <h5 class="price">$0<span>/month</span></h5>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check"></i> Limited free courses</li>
+                                <li><i class="bi bi-check"></i> AI course recommendations</li>
+                                <li class="text-muted"><i class="bi bi-x"></i> No quizzes & analytics</li>
+                                <li class="text-muted"><i class="bi bi-x"></i> No certification</li>
+                            </ul>
+                            <a href="#" class="buy-btn">Get Started</a>
+                        </div>
+                    </div>
 
-          <div class="container" data-aos="zoom-in" data-aos-delay="100">
-            <div class="row g-4">
-              <div class="col-lg-4">
-                <div class="pricing-item">
-                  <h3>Free Plan</h3>
-                  <div class="icon">
-                    <i class="bi bi-box"></i>
-                  </div>
-                  <h4>
-                    <sup>$</sup>0<span> / month</span>
-                  </h4>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Quam adipiscing vitae proin</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Nec feugiat nisl pretium</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Nulla at volutpat diam uteera</span>
-                    </li>
-                    <li class="na">
-                      <i class="bi bi-x"></i>{" "}
-                      <span>Pharetra massa massa ultricies</span>
-                    </li>
-                    <li class="na">
-                      <i class="bi bi-x"></i>{" "}
-                      <span>Massa ultricies mi quis hendrerit</span>
-                    </li>
-                  </ul>
-                  <div class="text-center">
-                    <a href="#" class="buy-btn">
-                      Buy Now
-                    </a>
-                  </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pricing-item">
+                            <div class="icon">
+                                <i class="bi bi-rocket"></i>
+                            </div>
+                            <h4 class="fw-semibold fs-5">Premium Plan</h4>
+                            <h5 class="price">$29<span>/month</span></h5>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check"></i> Unlimited course access</li>
+                                <li><i class="bi bi-check"></i> AI-powered learning</li>
+                                <li><i class="bi bi-check"></i> Personalized quizzes</li>
+                                <li><i class="bi bi-check"></i> Certification included</li>
+                            </ul>
+                            <a href="#" class="buy-btn">Subscribe Now</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pricing-item">
+                            <div class="icon">
+                                <i class="bi bi-person-video3"></i>
+                            </div>
+                            <h4 class="fw-semibold fs-5">Instructor Plan</h4>
+                            <h5 class="price">$49<span>/month</span></h5>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check"></i> Unlimited course uploads</li>
+                                <li><i class="bi bi-check"></i> AI-powered student insights</li>
+                                <li><i class="bi bi-check"></i> Revenue sharing & analytics</li>
+                                <li><i class="bi bi-check"></i> Advanced tracking & reports</li>
+                            </ul>
+                            <a href="#" class="buy-btn">Join as Instructor</a>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="pricing-item featured">
-                  <h3>Business Plan</h3>
-                  <div class="icon">
-                    <i class="bi bi-rocket"></i>
-                  </div>
-
-                  <h4>
-                    <sup>$</sup>29<span> / month</span>
-                  </h4>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Quam adipiscing vitae proin</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Nec feugiat nisl pretium</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Nulla at volutpat diam uteera</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Pharetra massa massa ultricies</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Massa ultricies mi quis hendrerit</span>
-                    </li>
-                  </ul>
-                  <div class="text-center">
-                    <a href="#" class="buy-btn">
-                      Buy Now
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="pricing-item">
-                  <h3>Developer Plan</h3>
-                  <div class="icon">
-                    <i class="bi bi-send"></i>
-                  </div>
-                  <h4>
-                    <sup>$</sup>49<span> / month</span>
-                  </h4>
-                  <ul>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Quam adipiscing vitae proin</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Nec feugiat nisl pretium</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Nulla at volutpat diam uteera</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Pharetra massa massa ultricies</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-check"></i>{" "}
-                      <span>Massa ultricies mi quis hendrerit</span>
-                    </li>
-                  </ul>
-                  <div class="text-center">
-                    <a href="#" class="buy-btn">
-                      Buy Now
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
         </section>
 
-        <section id="contact" class="contact section">
+        {/* contact */}
+        {/* <section id="contact" class="contact section">
           <div class="container section-title" data-aos="fade-up">
             <h2>Contact</h2>
             <p>
@@ -1217,105 +991,303 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </section> */}
 
-      <footer id="footer" class="footer accent-background">
-        <div class="container footer-top">
-          <div class="row gy-4">
-            <div class="col-lg-5 col-md-12 footer-about">
-              <a href="index.html" class="logo d-flex align-items-center">
-                <span class="sitename">Impact</span>
-              </a>
-              <p>
-                Cras fermentum odio eu feugiat lide par naso tierra. Justo eget
-                nada terra videa magna derita valies darta donna mare fermentum
-                iaculis eu non diam phasellus.
-              </p>
-              <div class="social-links d-flex mt-4">
-                <a href="">
-                  <i class="bi bi-twitter-x"></i>
-                </a>
-                <a href="">
-                  <i class="bi bi-facebook"></i>
-                </a>
-                <a href="">
-                  <i class="bi bi-instagram"></i>
-                </a>
-                <a href="">
-                  <i class="bi bi-linkedin"></i>
-                </a>
+        {/* course details */}
+        {/* <section
+          id="courses-course-details"
+          class="courses-course-details section"
+        >
+          <div class="container section-title" data-aos="fade-up">
+            <h2>Courses details</h2>
+
+          </div>
+          <div class="container" data-aos="fade-up">
+            <div class="row">
+              <div class="col-lg-8">
+                <img
+                  src="/img/course-detail/course-details.jpg"
+                  class="img-fluid"
+                  alt=""
+                ></img>
+                <h3>Et enim incidunt fuga tempora</h3>
+                <p>
+                  Qui et explicabo voluptatem et ab qui vero et voluptas. Sint
+                  voluptates temporibus quam autem. Atque nostrum voluptatum
+                  laudantium a doloremque enim et ut dicta. Nostrum ducimus est
+                  iure minima totam doloribus nisi ullam deserunt. Corporis aut
+                  officiis sit nihil est. Labore aut sapiente aperiam. Qui
+                  voluptas qui vero ipsum ea voluptatem. Omnis et est.
+                  Voluptatem officia voluptatem adipisci et iusto provident
+                  doloremque consequatur. Quia et porro est. Et qui corrupti
+                  laudantium ipsa. Eum quasi saepe aperiam qui delectus quaerat
+                  in. Vitae mollitia ipsa quam. Ipsa aut qui numquam eum iste
+                  est dolorum. Rem voluptas ut sit ut.
+                </p>
+              </div>
+              <div class="col-lg-4">
+                <div class="course-info d-flex justify-content-between align-items-center">
+                  <h5>Trainer</h5>
+                  <p>
+                    <a href="#">Walter White</a>
+                  </p>
+                </div>
+
+                <div class="course-info d-flex justify-content-between align-items-center">
+                  <h5>Course Fee</h5>
+                  <p>$165</p>
+                </div>
+
+                <div class="course-info d-flex justify-content-between align-items-center">
+                  <h5>Available Seats</h5>
+                  <p>30</p>
+                </div>
+
+                <div class="course-info d-flex justify-content-between align-items-center">
+                  <h5>Schedule</h5>
+                  <p>5.00 pm - 7.00 pm</p>
+                </div>
               </div>
             </div>
+          </div>
+        </section> */}
 
-            <div class="col-lg-2 col-6 footer-links">
-              <h4>Useful Links</h4>
-              <ul>
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li>
-                  <a href="#">About us</a>
-                </li>
-                <li>
-                  <a href="#">Services</a>
-                </li>
-                <li>
-                  <a href="#">Terms of service</a>
-                </li>
-                <li>
-                  <a href="#">Privacy policy</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-2 col-6 footer-links">
-              <h4>Our Services</h4>
-              <ul>
-                <li>
-                  <a href="#">Web Design</a>
-                </li>
-                <li>
-                  <a href="#">Web Development</a>
-                </li>
-                <li>
-                  <a href="#">Product Management</a>
-                </li>
-                <li>
-                  <a href="#">Marketing</a>
-                </li>
-                <li>
-                  <a href="#">Graphic Design</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-              <h4>Contact Us</h4>
-              <p>A108 Adam Street</p>
-              <p>New York, NY 535022</p>
-              <p>United States</p>
-              <p class="mt-4">
-                <strong>Phone:</strong> <span>+1 5589 55488 55</span>
-              </p>
-              <p>
-                <strong>Email:</strong> <span>info@example.com</span>
-              </p>
+        {/* <section id="tabs" class="tabs section">
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row">
+              <div class="col-lg-3">
+                <ul class="nav nav-tabs flex-column">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active show"
+                      data-toggle="tab"
+                      href="#tab-1"
+                    >
+                      Modi sit est
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-2">
+                      Unde praesentium sed
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-3">
+                      Pariatur explicabo vel
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-4">
+                      Nostrum qui quasi
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-5">
+                      Iusto ut expedita aut
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-9 mt-4 mt-lg-0">
+                <div class="tab-content">
+                  <div class="tab-pane active show" id="tab-1">
+                    <div class="row">
+                      <div class="col-lg-8 details order-2 order-lg-1">
+                        <h3>Architecto ut aperiam autem id</h3>
+                        <p class="fst-italic">
+                          Qui laudantium consequatur laborum sit qui ad sapiente
+                          dila parde sonata raqer a videna mareta paulona marka
+                        </p>
+                        <p>
+                          Et nobis maiores eius. Voluptatibus ut enim blanditiis
+                          atque harum sint. Laborum eos ipsum ipsa odit magni.
+                          Incidunt hic ut molestiae aut qui. Est repellat minima
+                          eveniet eius et quis magni nihil. Consequatur dolorem
+                          quaerat quos qui similique accusamus nostrum rem vero
+                        </p>
+                      </div>
+                      <div class="col-lg-4 text-center order-1 order-lg-2">
+                        <img
+                          src="/img/course-detail/tab-1.png"
+                          alt=""
+                          class="img-fluid"
+                        ></img>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab-2">
+                    <div class="row">
+                      <div class="col-lg-8 details order-2 order-lg-1">
+                        <h3>Et blanditiis nemo veritatis excepturi</h3>
+                        <p class="fst-italic">
+                          Qui laudantium consequatur laborum sit qui ad sapiente
+                          dila parde sonata raqer a videna mareta paulona marka
+                        </p>
+                        <p>
+                          Ea ipsum voluptatem consequatur quis est. Illum error
+                          ullam omnis quia et reiciendis sunt sunt est. Non
+                          aliquid repellendus itaque accusamus eius et velit
+                          ipsa voluptates. Optio nesciunt eaque beatae accusamus
+                          lerode pakto madirna desera vafle de nideran pal
+                        </p>
+                      </div>
+                      <div class="col-lg-4 text-center order-1 order-lg-2">
+                        <img
+                          src="/img/course-detail/tab-2.png"
+                          alt=""
+                          class="img-fluid"
+                        ></img>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab-3">
+                    <div class="row">
+                      <div class="col-lg-8 details order-2 order-lg-1">
+                        <h3>
+                          Impedit facilis occaecati odio neque aperiam sit
+                        </h3>
+                        <p class="fst-italic">
+                          Eos voluptatibus quo. Odio similique illum id quidem
+                          non enim fuga. Qui natus non sunt dicta dolor et. In
+                          asperiores velit quaerat perferendis aut
+                        </p>
+                        <p>
+                          Iure officiis odit rerum. Harum sequi eum illum
+                          corrupti culpa veritatis quisquam. Neque
+                          necessitatibus illo rerum eum ut. Commodi ipsam minima
+                          molestiae sed laboriosam a iste odio. Earum odit
+                          nesciunt fugiat sit ullam. Soluta et harum voluptatem
+                          optio quae
+                        </p>
+                      </div>
+                      <div class="col-lg-4 text-center order-1 order-lg-2">
+                        <img
+                          src="/img/course-detail/tab-3.png"
+                          alt=""
+                          class="img-fluid"
+                        ></img>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab-4">
+                    <div class="row">
+                      <div class="col-lg-8 details order-2 order-lg-1">
+                        <h3>
+                          Fuga dolores inventore laboriosam ut est accusamus
+                          laboriosam dolore
+                        </h3>
+                        <p class="fst-italic">
+                          Totam aperiam accusamus. Repellat consequuntur iure
+                          voluptas iure porro quis delectus
+                        </p>
+                        <p>
+                          Eaque consequuntur consequuntur libero expedita in
+                          voluptas. Nostrum ipsam necessitatibus aliquam fugiat
+                          debitis quis velit. Eum ex maxime error in consequatur
+                          corporis atque. Eligendi asperiores sed qui veritatis
+                          aperiam quia a laborum inventore
+                        </p>
+                      </div>
+                      <div class="col-lg-4 text-center order-1 order-lg-2">
+                        <img
+                          src="/img/course-detail/tab-4.png"
+                          alt=""
+                          class="img-fluid"
+                        ></img>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="tab-5">
+                    <div class="row">
+                      <div class="col-lg-8 details order-2 order-lg-1">
+                        <h3>
+                          Est eveniet ipsam sindera pad rone matrelat sando reda
+                        </h3>
+                        <p class="fst-italic">
+                          Omnis blanditiis saepe eos autem qui sunt debitis
+                          porro quia.
+                        </p>
+                        <p>
+                          Exercitationem nostrum omnis. Ut reiciendis
+                          repudiandae minus. Omnis recusandae ut non quam ut
+                          quod eius qui. Ipsum quia odit vero atque qui
+                          quibusdam amet. Occaecati sed est sint aut vitae
+                          molestiae voluptate vel
+                        </p>
+                      </div>
+                      <div class="col-lg-4 text-center order-1 order-lg-2">
+                        <img
+                          src="/img/course-detail/tab-5.png"
+                          alt=""
+                          class="img-fluid"
+                        ></img>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </section> */}
+      </main>
+
+      {/* footer */}
+      <footer id="footer" class="footer accent-background">
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-12 footer-about">
+                    <a href="index.html" class="logo d-flex align-items-center">
+                        <img src="/img/EduQuestLogo.png" alt="EduQuest Logo" class="footer-logo"/>
+                        <span class="sitename">EduQuest</span>
+                    </a>
+                    <p class="footer-description">
+                        Elevate your learning experience with AI-powered courses, 
+                        personalized quizzes, and interactive mentorship programs.  
+                    </p>
+                    <div class="social-links d-flex mt-3">
+                        <a href="#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#">AI-Powered Learning</a></li>
+                        <li><a href="#">Automated Quizzes</a></li>
+                        <li><a href="#">Personalized Feedback</a></li>
+                        <li><a href="#">Interactive Courses</a></li>
+                        <li><a href="#">Mentorship Program</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
+                    <h4>Contact Us</h4>
+                    <p><i class="bi bi-geo-alt-fill"></i> EduQuest HQ, Silicon Valley, CA</p>
+                    <p><i class="bi bi-telephone-fill"></i> +1 800 123 4567</p>
+                    <p><i class="bi bi-envelope-fill"></i> support@eduquest.com</p>
+                    <p><i class="bi bi-clock-fill"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
         </div>
 
         <div class="container copyright text-center mt-4">
-          <p>
-            © <span>Copyright</span>{" "}
-            <strong class="px-1 sitename">Impact</strong>{" "}
-            <span>All Rights Reserved</span>
-          </p>
-          <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-          </div>
+            <p>© 2024 <strong>EduQuest</strong>. All Rights Reserved.</p>
         </div>
-      </footer>
+    </footer>
     </>
   );
 }
