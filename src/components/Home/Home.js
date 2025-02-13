@@ -283,6 +283,17 @@ export default function Home() {
             </div>
         </section>
 
+        <div style={{width: '25vw', height: "50vh", backgroundColor: "white", position: "fixed", bottom: 0, right: 20, borderTopLeftRadius: "10px", borderTopRightRadius: "10px", zIndex: "50"}}>
+          <div style={{height:"90%"}}></div>
+          <div style={{width: "100%", height: "10%"}}>
+            <input placeholder="Enter message" style={{width: "90%", height: "100%", borderTopRightRadius: "10px", borderBottomRightRadius: "10px"}}></input>
+            <button style={{width: "10%", height: "100%", border: "none"}}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth= "1.5" stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
         {/* <section id="clients" className="clients section">
           <div className="container">
