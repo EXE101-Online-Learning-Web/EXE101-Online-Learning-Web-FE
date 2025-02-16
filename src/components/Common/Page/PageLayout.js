@@ -4,10 +4,10 @@ import Footer from "./Footer";
 
 export default function PageLayout({ children }) {
   return (
-    <>
-      <Header />
-     {children}
-      <Footer />
-    </>
+    <div className="page-container-layout">
+    <Header />
+    <main className="content-layout">{children}</main>
+    <Footer />
+  </div>
   );
 }
