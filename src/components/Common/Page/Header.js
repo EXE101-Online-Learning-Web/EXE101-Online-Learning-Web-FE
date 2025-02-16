@@ -12,9 +12,15 @@ export default function Header() {
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     const storedAvatar = localStorage.getItem("avatar");
-    const decodedToken = jwtDecode(localStorage.getItem("authToken"));
-    if (decodedToken) {
-      setAdmin(decodedToken.role === "Admin" ? true : false);
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setAdmin(decodedToken.role === "Admin");
+      } catch (error) {
+        console.error("Invalid token:", error);
+        setAdmin(false);
+      }
     }
 
     if (storedUserName) {
