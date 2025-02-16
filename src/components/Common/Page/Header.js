@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,10 +7,15 @@ export default function Header() {
   const [userName, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     const storedAvatar = localStorage.getItem("avatar");
+    const decodedToken = jwtDecode(localStorage.getItem("authToken"));
+    if (decodedToken) {
+      setAdmin(decodedToken.role === "Admin" ? true : false);
+    }
 
     if (storedUserName) {
       setUserName(storedUserName);
@@ -24,6 +30,10 @@ export default function Header() {
     setUserName("");
     setAvatar("");
     navigate("/login");
+  };
+
+  const naviagteAdmin = () => {
+    navigate("/admin");
   };
 
   const toggleDropdown = () => {
@@ -117,6 +127,11 @@ export default function Header() {
                         <a href="#profile" className="dropdown-item">
                           View Profile
                         </a>
+                        {isAdmin ? (
+                          <a onClick={naviagteAdmin}>Admin Management</a>
+                        ) : (
+                          ""
+                        )}
                         <a
                           href="#"
                           className="dropdown-item"
