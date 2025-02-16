@@ -38,7 +38,9 @@ export default function Login() {
           const avatar = decodedToken.avatar;
 
           localStorage.setItem("userName", userName);
+         if(avatar) {
           localStorage.setItem("avatar", avatar);
+         }
           localStorage.setItem("isLogin","isLogin");
 
           if (role === "Admin") {

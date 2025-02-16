@@ -11,7 +11,7 @@ export default function Header() {
     const storedUserName = localStorage.getItem("userName");
     const storedAvatar = localStorage.getItem("avatar");
 
-    if (storedUserName && storedAvatar) {
+    if (storedUserName) {
       setUserName(storedUserName);
       setAvatar(storedAvatar);
     }
@@ -64,7 +64,7 @@ export default function Header() {
 
         <div class="navbar">
           <div class="container">
-            <Link to="/"  class="logo">
+            <Link to="/" class="logo">
               <img
                 src="/img/EduQuestLogo.png"
                 alt="EduQuest Logo"
@@ -104,7 +104,7 @@ export default function Header() {
                   >
                     <span className="ms-2 user-name">{userName}</span>
                     <img
-                      src={avatar || "/img/default-avatar.png"}
+                      src={avatar || "/img/icon-default.png"}
                       alt="User Avatar"
                       className="rounded-circle avatar-img"
                       width="40"
@@ -142,7 +142,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-
     </>
   );
 }
