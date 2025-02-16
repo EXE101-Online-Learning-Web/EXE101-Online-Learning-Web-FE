@@ -1,4 +1,34 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SweetAlert from "sweetalert";
 export function HeaderAdmin() {
+  const [userName, setUserName] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    localStorage.clear();
+
+    await SweetAlert(
+      "Đăng xuất thành công",
+      `Cám ơn bạn đã có những trải nghiệm với hệ thống của chúng tôi!`,
+      "success"
+    );
+    navigate("/");
+  };
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem("userName");
+    const storedAvatar = localStorage.getItem("avatar");
+
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+    if (storedAvatar) {
+      setAvatar(storedAvatar);
+    }
+  }, []);
+
   return (
     <>
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -216,11 +246,13 @@ export function HeaderAdmin() {
               aria-expanded="false"
             >
               <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                Douglas McGee
+                {userName}
               </span>
               <img
                 class="img-profile rounded-circle"
-                src="/img/admin/undraw_profile.svg"
+                src={avatar || "/img/icon-default.png"}
+                width="40"
+                height="40"
               ></img>
             </a>
             <div
@@ -242,7 +274,7 @@ export function HeaderAdmin() {
               <div class="dropdown-divider"></div>
               <a
                 class="dropdown-item"
-                href="#"
+                onClick={logout}
                 data-toggle="modal"
                 data-target="#logoutModal"
               >

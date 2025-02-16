@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import swal from "sweetalert";
 
 const PrivateRouteAdmin = ({ allowedRoles }) => {
   const token = localStorage.getItem("authToken");
@@ -16,6 +17,7 @@ const PrivateRouteAdmin = ({ allowedRoles }) => {
     if (allowedRoles.includes(userRole)) {
       return <Outlet />;
     } else {
+      swal("Cảnh báo!", "Bạn không có quyền truy cập trang này!", "error");
       return <Navigate to="/" replace />;
     }
   } catch (error) {
