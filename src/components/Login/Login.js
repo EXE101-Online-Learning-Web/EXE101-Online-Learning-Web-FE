@@ -34,14 +34,20 @@ export default function Login() {
         try {
           const decodedToken = jwtDecode(token);
           const role = decodedToken.role;
-          const userName = decodedToken.sub; 
+          const userName = decodedToken.sub;
           const avatar = decodedToken.avatar;
+          const emailConfirmed = decodedToken.emailConfirmed;
+
+          if (!emailConfirmed) {
+            setError("You haven't confirmed your email. Please confirm your email before logging in.");
+            return;
+          }
 
           localStorage.setItem("userName", userName);
-         if(avatar) {
-          localStorage.setItem("avatar", avatar);
-         }
-          localStorage.setItem("isLogin","isLogin");
+          if (avatar) {
+            localStorage.setItem("avatar", avatar);
+          }
+          localStorage.setItem("isLogin", "isLogin");
 
           if (role === "Admin") {
             navigate("/admin");

@@ -27,44 +27,37 @@
 .d-flex {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px; /* Tăng khoảng cách giữa các radio button */
 }
 
-.d-flex button {
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  border: 2px solid #ddd;
-  background-color: transparent;
-  color: #007bff;
-  cursor: pointer;
-  outline: none;
+.d-flex .form-check {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 48%;
 }
 
-.d-flex button:hover {
-  background-color: #007bff;
-  color: white;
+.d-flex .form-check-input {
+  width: 20px; /* Kích thước của radio button */
+  height: 20px;
+  margin-right: 10px; /* Khoảng cách giữa radio button và text */
 }
 
-.d-flex button.selected {
-  background-color: #007bff;
-  color: white;
-  border-color: #0056b3;
-}
-
-.d-flex .btn-default {
-  background-color: transparent;
+.d-flex .form-check-label {
+  font-size: 16px;
+  font-weight: bold;
   color: #007bff;
-  border-color: #ddd;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
-.d-flex button .mr-2 {
-  margin-right: 8px;
+.d-flex input[type="radio"]:checked + label {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.d-flex input[type="radio"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .register-container .register-btn {

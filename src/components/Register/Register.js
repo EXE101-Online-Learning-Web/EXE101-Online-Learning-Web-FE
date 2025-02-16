@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUser, FaChalkboardTeacher } from 'react-icons/fa';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../public/assets/css/register.css";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -67,20 +67,35 @@ export default function Register() {
       >
         <h2 className="text-center mb-4 font-weight-bold" style={{ color: "#343a40" }}>Register</h2>
         <div className="d-flex mb-4">
-          <button
-            className={`btn ${role === "student" ? "btn-selected" : "btn-default"}`}
-            onClick={() => setRole("Student")}
-            onBlur={() => setRole(role === "Student" ? "Student" : "Teacher")}
-          >
-            <FaUser className="mr-2" /> Student
-          </button>
-          <button
-            className={`btn ${role === "teacher" ? "btn-selected" : "btn-default"}`}
-            onClick={() => setRole("Teacher")}
-            onBlur={() => setRole(role === "Teacher" ? "Teacher" : "Student")}
-          >
-            <FaChalkboardTeacher className="mr-2" /> Teacher
-          </button>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              id="student"
+              name="role"
+              value="Student"
+              checked={role === "Student"}
+              onChange={() => setRole("Student")}
+            />
+            <label className="form-check-label" htmlFor="student">
+              <FaUser className="mr-2" /> Student
+            </label>
+          </div>
+
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              id="teacher"
+              name="role"
+              value="Teacher"
+              checked={role === "Teacher"}
+              onChange={() => setRole("Teacher")}
+            />
+            <label className="form-check-label" htmlFor="teacher">
+              <FaChalkboardTeacher className="mr-2" /> Teacher
+            </label>
+          </div>
         </div>
 
         {error && <div className="alert alert-danger">{error}</div>}
