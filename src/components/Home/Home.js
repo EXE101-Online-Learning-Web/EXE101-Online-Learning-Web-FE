@@ -4,9 +4,35 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "../../public/assets/css/home.css";
 import "../../public/assets/css/heroSection.css";
+import axios from "axios";
 
 export default function Home() {
-  return (
+    const handlePayment = async () => {
+        const paymentRequest = {
+            userId: "3",
+            orderName: "Demo Order",
+            description: "Demo 1",
+            totalPrice: 10000,
+            returnUrl: "http://localhost:3000/Success",
+            cancelUrl: "http://localhost:3000/Fail"
+        };
+
+        try {
+            // Gửi yêu cầu đến API backend
+            const response = await axios.post('http://localhost:7091/api/payment/payment-link', paymentRequest);
+
+            // Nếu trả về URL thanh toán, chuyển hướng người dùng tới đó
+            if (response.data && response.data.PaymentLink) {
+                window.location.href = response.data.PaymentLink;
+            } else {
+                alert("Error: Payment link not received.");
+            }
+        } catch (error) {
+            console.error("Error during payment link creation:", error);
+            alert("Error: Unable to create payment link.");
+        }
+    };
+    return (
     <>
       <header id="header" class="header fixed-top">
         <div class="topbar d-flex align-items-center">
@@ -146,6 +172,7 @@ export default function Home() {
                             <div class="course-content">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <p class="category">Full-Stack Web Development</p>
+                                    
                                     <p class="price">$299</p>
                                 </div>
                                 <h3><a href="course-details.html">Become a Full-Stack Developer</a></h3>
@@ -153,6 +180,7 @@ export default function Home() {
                                     Learn HTML, CSS, JavaScript, React, and Node.js to build dynamic and responsive web applications. 
                                     Hands-on projects and real-world applications included.
                                 </p>
+                                <button class="btn btn-primary" onClick={handlePayment}>Buy</button>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">
                                         <img src="/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="John Doe"/>
