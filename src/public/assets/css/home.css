@@ -155,3 +155,56 @@
     height: auto;
     margin-right: 8px; 
 }
+
+.auth-buttons {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .user-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    margin-right: 8px; /* Space between name and avatar */
+  }
+  
+  .avatar-img {
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    z-index: 10;
+    display: block;
+  }
+  
+  .dropdown-item {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f8f8;
+    color: #007bff;
+  }
+  
+  .auth-buttons img {
+    cursor: pointer;
+  }
+  
+  .auth-buttons .dropdown-item:focus {
+    background-color: #f8f8f8;
+    color: #007bff;
+  }
+  
