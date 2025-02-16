@@ -64,7 +64,7 @@ export default function Header() {
 
         <div class="navbar">
           <div class="container">
-            <a href="index.html" class="logo">
+            <Link to="/"  class="logo">
               <img
                 src="/img/EduQuestLogo.png"
                 alt="EduQuest Logo"
@@ -72,7 +72,7 @@ export default function Header() {
               />
               <h1 id="pageName">EduQuest</h1>
               <span>.</span>
-            </a>
+            </Link>
             <nav class="navmenu">
               <ul class="nav-links">
                 <li>

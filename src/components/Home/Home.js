@@ -1,23 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "../../public/assets/css/home.css";
 import "../../public/assets/css/heroSection.css";
 import PageLayout from "../Common/Page/PageLayout";
-import SweetAlert from "sweetalert";
-import MySwal from "sweetalert2";
 
 export default function Home() {
-  useEffect(() => {
-    const isLogin = localStorage.getItem("isLogin");
-    if (isLogin !== null) {
-      SweetAlert(
-        "Đăng nhập thành công!",
-        `Chào mừng ${localStorage.getItem("userName")} đến với hệ thống!`,
-        "success"
-      );
-    }
-    localStorage.removeItem("isLogin");
-  });
   return (
     <>
       <PageLayout>
