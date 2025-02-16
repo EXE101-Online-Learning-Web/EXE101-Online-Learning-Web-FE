@@ -1,5 +1,9 @@
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export function SidebarAdmin() {
+  const navigate = useNavigate();
+  const navigateHome = () => {
+    navigate("/");
+  };
   return (
     <>
       <ul
@@ -8,20 +12,22 @@ export function SidebarAdmin() {
       >
         <a
           class="sidebar-brand d-flex align-items-center justify-content-center"
-          href="index.html"
+          onClick={navigateHome}
         >
-          <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-          </div>
-          <div class="sidebar-brand-text mx-3">
-            SB Admin <sup>2</sup>
+          <img
+            src="/img/EduQuestLogo.png"
+            alt="EduQuest Logo"
+            class="logo-img"
+          />
+          <div style={{ color: "white" }} class="mx-3">
+            SB Admin 
           </div>
         </a>
 
         <hr class="sidebar-divider my-0"></hr>
 
         <li class="nav-item active">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" onClick={navigateHome}>
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
@@ -50,10 +56,10 @@ export function SidebarAdmin() {
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <Link to={"/admin/student/studentList"} class="collapse-item" >
+              <Link to={"/admin/student/studentList"} class="collapse-item">
                 Student
               </Link>
-              <Link to={"/admin/teacher/teacherList"} class="collapse-item" >
+              <Link to={"/admin/teacher/teacherList"} class="collapse-item">
                 Teacher
               </Link>
             </div>
