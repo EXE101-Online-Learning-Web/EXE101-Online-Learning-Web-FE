@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,12 +7,17 @@ export default function Header() {
   const [userName, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     const storedAvatar = localStorage.getItem("avatar");
+    const decodedToken = jwtDecode(localStorage.getItem("authToken"));
+    if (decodedToken) {
+      setAdmin(decodedToken.role === "Admin" ? true : false);
+    }
 
-    if (storedUserName && storedAvatar) {
+    if (storedUserName) {
       setUserName(storedUserName);
       setAvatar(storedAvatar);
     }
@@ -24,6 +30,10 @@ export default function Header() {
     setUserName("");
     setAvatar("");
     navigate("/login");
+  };
+
+  const naviagteAdmin = () => {
+    navigate("/admin");
   };
 
   const toggleDropdown = () => {
@@ -64,7 +74,7 @@ export default function Header() {
 
         <div class="navbar">
           <div class="container">
-            <a href="index.html" class="logo">
+            <Link to="/" class="logo">
               <img
                 src="/img/EduQuestLogo.png"
                 alt="EduQuest Logo"
@@ -72,7 +82,7 @@ export default function Header() {
               />
               <h1 id="pageName">EduQuest</h1>
               <span>.</span>
-            </a>
+            </Link>
             <nav class="navmenu">
               <ul class="nav-links">
                 <li>
@@ -104,7 +114,7 @@ export default function Header() {
                   >
                     <span className="ms-2 user-name">{userName}</span>
                     <img
-                      src={avatar || "/img/default-avatar.png"}
+                      src={avatar || "/img/icon-default.png"}
                       alt="User Avatar"
                       className="rounded-circle avatar-img"
                       width="40"
@@ -117,6 +127,11 @@ export default function Header() {
                         <a href="#profile" className="dropdown-item">
                           View Profile
                         </a>
+                        {isAdmin ? (
+                          <a onClick={naviagteAdmin}>Admin Management</a>
+                        ) : (
+                          ""
+                        )}
                         <a
                           href="#"
                           className="dropdown-item"
@@ -142,7 +157,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-
     </>
   );
 }
