@@ -39,6 +39,7 @@ export default function Login() {
 
           localStorage.setItem("userName", userName);
           localStorage.setItem("avatar", avatar);
+          localStorage.setItem("isLogin","isLogin");
 
           if (role === "Admin") {
             navigate("/admin");
