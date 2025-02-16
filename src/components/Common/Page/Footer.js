@@ -1,4 +1,5 @@
 export default function Footer() {
+return (
     <footer id="footer" class="footer accent-background">
     <div class="container footer-top">
         <div class="row gy-4">
@@ -55,4 +56,5 @@ export default function Footer() {
         <p>© 2024 <strong>EduQuest</strong>. All Rights Reserved.</p>
     </div>
 </footer>
+)
 }
