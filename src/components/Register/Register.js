@@ -1,60 +1,38 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom"; // Import Link
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../../public/assets/css/login.css";  // Your custom CSS
+import "../../public/assets/css/register.css";
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     try {
       const response = await axios.post(
-        "https://localhost:7091/api/Auth/Login",
+        "https://localhost:7091/api/Auth/Register",
         {
           email,
           password,
-        },
-        {
-          withCredentials: true,
         }
       );
 
-      if (response.data && response.data.token) {
-        const token = response.data.token.result;
-        localStorage.setItem("authToken", token);
-
-        try {
-          const decodedToken = jwtDecode(token);
-          const role = decodedToken.role;
-          const userName = decodedToken.sub; 
-          const avatar = decodedToken.avatar;
-
-          localStorage.setItem("userName", userName);
-          localStorage.setItem("avatar", avatar);
-
-          if (role === "Admin") {
-            navigate("/admin");
-          } else if (role === "Student") {
-            navigate("/home");
-          } else if (role === "Teacher") {
-            navigate("/home");
-          } else {
-            setError("Invalid role.");
-          }
-        } catch (error) {
-          console.error("Error decoding token:", error);
-        }
+      if (response.data) {
+        navigate("/login"); // Navigate to login page after successful registration
       }
     } catch (err) {
-      setError("Login failed. Please check your credentials.");
+      setError("Registration failed. Please try again.");
     }
   };
 
@@ -76,7 +54,7 @@ export default function Login() {
           borderRadius: "12px",
         }}
       >
-        <h2 className="text-center mb-4 font-weight-bold" style={{ color: "#343a40" }}>Login</h2>
+        <h2 className="text-center mb-4 font-weight-bold" style={{ color: "#343a40" }}>Register</h2>
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-3">
@@ -105,16 +83,29 @@ export default function Login() {
               style={{ borderRadius: "8px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}
             />
           </div>
+          <div className="form-group mb-3">
+            <label htmlFor="confirmPassword" className="font-weight-semibold">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              className="form-control"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              placeholder="Confirm password"
+              style={{ borderRadius: "8px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}
+            />
+          </div>
           <button type="submit" className="btn btn-primary w-100 mt-4" style={{ borderRadius: "8px" }}>
-            Login
+            Register
           </button>
         </form>
         <div className="text-center mt-3">
           <small>
-            Don't have an account?{" "}
-            <Link to="/register" className="text-decoration-none" style={{ color: "#007bff" }}>
-              Sign up
-            </Link>
+            Already have an account?{" "}
+            <a href="/login" className="text-decoration-none" style={{ color: "#007bff" }}>
+              Login
+            </a>
           </small>
         </div>
       </div>
