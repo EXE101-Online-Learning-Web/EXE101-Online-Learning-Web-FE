@@ -557,7 +557,9 @@
     }
 }
 
-
+.content-layout {
+    margin-top: 100px;
+}
 
 /* Footer Tổng Quan */
 .footer {
@@ -700,4 +702,14 @@
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
+
+.page-container-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Đảm bảo trang luôn đủ chiều cao */
+  }
+  
+  .content-layout {
+    flex: 1; /* Đẩy footer xuống dưới */
+  }
 

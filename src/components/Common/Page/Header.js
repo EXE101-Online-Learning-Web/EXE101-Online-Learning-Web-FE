@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,12 +7,23 @@ export default function Header() {
   const [userName, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAdmin, setAdmin] = useState(false);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     const storedAvatar = localStorage.getItem("avatar");
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setAdmin(decodedToken.role === "Admin");
+      } catch (error) {
+        console.error("Invalid token:", error);
+        setAdmin(false);
+      }
+    }
 
-    if (storedUserName && storedAvatar) {
+    if (storedUserName) {
       setUserName(storedUserName);
       setAvatar(storedAvatar);
     }
@@ -24,6 +36,10 @@ export default function Header() {
     setUserName("");
     setAvatar("");
     navigate("/login");
+  };
+
+  const naviagteAdmin = () => {
+    navigate("/admin");
   };
 
   const toggleDropdown = () => {
@@ -64,7 +80,7 @@ export default function Header() {
 
         <div class="navbar">
           <div class="container">
-            <a href="index.html" class="logo">
+            <Link to="/" class="logo">
               <img
                 src="/img/EduQuestLogo.png"
                 alt="EduQuest Logo"
@@ -72,7 +88,7 @@ export default function Header() {
               />
               <h1 id="pageName">EduQuest</h1>
               <span>.</span>
-            </a>
+            </Link>
             <nav class="navmenu">
               <ul class="nav-links">
                 <li>
@@ -104,7 +120,7 @@ export default function Header() {
                   >
                     <span className="ms-2 user-name">{userName}</span>
                     <img
-                      src={avatar || "/img/default-avatar.png"}
+                      src={avatar || "/img/icon-default.png"}
                       alt="User Avatar"
                       className="rounded-circle avatar-img"
                       width="40"
@@ -112,11 +128,43 @@ export default function Header() {
                     />
 
                     {/* Dropdown Menu */}
+                    <div
+                      class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                      aria-labelledby="userDropdown"
+                    >
+                      <a class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Settings
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Activity Log
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item"
+                        data-toggle="modal"
+                        data-target="#logoutModal"
+                      >
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                      </a>
+                    </div>
+                    
                     {isDropdownOpen && (
                       <div className="dropdown-menu">
                         <a href="#profile" className="dropdown-item">
                           View Profile
                         </a>
+                        {isAdmin ? (
+                          <a onClick={naviagteAdmin}>Admin Management</a>
+                        ) : (
+                          ""
+                        )}
                         <a
                           href="#"
                           className="dropdown-item"
@@ -142,7 +190,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-      ;
     </>
   );
 }

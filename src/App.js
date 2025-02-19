@@ -10,6 +10,7 @@ import "../src/public/assets/vendor/bootstrap/css/bootstrap.min.css";
 import "../src/public/assets/css/main.css";
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
+import Test from "./components/Home/test";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AdminManagement from "./components/Admin/Admin";
@@ -22,6 +23,7 @@ const AppContent = () => (
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
     <Route path="/home" element={<Home />} />
+    <Route path="/test" element={<Test />} />
     {/* Protected Admin Routes */}
     <Route element={<PrivateRouteAdmin allowedRoles={["Admin"]} />}>
       <Route path="/admin" element={<AdminManagement />} />
