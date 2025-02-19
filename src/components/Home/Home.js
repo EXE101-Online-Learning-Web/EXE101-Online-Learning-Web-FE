@@ -1,12 +1,13 @@
-import React from "react";
-
+import React, { useState } from "react";
+import axios from "axios";
 import "../../public/assets/css/home.css";
 import "../../public/assets/css/heroSection.css";
 import PageLayout from "../Common/Page/PageLayout";
+import { DivideCircle } from "lucide-react";
+import Chatbot from "../Common/OpenAIChat/Chatbot"
 
 export default function Home() {
   return (
-    <>
       <PageLayout>
         <main class="main">
           <section id="hero" class="hero section accent-background">
@@ -374,8 +375,9 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <Chatbot></Chatbot>
         </main>
       </PageLayout>
-    </>
   );
 }
