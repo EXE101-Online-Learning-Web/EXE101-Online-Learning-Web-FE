@@ -16,6 +16,7 @@ import Register from "./components/Register/Register";
 import AdminManagement from "./components/Admin/Admin";
 import TeacherList from "./components/Admin/Teacher/TeacherList";
 import PrivateRouteAdmin from "./components/Admin/PrivateRouteAdmin";
+import CourseDetail from "./components/Course/CourseDetail";
 
 const AppContent = () => (
   <Routes>
@@ -24,6 +25,7 @@ const AppContent = () => (
     <Route path="/register" element={<Register />} />
     <Route path="/home" element={<Home />} />
     <Route path="/test" element={<Test />} />
+    <Route path="/course/:idCourse" element={<CourseDetail />} />
     {/* Protected Admin Routes */}
     <Route element={<PrivateRouteAdmin allowedRoles={["Admin"]} />}>
       <Route path="/admin" element={<AdminManagement />} />

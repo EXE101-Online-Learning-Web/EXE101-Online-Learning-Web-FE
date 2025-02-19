@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import "../../public/assets/css/home.css";
 import "../../public/assets/css/heroSection.css";
 import PageLayout from "../Common/Page/PageLayout";
+import { Link } from "react-router-dom";
 
 export default function Home() {
+  const [courses, setCourses] = useState([]);
+
+  const fetchApi = async () => {
+    try {
+      const result = await axios.get("https://localhost:7091/api/Course");
+      setCourses(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
   return (
     <>
       <PageLayout>
@@ -57,145 +75,205 @@ export default function Home() {
           <section id="courses" class="courses section">
             <div class="container">
               <div class="row">
-                <div
-                  class="col-lg-4 col-md-6 d-flex align-items-stretch"
-                  data-aos="zoom-in"
-                  data-aos-delay="100"
-                >
-                  <div class="course-item">
-                    <img
-                      src="/img/courses/course-1.jpg"
-                      class="img-fluid"
-                      alt="Full-Stack Web Development"
-                    />
-                    <div class="course-content">
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <p class="category">Full-Stack Web Development</p>
-                        <p class="price">$299</p>
-                      </div>
-                      <h3>
-                        <a href="course-details.html">
-                          Become a Full-Stack Developer
-                        </a>
-                      </h3>
-                      <p class="description">
-                        Learn HTML, CSS, JavaScript, React, and Node.js to build
-                        dynamic and responsive web applications. Hands-on
-                        projects and real-world applications included.
-                      </p>
-                      <div class="trainer d-flex justify-content-between align-items-center">
-                        <div class="trainer-profile d-flex align-items-center">
-                          <img
-                            src="/img/trainers/trainer-1-2.jpg"
-                            class="img-fluid"
-                            alt="John Doe"
-                          />
-                          <a href="" class="trainer-link">
-                            John Doe
-                          </a>
-                        </div>
-                        <div class="trainer-rank d-flex align-items-center">
-                          <i class="bi bi-person user-icon"></i>&nbsp;120
-                          &nbsp;&nbsp;
-                          <i class="bi bi-heart heart-icon"></i>&nbsp;98
+                {courses ? (
+                  courses.map((item) => (
+                    <div
+                      class="col-lg-4 col-md-6 d-flex align-items-stretch"
+                      data-aos="zoom-in"
+                      data-aos-delay="100"
+                    >
+                      <div class="course-item">
+                        <img
+                          src="/img/courses/course-1.jpg"
+                          class="img-fluid"
+                          alt="Full-Stack Web Development"
+                        />
+                        <div class="course-content">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <p class="category">Full-Stack Web Development</p>
+                            <p class="price">$299</p>
+                          </div>
+                          <h3>
+                            <Link
+                              to={`/course/${item.courseId}`}
+                              class="collapse-item"
+                            >
+                              Become a Full-Stack Developer
+                            </Link>
+                          </h3>
+                          <p class="description">
+                            Learn HTML, CSS, JavaScript, React, and Node.js to
+                            build dynamic and responsive web applications.
+                            Hands-on projects and real-world applications
+                            included.
+                          </p>
+                          <div class="trainer d-flex justify-content-between align-items-center">
+                            <div class="trainer-profile d-flex align-items-center">
+                              <img
+                                src="/img/trainers/trainer-1-2.jpg"
+                                class="img-fluid"
+                                alt="John Doe"
+                              />
+                              <a href="" class="trainer-link">
+                                John Doe
+                              </a>
+                            </div>
+                            <div class="trainer-rank d-flex align-items-center">
+                              <i class="bi bi-person user-icon"></i>&nbsp;120
+                              &nbsp;&nbsp;
+                              <i class="bi bi-heart heart-icon"></i>&nbsp;98
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  ))
+                ) : (
+                  <>
+                    <div
+                      class="col-lg-4 col-md-6 d-flex align-items-stretch"
+                      data-aos="zoom-in"
+                      data-aos-delay="100"
+                    >
+                      <div class="course-item">
+                        <img
+                          src="/img/courses/course-1.jpg"
+                          class="img-fluid"
+                          alt="Full-Stack Web Development"
+                        />
+                        <div class="course-content">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <p class="category">Full-Stack Web Development</p>
+                            <p class="price">$299</p>
+                          </div>
+                          <h3>
+                            <a href="course-details.html">
+                              Become a Full-Stack Developer
+                            </a>
+                          </h3>
+                          <p class="description">
+                            Learn HTML, CSS, JavaScript, React, and Node.js to
+                            build dynamic and responsive web applications.
+                            Hands-on projects and real-world applications
+                            included.
+                          </p>
+                          <div class="trainer d-flex justify-content-between align-items-center">
+                            <div class="trainer-profile d-flex align-items-center">
+                              <img
+                                src="/img/trainers/trainer-1-2.jpg"
+                                class="img-fluid"
+                                alt="John Doe"
+                              />
+                              <a href="" class="trainer-link">
+                                John Doe
+                              </a>
+                            </div>
+                            <div class="trainer-rank d-flex align-items-center">
+                              <i class="bi bi-person user-icon"></i>&nbsp;120
+                              &nbsp;&nbsp;
+                              <i class="bi bi-heart heart-icon"></i>&nbsp;98
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
+                      data-aos="zoom-in"
+                      data-aos-delay="200"
+                    >
+                      <div class="course-item">
+                        <img
+                          src="/img/courses/course-2.jpg"
+                          class="img-fluid"
+                          alt="Digital Marketing"
+                        />
+                        <div class="course-content">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <p class="category">Digital Marketing for IT</p>
+                            <p class="price">$199</p>
+                          </div>
+                          <h3>
+                            <a href="course-details.html">
+                              SEO & Social Media Strategies
+                            </a>
+                          </h3>
+                          <p class="description">
+                            Master SEO, content marketing, and social media
+                            strategies tailored for IT and tech businesses.
+                            Learn how to drive traffic and optimize brand
+                            presence online.
+                          </p>
+                          <div class="trainer d-flex justify-content-between align-items-center">
+                            <div class="trainer-profile d-flex align-items-center">
+                              <img
+                                src="/img/trainers/trainer-2-2.jpg"
+                                class="img-fluid"
+                                alt="Sarah Lee"
+                              />
+                              <a href="" class="trainer-link">
+                                Sarah Lee
+                              </a>
+                            </div>
+                            <div class="trainer-rank d-flex align-items-center">
+                              <i class="bi bi-person user-icon"></i>&nbsp;85
+                              &nbsp;&nbsp;
+                              <i class="bi bi-heart heart-icon"></i>&nbsp;72
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-                <div
-                  class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-                  data-aos="zoom-in"
-                  data-aos-delay="200"
-                >
-                  <div class="course-item">
-                    <img
-                      src="/img/courses/course-2.jpg"
-                      class="img-fluid"
-                      alt="Digital Marketing"
-                    />
-                    <div class="course-content">
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <p class="category">Digital Marketing for IT</p>
-                        <p class="price">$199</p>
-                      </div>
-                      <h3>
-                        <a href="course-details.html">
-                          SEO & Social Media Strategies
-                        </a>
-                      </h3>
-                      <p class="description">
-                        Master SEO, content marketing, and social media
-                        strategies tailored for IT and tech businesses. Learn
-                        how to drive traffic and optimize brand presence online.
-                      </p>
-                      <div class="trainer d-flex justify-content-between align-items-center">
-                        <div class="trainer-profile d-flex align-items-center">
-                          <img
-                            src="/img/trainers/trainer-2-2.jpg"
-                            class="img-fluid"
-                            alt="Sarah Lee"
-                          />
-                          <a href="" class="trainer-link">
-                            Sarah Lee
-                          </a>
-                        </div>
-                        <div class="trainer-rank d-flex align-items-center">
-                          <i class="bi bi-person user-icon"></i>&nbsp;85
-                          &nbsp;&nbsp;
-                          <i class="bi bi-heart heart-icon"></i>&nbsp;72
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
-                  data-aos="zoom-in"
-                  data-aos-delay="300"
-                >
-                  <div class="course-item">
-                    <img
-                      src="/img/courses/course-3.jpg"
-                      class="img-fluid"
-                      alt="AI Copywriting"
-                    />
-                    <div class="course-content">
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <p class="category">AI-Powered Copywriting</p>
-                        <p class="price">$149</p>
-                      </div>
-                      <h3>
-                        <a href="course-details.html">Write Better with AI</a>
-                      </h3>
-                      <p class="description">
-                        Leverage AI tools like ChatGPT and Jasper to create
-                        high-quality blog posts, landing pages, and ad copy that
-                        convert. Perfect for tech professionals and content
-                        creators.
-                      </p>
-                      <div class="trainer d-flex justify-content-between align-items-center">
-                        <div class="trainer-profile d-flex align-items-center">
-                          <img
-                            src="/img/trainers/trainer-3-2.jpg"
-                            class="img-fluid"
-                            alt="Michael Chen"
-                          />
-                          <a href="" class="trainer-link">
-                            Michael Chen
-                          </a>
-                        </div>
-                        <div class="trainer-rank d-flex align-items-center">
-                          <i class="bi bi-person user-icon"></i>&nbsp;60
-                          &nbsp;&nbsp;
-                          <i class="bi bi-heart heart-icon"></i>&nbsp;80
+                    <div
+                      class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
+                      data-aos="zoom-in"
+                      data-aos-delay="300"
+                    >
+                      <div class="course-item">
+                        <img
+                          src="/img/courses/course-3.jpg"
+                          class="img-fluid"
+                          alt="AI Copywriting"
+                        />
+                        <div class="course-content">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <p class="category">AI-Powered Copywriting</p>
+                            <p class="price">$149</p>
+                          </div>
+                          <h3>
+                            <a href="course-details.html">
+                              Write Better with AI
+                            </a>
+                          </h3>
+                          <p class="description">
+                            Leverage AI tools like ChatGPT and Jasper to create
+                            high-quality blog posts, landing pages, and ad copy
+                            that convert. Perfect for tech professionals and
+                            content creators.
+                          </p>
+                          <div class="trainer d-flex justify-content-between align-items-center">
+                            <div class="trainer-profile d-flex align-items-center">
+                              <img
+                                src="/img/trainers/trainer-3-2.jpg"
+                                class="img-fluid"
+                                alt="Michael Chen"
+                              />
+                              <a href="" class="trainer-link">
+                                Michael Chen
+                              </a>
+                            </div>
+                            <div class="trainer-rank d-flex align-items-center">
+                              <i class="bi bi-person user-icon"></i>&nbsp;60
+                              &nbsp;&nbsp;
+                              <i class="bi bi-heart heart-icon"></i>&nbsp;80
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </>
+                )}
               </div>
             </div>
           </section>
