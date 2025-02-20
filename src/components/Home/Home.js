@@ -7,9 +7,27 @@ import PageLayout from "../Common/Page/PageLayout";
 import { DivideCircle } from "lucide-react";
 import Chatbot from "../Common/OpenAIChat/Chatbot";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
+
+  const showLoginAlert = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Login Required",
+      text: "You need to log in to use this feature.",
+      showCancelButton: true,
+      confirmButtonText: "Login",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/login");
+      }
+    });
+  };
 
   const fetchApi = async () => {
     try {
@@ -51,7 +69,7 @@ export default function Home() {
                   to improve learning performance.
                 </p>
                 <div class="d-flex">
-                  <a href="#about" class="btn-get-started">
+                  <a href="/login" class="btn-get-started">
                     Get Started
                   </a>
                   <a
@@ -373,9 +391,7 @@ export default function Home() {
                       <i class="bi bi-x"></i> No certification
                     </li>
                   </ul>
-                  <a href="#" class="buy-btn">
-                    Get Started
-                  </a>
+                  <button className="buy-btn" onClick={showLoginAlert}>Get Started</button>
                 </div>
               </div>
 
@@ -402,9 +418,7 @@ export default function Home() {
                       <i class="bi bi-check"></i> Certification included
                     </li>
                   </ul>
-                  <a href="#" class="buy-btn">
-                    Subscribe Now
-                  </a>
+                  <button className="buy-btn" onClick={showLoginAlert}>Subscribe Now</button>
                 </div>
               </div>
 
@@ -431,9 +445,7 @@ export default function Home() {
                       <i class="bi bi-check"></i> Advanced tracking & reports
                     </li>
                   </ul>
-                  <a href="#" class="buy-btn">
-                    Join as Instructor
-                  </a>
+                  <button className="buy-btn" onClick={showLoginAlert}>Join as Instructor</button>
                 </div>
               </div>
             </div>
