@@ -95,7 +95,6 @@ export default function Home() {
         <section id="courses" class="courses section">
           <div className="container">
             <div className="row">
-              <h1>hello</h1>
               {courses.length > 0 ? (
                   courses.map((item) => (
                       <div

@@ -31,8 +31,10 @@ export default function Login() {
         const token = response.data.token.result;
         localStorage.setItem("authToken", token);
 
+
         try {
-          const decodedToken = jwtDecode(token);
+            const decodedToken = jwtDecode(token);
+          console.log(decodedToken);
           const role = decodedToken.role;
           const userName = decodedToken.sub;
           const avatar = decodedToken.avatar;
