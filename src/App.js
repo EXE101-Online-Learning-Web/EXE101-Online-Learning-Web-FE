@@ -11,11 +11,14 @@ import "../src/public/assets/css/main.css";
 import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
 import Test from "./components/Home/test";
+import Courses from "./components/Home/Courses";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import AdminManagement from "./components/Admin/Admin";
 import TeacherList from "./components/Admin/Teacher/TeacherList";
 import PrivateRouteAdmin from "./components/Admin/PrivateRouteAdmin";
+import CourseDetail from "./components/Course/CourseDetail";
+import QuizDetail from "./components/Quiz/QuizDetail";
 import Statistic from "./components/Admin/Statistic/Statistic";
 
 const AppContent = () => (
@@ -24,7 +27,10 @@ const AppContent = () => (
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
     <Route path="/home" element={<Home />} />
+    <Route path="/courses" element={<Courses />} />
     <Route path="/test" element={<Test />} />
+    <Route path="/course/:idCourse" element={<CourseDetail />} />
+    <Route path="/quiz/:idCourse" element={<QuizDetail />} />
     {/* Protected Admin Routes */}
     <Route element={<PrivateRouteAdmin allowedRoles={["Admin"]} />}>
       <Route path="/admin/statistic" element={<Statistic />} />
