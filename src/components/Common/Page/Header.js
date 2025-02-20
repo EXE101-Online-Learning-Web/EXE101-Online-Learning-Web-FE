@@ -100,18 +100,25 @@ export default function Header() {
             </Link>
             <nav className="navmenu">
               <ul className="nav-links">
-                <li>
-                  <a href="#hero"><i className="fas fa-home"></i> Home</a>
-                </li>
-                <li>
-                  <a href="#courses"><i className="fas fa-book"></i> Courses</a>
-                </li>
-                <li>
-                  <a href="#about"><i className="fas fa-info-circle"></i> About</a>
-                </li>
-                <li>
-                  <a href="#pricing"><i className="fas fa-dollar-sign"></i> Pricing</a>
-                </li>
+                {userName ? (
+                  <>
+                    <li>
+                      <a href="#courses"><i className="fas fa-book"></i> Courses</a>
+                    </li>
+                    <li>
+                      <a href="#pricing"><i className="fas fa-dollar-sign"></i> Pricing</a>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <a href="#hero"><i className="fas fa-home"></i> Home</a>
+                    </li>
+                    <li>
+                      <a href="#about"><i className="fas fa-info-circle"></i> About</a>
+                    </li>
+                  </>
+                )}
               </ul>
 
               <div className="auth-buttons">
