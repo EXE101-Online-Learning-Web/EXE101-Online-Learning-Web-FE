@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../public/assets/css/courses.css";
 import "../../public/assets/css/pricing.css";
+import "../../public/assets/css/heroSection.css";
 import PageLayout from "../Common/Page/PageLayout";
 import Chatbot from "../Common/OpenAIChat/Chatbot";
 
@@ -10,6 +11,7 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("");
+  const [priceFilter, setPriceFilter] = useState(""); // Thêm state để lọc theo giá
   const [currentPage, setCurrentPage] = useState(1);
   const coursesPerPage = 10;
   const navigate = useNavigate();
@@ -32,7 +34,15 @@ export default function Courses() {
     .filter((course) =>
       course.courseTitle.toLowerCase().includes(searchQuery.toLowerCase())
     )
-    .filter((course) => (category ? course.categoryId === parseInt(category) : true));
+    .filter((course) => (category ? course.categoryId === parseInt(category) : true))
+    .filter((course) => {
+      if (priceFilter === "") return true;
+      const price = parseFloat(course.price);
+      if (priceFilter === "low") return price <= 20;
+      if (priceFilter === "medium") return price > 20 && price <= 50;
+      if (priceFilter === "high") return price > 50;
+      return true;
+    });
 
   return (
     <PageLayout>
@@ -100,6 +110,17 @@ export default function Courses() {
             <option value="2">Marketing</option>
             <option value="3">AI & Machine Learning</option>
           </select>
+          {/* Thêm dropdown lọc theo giá */}
+          <select
+            value={priceFilter}
+            onChange={(e) => setPriceFilter(e.target.value)}
+            className="form-select w-25"
+          >
+            <option value="">Lọc theo giá</option>
+            <option value="low">Dưới 20$</option>
+            <option value="medium">20$ - 50$</option>
+            <option value="high">Trên 50$</option>
+          </select>
         </div>
 
         <div className="row">
@@ -107,8 +128,8 @@ export default function Courses() {
             filteredCourses.map((course) => (
               <div key={course.courseId} className="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
                 <div className="course-item" onClick={() => navigate(`/course/${course.courseId}`)}>
-                  <img src={course.ImageURL} className="img-fluid" alt={course.courseTitle}/>
-                    <div className="course-content">
+                  <img src="../img/courses/course-1.jpg" className="img-fluid" alt={course.courseTitle} />
+                  <div className="course-content">
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <p className="category">{course.categoryName}</p>
                       <p className="price">${course.price}</p>
@@ -140,98 +161,9 @@ export default function Courses() {
       </div>
 
       <section id="pricing" class="pricing section">
-        <div class="container" data-aos="zoom-in" data-aos-delay="100">
-          <div class="row g-3 justify-content-center">
-            <div class="col-lg-4 col-md-6">
-              <div class="pricing-item">
-                <div class="icon">
-                  <i class="bi bi-box"></i>
-                </div>
-                <h4 class="fw-semibold fs-5">Free Plan</h4>
-                <h5 class="price">
-                  $0<span>/month</span>
-                </h5>
-                <ul class="list-unstyled">
-                  <li>
-                    <i class="bi bi-check"></i> Limited free courses
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> AI course recommendations
-                  </li>
-                  <li class="text-muted">
-                    <i class="bi bi-x"></i> No quizzes & analytics
-                  </li>
-                  <li class="text-muted">
-                    <i class="bi bi-x"></i> No certification
-                  </li>
-                </ul>
-                <a href="#" class="buy-btn">
-                  Get Started
-                </a>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-              <div class="pricing-item">
-                <div class="icon">
-                  <i class="bi bi-rocket"></i>
-                </div>
-                <h4 class="fw-semibold fs-5">Premium Plan</h4>
-                <h5 class="price">
-                  $29<span>/month</span>
-                </h5>
-                <ul class="list-unstyled">
-                  <li>
-                    <i class="bi bi-check"></i> Unlimited course access
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> AI-powered learning
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> Personalized quizzes
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> Certification included
-                  </li>
-                </ul>
-                <a href="#" class="buy-btn">
-                  Subscribe Now
-                </a>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-              <div class="pricing-item">
-                <div class="icon">
-                  <i class="bi bi-person-video3"></i>
-                </div>
-                <h4 class="fw-semibold fs-5">Instructor Plan</h4>
-                <h5 class="price">
-                  $49<span>/month</span>
-                </h5>
-                <ul class="list-unstyled">
-                  <li>
-                    <i class="bi bi-check"></i> Unlimited course uploads
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> AI-powered student insights
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> Revenue sharing & analytics
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> Advanced tracking & reports
-                  </li>
-                </ul>
-                <a href="#" class="buy-btn">
-                  Join as Instructor
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Phần giá trị subscription */}
       </section>
-      <Chatbot></Chatbot>
+      <Chatbot />
     </PageLayout>
   );
 }
