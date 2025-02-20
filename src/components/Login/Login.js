@@ -31,12 +31,15 @@ export default function Login() {
         const token = response.data.token.result;
         localStorage.setItem("authToken", token);
 
+
         try {
-          const decodedToken = jwtDecode(token);
+            const decodedToken = jwtDecode(token);
+          console.log(decodedToken);
           const role = decodedToken.role;
           const userName = decodedToken.sub;
           const avatar = decodedToken.avatar;
           const emailConfirmed = decodedToken.emailConfirmed;
+          const userId = decodedToken.nameid;
 
           if (!emailConfirmed) {
             setError("You haven't confirmed your email. Please confirm your email before logging in.");
@@ -44,6 +47,7 @@ export default function Login() {
           }
 
           localStorage.setItem("userName", userName);
+          localStorage.setItem("userId", userId);
           if (avatar) {
             localStorage.setItem("avatar", avatar);
           }

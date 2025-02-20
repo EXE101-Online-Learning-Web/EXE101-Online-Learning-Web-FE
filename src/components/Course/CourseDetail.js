@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PageLayout from "../Common/Page/PageLayout";
+import { jwtDecode } from "jwt-decode";
 
 export default function CourseDetail() {
   const { idCourse } = useParams();
   const [course, setCourse] = useState(null);
+  const navigate = useNavigate();
 
   const fetchCourseDetail = async () => {
     try {
@@ -18,26 +20,34 @@ export default function CourseDetail() {
 
   const handleBuyClick = async () => {
     try {
-      const request = {
-        userId: "user123",  // Thay bằng thông tin người dùng thực tế, ví dụ: từ session hoặc user login
-        orderName: course.courseTitle,  // Sử dụng tên khóa học làm tên đơn hàng
-        description: course.description,  // Mô tả khóa học
-        totalPrice: course.price,  // Giá của khóa học
-        returnUrl: "http://localhost:3000/paymentSuccess",  // URL người dùng sẽ được chuyển hướng sau khi thanh toán thành công
-        cancelUrl: "http://localhost:3000/paymentCancelled"  // URL nếu người dùng hủy thanh toán
+      const paymentData = {
+        "userId": localStorage.getItem("userId"),
+        "orderName": course.courseTitle,
+        "description": course.courseTitle,
+        "totalPrice": course.price,
+        "returnUrl": "http://localhost:3000/PaymentSuccess",
+        "cancelUrl": "http://localhost:3000/"
       };
 
-      // Gửi request tới API để tạo payment link
-      const response = await axios.post("https://localhost:7091/api/Payment/payment-link", request);
+      console.log("xxxxxxxxx");
 
-      if (response.data && response.data.PaymentLink) {
+      // Gửi request tới API để tạo payment link
+      const response = await axios.post("https://localhost:7091/api/Payment/payment-link", paymentData);
+
+      console.log(response);
+      if (response.data && response.data.paymentLink) {
         // Chuyển hướng người dùng đến link thanh toán
-        window.location.href = response.data.PaymentLink;
+        window.location.href = response.data.paymentLink;
       }
     } catch (error) {
       console.error("Error while creating payment link:", error);
       alert("An error occurred while processing your payment. Please try again.");
     }
+  };
+
+  const handleEnrollClick = () => {
+    // Navigate to the LearnCourse page
+    navigate(`/learn-course/${idCourse}`);
   };
 
   useEffect(() => {
@@ -119,6 +129,10 @@ export default function CourseDetail() {
                     <li>June 2025</li>
                     <li>September 2025</li>
                   </ul>
+
+                  <button className="btn btn-success" onClick={handleEnrollClick}>
+                    Enroll
+                  </button>
                 </div>
               </div>
             </div>
