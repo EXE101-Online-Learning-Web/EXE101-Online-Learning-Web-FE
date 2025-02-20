@@ -21,6 +21,7 @@ import CourseDetail from "./components/Course/CourseDetail";
 import QuizDetail from "./components/Quiz/QuizDetail";
 import ProfileDetail from "./components/Profile/ProfileDetail";
 import Statistic from "./components/Admin/Statistic/Statistic";
+import {PaymentSuccess} from "./components/PaymentSuccess";
 
 const AppContent = () => (
   <Routes>
@@ -33,7 +34,8 @@ const AppContent = () => (
     <Route path="/course/:idCourse" element={<CourseDetail />} />
     <Route path="/quiz/:idCourse" element={<QuizDetail />} />
     <Route path="/profile/:id" element={<ProfileDetail />} />
-    {/* Protected Admin Routes */}
+      <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+      {/* Protected Admin Routes */}
     <Route element={<PrivateRouteAdmin allowedRoles={["Admin"]} />}>
       <Route path="/admin/statistic" element={<Statistic />} />
       <Route path="/admin" element={<AdminManagement />} />
