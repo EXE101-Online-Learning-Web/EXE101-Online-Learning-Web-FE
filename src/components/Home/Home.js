@@ -12,7 +12,7 @@ export default function Home() {
 
   const fetchApi = async () => {
     try {
-      const result = await axios.get("https://localhost:7091/api/Course");
+      const result = await axios.get("https://localhost:7091/api/Courses");
       setCourses(result.data);
     } catch (error) {
       console.log(error);
@@ -338,23 +338,16 @@ export default function Home() {
                     education!
                   </p>
 
-                  <div class="position-relative mt-4">
-                    <img
-                      src="/img/about-2.jpg"
-                      class="img-fluid rounded-4"
-                      alt="EduQuest Learning"
-                    />
-                    <a
-                      href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
-                      class="glightbox pulsating-play-btn"
-                    >
-                      {/* <i class="bi bi-play-circle"></i> */}
-                    </a>
-                  </div>
+                            <div class="position-relative mt-4">
+                                <img src="/img/about-2.jpg" class="img-fluid rounded-4" alt="EduQuest Learning"/>
+                                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn">
+                                    {/* <i class="bi bi-play-circle"></i> */}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </section>
 
         <section id="pricing" class="pricing section">
