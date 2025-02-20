@@ -1,13 +1,13 @@
 .hero {
-    background: linear-gradient(to right, 
-        #004c43 20%,  
-        rgba(0, 76, 67, 0.9) 35%,  
-        rgba(0, 76, 67, 0.6) 50%,  
-        rgba(255, 107, 107, 0.3) 80%,  
-        rgba(255, 107, 107, 0)), 
+    background: linear-gradient(to right,
+            #004c43 20%,
+            rgba(0, 76, 67, 0.9) 35%,
+            rgba(0, 76, 67, 0.6) 50%,
+            rgba(255, 107, 107, 0.3) 80%,
+            rgba(255, 107, 107, 0)),
         url('../../../../public/img/blog/blog-3.jpg') no-repeat center center/cover;
     color: white;
-    padding-top: 120px;
+    padding-top: 20px;
     padding-bottom: 40px;
     margin-bottom: 0px;
     text-align: left;
@@ -21,7 +21,7 @@
 }
 
 .logo #pageName {
-    color: #00dec4; 
+    color: #00dec4;
 }
 
 .hero #accent {
@@ -118,7 +118,8 @@
 
 .icon-boxes {
     position: relative;
-    top: -50px; /* Đẩy icon-box lên để chạm vào hero */
+    top: -50px;
+    /* Đẩy icon-box lên để chạm vào hero */
     z-index: 10;
     background: transparent;
     padding: 40px 0;
@@ -300,8 +301,6 @@
 }
 
 
-
-
 /* About Section */
 .about {
     padding: 80px 0;
@@ -396,7 +395,7 @@
 }
 
 .about .content ul li span {
-    color: #ffffff; 
+    color: #ffffff;
     font-weight: 500;
 }
 
@@ -407,7 +406,7 @@
 }
 
 .about h3 {
-    color: #ffffff; 
+    color: #ffffff;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -427,7 +426,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    max-width: 1100px; /* Giữ bố cục cân đối */
+    max-width: 1100px;
+    /* Giữ bố cục cân đối */
     margin: 0 auto;
 }
 
@@ -436,11 +436,13 @@
     display: flex;
     align-items: center;
     background: white;
-    padding: 10px 15px; /* Giảm padding dư thừa */
+    padding: 10px 15px;
+    /* Giảm padding dư thừa */
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
-    height: 70px; /* Giảm chiều cao */
+    height: 70px;
+    /* Giảm chiều cao */
 }
 
 /* Hover Effect */
@@ -454,7 +456,8 @@
     font-size: 22px;
     color: #00dec4;
     min-width: 40px;
-    margin-right: 10px; /* Tạo khoảng cách giữa icon và nội dung */
+    margin-right: 10px;
+    /* Tạo khoảng cách giữa icon và nội dung */
 }
 
 /* Content Box - Tiêu đề phía trên, nội dung phía dưới */
@@ -500,11 +503,13 @@
     display: flex;
     align-items: center;
     background: white;
-    padding: 8px 10px; /* Giảm padding để nhỏ gọn hơn */
+    padding: 8px 10px;
+    /* Giảm padding để nhỏ gọn hơn */
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s, box-shadow 0.2s;
-    height: 60px; /* Chiều cao đã giảm tối đa */
+    height: 60px;
+    /* Chiều cao đã giảm tối đa */
 }
 
 /* Hover Effect */
@@ -530,7 +535,8 @@
 
 /* Tiêu đề */
 .service-item h3 {
-    font-size: 14px; /* Giảm kích thước chữ */
+    font-size: 14px;
+    /* Giảm kích thước chữ */
     font-weight: 700;
     color: #333;
     margin-bottom: 2px;
@@ -666,50 +672,14 @@
     color: #ccc;
 }
 
-
-.pricing .pricing-item {
-    background: #ffffff;
-    border: 2px solid #00000026;
-    color: #333;
-    border-radius: 10px;
-    text-align: center;
-    padding: 30px;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 100%; /* Đảm bảo full width theo cột */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 500px; /* Giữ chiều cao bằng nhau */
-}
-
-/* Đảm bảo tất cả cột có chiều rộng bằng nhau */
-.row.g-3 > div {
-    display: flex;
-    width: 33.33%; /* Chia đều thành 3 cột */
-}
-
-/* Căn giữa icon */
-.pricing .pricing-item .icon i {
-    font-size: 40px;
-    color: #00dec4;
-}
-
-/* Hover nhẹ nhàng */
-.pricing .pricing-item:hover {
-    background: #f8f9fa;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
 .page-container-layout {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Đảm bảo trang luôn đủ chiều cao */
-  }
-  
-  .content-layout {
-    flex: 1; /* Đẩy footer xuống dưới */
-  }
+    min-height: 100vh;
+    /* Đảm bảo trang luôn đủ chiều cao */
+}
 
+.content-layout {
+    flex: 1;
+    /* Đẩy footer xuống dưới */
+}

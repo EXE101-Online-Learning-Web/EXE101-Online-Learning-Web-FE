@@ -1,13 +1,16 @@
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../../../public/assets/css/header.css";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isAdmin, setAdmin] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
@@ -16,6 +19,7 @@ export default function Header() {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
+        setUserId(decodedToken.nameid || decodedToken.sub);
         setAdmin(decodedToken.role === "Admin");
       } catch (error) {
         console.error("Invalid token:", error);
@@ -35,141 +39,122 @@ export default function Header() {
     localStorage.removeItem("avatar");
     setUserName("");
     setAvatar("");
-    navigate("/login");
+    navigate("/home");
   };
 
-  const naviagteAdmin = () => {
+  const navigateAdmin = () => {
     navigate("/admin");
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
+    setIsDropdownOpen(!isDropdownOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   return (
     <>
-      <header id="header" class="header fixed-top">
-        <div class="topbar d-flex align-items-center">
-          <div class="container d-flex justify-content-center justify-content-md-between">
-            <div class="contact-info d-flex align-items-center">
-              <i class="bi bi-envelope d-flex align-items-center">
-                <a href="mailto:contact@example.com">
-                  EduQuest.service@gmail.com
-                </a>
+      <header id="header" className="header fixed-top">
+        <div className="topbar d-flex align-items-center">
+          <div className="container d-flex justify-content-center justify-content-md-between">
+            <div className="contact-info d-flex align-items-center">
+              <i className="bi bi-envelope d-flex align-items-center">
+                <a href="mailto:contact@example.com">EduQuest.service@gmail.com</a>
               </i>
-              <i class="bi bi-phone d-flex align-items-center ms-4">
+              <i className="bi bi-phone d-flex align-items-center ms-4">
                 <span>+84386543757</span>
               </i>
             </div>
-            <div class="social-links d-none d-md-flex align-items-center">
-              <a href="#" class="twitter">
-                <i class="bi bi-twitter-x"></i>
+            <div className="social-links d-none d-md-flex align-items-center">
+              <a href="#" className="twitter">
+                <i className="bi bi-twitter-x"></i>
               </a>
-              <a href="#" class="facebook">
-                <i class="bi bi-facebook"></i>
+              <a href="#" className="facebook">
+                <i className="bi bi-facebook"></i>
               </a>
-              <a href="#" class="instagram">
-                <i class="bi bi-instagram"></i>
+              <a href="#" className="instagram">
+                <i className="bi bi-instagram"></i>
               </a>
-              <a href="#" class="linkedin">
-                <i class="bi bi-linkedin"></i>
+              <a href="#" className="linkedin">
+                <i className="bi bi-linkedin"></i>
               </a>
             </div>
           </div>
         </div>
 
-        <div class="navbar">
-          <div class="container">
-            <Link to="/" class="logo">
-              <img
-                src="/img/EduQuestLogo.png"
-                alt="EduQuest Logo"
-                class="logo-img"
-              />
+        <div className="navbar">
+          <div className="container">
+            <Link to="/" className="logo">
+              <img src="/img/EduQuestLogo.png" alt="EduQuest Logo" className="logo-img" />
               <h1 id="pageName">EduQuest</h1>
               <span>.</span>
             </Link>
-            <nav class="navmenu">
-              <ul class="nav-links">
-                <li>
-                  <a href="#hero">
-                    <i class="fas fa-home"></i> Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#courses">
-                    <i class="fas fa-book"></i> Courses
-                  </a>
-                </li>
-                <li>
-                  <a href="#about">
-                    <i class="fas fa-info-circle"></i> About
-                  </a>
-                </li>
-                <li>
-                  <a href="#pricing">
-                    <i class="fas fa-dollar-sign"></i> Pricing
-                  </a>
-                </li>
+            <nav className="navmenu">
+              <ul className="nav-links">
+                {userName ? (
+                  <>
+                    <li>
+                      <a href="/courses"><i className="fas fa-book"></i> Courses</a>
+                    </li>
+                    <li>
+                      <a href="#pricing"><i className="fas fa-dollar-sign"></i> Pricing</a>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <a href="#hero"><i className="fas fa-home"></i> Home</a>
+                    </li>
+                    <li>
+                      <a href="#about"><i className="fas fa-info-circle"></i> About</a>
+                    </li>
+                  </>
+                )}
               </ul>
+
               <div className="auth-buttons">
                 {userName ? (
-                  <div
-                    className="d-flex align-items-center"
-                    onClick={toggleDropdown}
-                  >
-                    <span className="ms-2 user-name">{userName}</span>
-                    <img
-                      src={avatar || "/img/icon-default.png"}
-                      alt="User Avatar"
-                      className="rounded-circle avatar-img"
-                      width="40"
-                      height="40"
-                    />
-
-                    {/* Dropdown Menu */}
-                    <div
-                      class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                      aria-labelledby="userDropdown"
+                  <div className="nav-item dropdown no-arrow" ref={dropdownRef}>
+                    <button
+                      className="nav-link dropdown-toggle"
+                      onClick={toggleDropdown}
+                      aria-expanded={isDropdownOpen}
                     >
-                      <a class="dropdown-item" href="#">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Profile
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
-                      </a>
-                      <div class="dropdown-divider"></div>
-                      <a
-                        class="dropdown-item"
-                        data-toggle="modal"
-                        data-target="#logoutModal"
-                      >
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
-                      </a>
-                    </div>
-                    
+                      <span className="ms-2 user-name">{userName}</span>
+                      <img
+                        src={avatar || "../img/client-Avatar/clientAvatar-1.jpg"}
+                        alt="User Avatar"
+                        className="rounded-circle avatar-img"
+                        width="40"
+                        height="40"
+                      />
+                    </button>
                     {isDropdownOpen && (
-                      <div className="dropdown-menu">
-                        <a href="#profile" className="dropdown-item">
-                          View Profile
+                      <div className={`dropdown-menu ${isDropdownOpen ? "show" : ""} shadow animated--grow-in`}>
+                        <a className="dropdown-item" onClick={() => navigate(`/profile/${userId}`)}>
+                          <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                          Profile
                         </a>
-                        {isAdmin ? (
-                          <a onClick={naviagteAdmin}>Admin Management</a>
-                        ) : (
-                          ""
+                        {isAdmin && (
+                          <a onClick={navigateAdmin} className="dropdown-item">Admin Management</a>
                         )}
+                        <div className="dropdown-divider"></div>
                         <a
-                          href="#"
                           className="dropdown-item"
+                          data-toggle="modal"
+                          data-target="#logoutModal"
                           onClick={handleLogout}
                         >
+                          <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                           Logout
                         </a>
                       </div>
@@ -177,12 +162,8 @@ export default function Header() {
                   </div>
                 ) : (
                   <>
-                    <Link to="/login" className="login-btn">
-                      Login
-                    </Link>
-                    <Link to="/register" className="register-btn">
-                      Register
-                    </Link>
+                    <Link to="/login" className="login-btn">Login</Link>
+                    <Link to="/register" className="register-btn">Register</Link>
                   </>
                 )}
               </div>

@@ -34,21 +34,29 @@ export default function Login() {
         try {
           const decodedToken = jwtDecode(token);
           const role = decodedToken.role;
-          const userName = decodedToken.sub; 
+          const userName = decodedToken.sub;
           const avatar = decodedToken.avatar;
+          const emailConfirmed = decodedToken.emailConfirmed;
+          const userId = decodedToken.nameid;
+
+          if (!emailConfirmed) {
+            setError("You haven't confirmed your email. Please confirm your email before logging in.");
+            return;
+          }
 
           localStorage.setItem("userName", userName);
-         if(avatar) {
-          localStorage.setItem("avatar", avatar);
-         }
-          localStorage.setItem("isLogin","isLogin");
+          localStorage.setItem("userId", userId);
+          if (avatar) {
+            localStorage.setItem("avatar", avatar);
+          }
+          localStorage.setItem("isLogin", "isLogin");
 
           if (role === "Admin") {
             navigate("/admin");
           } else if (role === "Student") {
-            navigate("/home");
+            navigate("/courses");
           } else if (role === "Teacher") {
-            navigate("/home");
+            navigate("/courses");
           } else {
             setError("Invalid role.");
           }

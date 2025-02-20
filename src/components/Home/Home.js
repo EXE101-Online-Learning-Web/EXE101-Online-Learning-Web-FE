@@ -2,17 +2,36 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../public/assets/css/home.css";
 import "../../public/assets/css/heroSection.css";
+import "../../public/assets/css/pricing.css";
 import PageLayout from "../Common/Page/PageLayout";
 import { DivideCircle } from "lucide-react";
 import Chatbot from "../Common/OpenAIChat/Chatbot";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
+
+  const showLoginAlert = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Login Required",
+      text: "You need to log in to use this feature.",
+      showCancelButton: true,
+      confirmButtonText: "Login",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/login");
+      }
+    });
+  };
 
   const fetchApi = async () => {
     try {
-      const result = await axios.get("https://localhost:7091/api/Course");
+      const result = await axios.get("https://localhost:7091/api/Courses");
       setCourses(result.data);
     } catch (error) {
       console.log(error);
@@ -21,6 +40,8 @@ export default function Home() {
 
   useEffect(() => {
     fetchApi();
+
+    console.log("xxxxxxx",courses.length);
   }, []);
 
   return (
@@ -48,7 +69,7 @@ export default function Home() {
                   to improve learning performance.
                 </p>
                 <div class="d-flex">
-                  <a href="#about" class="btn-get-started">
+                  <a href="/login" class="btn-get-started">
                     Get Started
                   </a>
                   <a
@@ -72,61 +93,55 @@ export default function Home() {
         </section>
 
         <section id="courses" class="courses section">
-          <div class="container">
-            <div class="row">
-              {courses ? (
-                courses.map((item) => (
-                  <div
-                    class="col-lg-4 col-md-6 d-flex align-items-stretch"
-                    data-aos="zoom-in"
-                    data-aos-delay="100"
-                  >
-                    <div class="course-item">
-                      <img
-                        src="/img/courses/course-1.jpg"
-                        class="img-fluid"
-                        alt="Full-Stack Web Development"
-                      />
-                      <div class="course-content">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                          <p class="category">Full-Stack Web Development</p>
-                          <p class="price">$299</p>
-                        </div>
-                        <h3>
-                          <Link
-                            to={`/course/${item.courseId}`}
-                            class="collapse-item"
-                          >
-                            Become a Full-Stack Developer
-                          </Link>
-                        </h3>
-                        <p class="description">
-                          Learn HTML, CSS, JavaScript, React, and Node.js to
-                          build dynamic and responsive web applications.
-                          Hands-on projects and real-world applications
-                          included.
-                        </p>
-                        <div class="trainer d-flex justify-content-between align-items-center">
-                          <div class="trainer-profile d-flex align-items-center">
-                            <img
-                              src="/img/trainers/trainer-1-2.jpg"
-                              class="img-fluid"
-                              alt="John Doe"
-                            />
-                            <a href="" class="trainer-link">
-                              John Doe
-                            </a>
-                          </div>
-                          <div class="trainer-rank d-flex align-items-center">
-                            <i class="bi bi-person user-icon"></i>&nbsp;120
-                            &nbsp;&nbsp;
-                            <i class="bi bi-heart heart-icon"></i>&nbsp;98
+          <div className="container">
+            <div className="row">
+              <h1>hello</h1>
+              {courses.length > 0 ? (
+                  courses.map((item) => (
+                      <div
+                          key={item.courseId}
+                          className="col-lg-4 col-md-6 d-flex align-items-stretch"
+                          data-aos="zoom-in"
+                          data-aos-delay="100"
+                      >
+                        <div className="course-item">
+                          <img
+                              src="/img/courses/course-1.jpg" // Đây là hình ảnh mặc định, bạn có thể thêm trường hình ảnh nếu có trong API
+                              className="img-fluid"
+                              alt={item.courseTitle}
+                          />
+                          <div className="course-content">
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                              <p className="category">{item.categoryName}</p>
+                              <p className="price">{`${item.price} VND`}</p> {/* Hiển thị giá theo dạng tiền tệ */}
+                            </div>
+                            <h3>
+                              <Link to={`/course/${item.courseId}`} className="collapse-item">
+                                {item.courseTitle}
+                              </Link>
+                            </h3>
+                            <p className="description">{item.description}</p>
+                            <div className="trainer d-flex justify-content-between align-items-center">
+                              <div className="trainer-profile d-flex align-items-center">
+                                <img
+                                    src="/img/trainers/trainer-1-2.jpg" // Bạn có thể thay đổi đường dẫn hình ảnh của giảng viên nếu có trong API
+                                    className="img-fluid"
+                                    alt="Instructor"
+                                />
+                                <a href="#" className="trainer-link">
+                                  Instructor Name {/* Bạn có thể thay đổi tên giảng viên nếu có trong API */}
+                                </a>
+                              </div>
+                              <div className="trainer-rank d-flex align-items-center">
+                                <i className="bi bi-person user-icon"></i>&nbsp;120
+                                &nbsp;&nbsp;
+                                <i className="bi bi-heart heart-icon"></i>&nbsp;98
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                ))
+                  ))
               ) : (
                 <>
                   <div
@@ -339,15 +354,8 @@ export default function Home() {
                   </p>
 
                   <div class="position-relative mt-4">
-                    <img
-                      src="/img/about-2.jpg"
-                      class="img-fluid rounded-4"
-                      alt="EduQuest Learning"
-                    />
-                    <a
-                      href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
-                      class="glightbox pulsating-play-btn"
-                    >
+                    <img src="/img/about-2.jpg" class="img-fluid rounded-4" alt="EduQuest Learning" />
+                    <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn">
                       {/* <i class="bi bi-play-circle"></i> */}
                     </a>
                   </div>
@@ -383,9 +391,7 @@ export default function Home() {
                       <i class="bi bi-x"></i> No certification
                     </li>
                   </ul>
-                  <a href="#" class="buy-btn">
-                    Get Started
-                  </a>
+                  <button className="buy-btn" onClick={showLoginAlert}>Get Started</button>
                 </div>
               </div>
 
@@ -412,9 +418,7 @@ export default function Home() {
                       <i class="bi bi-check"></i> Certification included
                     </li>
                   </ul>
-                  <a href="#" class="buy-btn">
-                    Subscribe Now
-                  </a>
+                  <button className="buy-btn" onClick={showLoginAlert}>Subscribe Now</button>
                 </div>
               </div>
 
@@ -441,15 +445,12 @@ export default function Home() {
                       <i class="bi bi-check"></i> Advanced tracking & reports
                     </li>
                   </ul>
-                  <a href="#" class="buy-btn">
-                    Join as Instructor
-                  </a>
+                  <button className="buy-btn" onClick={showLoginAlert}>Join as Instructor</button>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
         <Chatbot></Chatbot>
       </main>
     </PageLayout>
