@@ -39,7 +39,7 @@ export default function Header() {
     localStorage.removeItem("avatar");
     setUserName("");
     setAvatar("");
-    navigate("/login");
+    navigate("/home");
   };
 
   const navigateAdmin = () => {
@@ -103,7 +103,7 @@ export default function Header() {
                 {userName ? (
                   <>
                     <li>
-                      <a href="#courses"><i className="fas fa-book"></i> Courses</a>
+                      <a href="/courses"><i className="fas fa-book"></i> Courses</a>
                     </li>
                     <li>
                       <a href="#pricing"><i className="fas fa-dollar-sign"></i> Pricing</a>
@@ -131,7 +131,7 @@ export default function Header() {
                     >
                       <span className="ms-2 user-name">{userName}</span>
                       <img
-                        src={avatar || "/img/icon-default.png"}
+                        src={avatar || "../img/client-Avatar/clientAvatar-1.jpg"}
                         alt="User Avatar"
                         className="rounded-circle avatar-img"
                         width="40"
