@@ -62,6 +62,9 @@ export function SidebarAdmin() {
               <Link to={"/admin/teacher/teacherList"} class="collapse-item">
                 Teacher
               </Link>
+              <Link to={"/admin/statistic"} class="collapse-item">
+                Statistic
+              </Link>
             </div>
           </div>
         </li>

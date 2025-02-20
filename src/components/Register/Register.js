@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaUser, FaChalkboardTeacher } from 'react-icons/fa';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../public/assets/css/register.css";
+import Swal from "sweetalert2";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("Student");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -25,11 +28,19 @@ export default function Register() {
         {
           email,
           password,
+          role
         }
       );
 
       if (response.data) {
-        navigate("/login"); // Navigate to login page after successful registration
+        Swal.fire({
+          title: "Registration Successful",
+          text: "Please check your email to confirm your account.",
+          icon: "success",
+          confirmButtonText: "OK"
+        }).then(() => {
+          navigate("/login"); // Navigate to login page after showing alert
+        });
       }
     } catch (err) {
       setError("Registration failed. Please try again.");
@@ -55,6 +66,38 @@ export default function Register() {
         }}
       >
         <h2 className="text-center mb-4 font-weight-bold" style={{ color: "#343a40" }}>Register</h2>
+        <div className="d-flex mb-4">
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              id="student"
+              name="role"
+              value="Student"
+              checked={role === "Student"}
+              onChange={() => setRole("Student")}
+            />
+            <label className="form-check-label" htmlFor="student">
+              <FaUser className="mr-2" /> Student
+            </label>
+          </div>
+
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="radio"
+              id="teacher"
+              name="role"
+              value="Teacher"
+              checked={role === "Teacher"}
+              onChange={() => setRole("Teacher")}
+            />
+            <label className="form-check-label" htmlFor="teacher">
+              <FaChalkboardTeacher className="mr-2" /> Teacher
+            </label>
+          </div>
+        </div>
+
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-3">
