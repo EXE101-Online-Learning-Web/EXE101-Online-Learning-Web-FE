@@ -18,6 +18,7 @@ import TeacherList from "./components/Admin/Teacher/TeacherList";
 import PrivateRouteAdmin from "./components/Admin/PrivateRouteAdmin";
 import CourseDetail from "./components/Course/CourseDetail";
 import QuizDetail from "./components/Quiz/QuizDetail";
+import CourseCreate from "./components/Course/CourseCreate";
 
 const AppContent = () => (
   <Routes>
@@ -26,6 +27,7 @@ const AppContent = () => (
     <Route path="/register" element={<Register />} />
     <Route path="/home" element={<Home />} />
     <Route path="/test" element={<Test />} />
+    <Route path="/course/create" element={<CourseCreate />} />
     <Route path="/course/:idCourse" element={<CourseDetail />} />
     <Route path="/quiz/:idCourse" element={<QuizDetail />} />
     {/* Protected Admin Routes */}
