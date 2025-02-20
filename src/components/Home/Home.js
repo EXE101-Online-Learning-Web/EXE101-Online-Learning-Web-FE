@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../public/assets/css/home.css";
 import "../../public/assets/css/heroSection.css";
+import "../../public/assets/css/pricing.css";
 import PageLayout from "../Common/Page/PageLayout";
 import { DivideCircle } from "lucide-react";
 import Chatbot from "../Common/OpenAIChat/Chatbot";
@@ -338,16 +339,16 @@ export default function Home() {
                     education!
                   </p>
 
-                            <div class="position-relative mt-4">
-                                <img src="/img/about-2.jpg" class="img-fluid rounded-4" alt="EduQuest Learning"/>
-                                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn">
-                                    {/* <i class="bi bi-play-circle"></i> */}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                  <div class="position-relative mt-4">
+                    <img src="/img/about-2.jpg" class="img-fluid rounded-4" alt="EduQuest Learning" />
+                    <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn">
+                      {/* <i class="bi bi-play-circle"></i> */}
+                    </a>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </section>
 
         <section id="pricing" class="pricing section">
@@ -442,7 +443,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
         <Chatbot></Chatbot>
       </main>
     </PageLayout>
