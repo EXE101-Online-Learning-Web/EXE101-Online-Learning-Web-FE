@@ -5,6 +5,7 @@ import "../../../public/assets/css/header.css";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -18,6 +19,7 @@ export default function Header() {
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
+        setUserId(decodedToken.nameid || decodedToken.sub);
         setAdmin(decodedToken.role === "Admin");
       } catch (error) {
         console.error("Invalid token:", error);
@@ -131,7 +133,7 @@ export default function Header() {
                     </button>
                     {isDropdownOpen && (
                       <div className={`dropdown-menu ${isDropdownOpen ? "show" : ""} shadow animated--grow-in`}>
-                        <a className="dropdown-item" href="#">
+                        <a className="dropdown-item" onClick={() => navigate(`/profile/${userId}`)}>
                           <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                           Profile
                         </a>

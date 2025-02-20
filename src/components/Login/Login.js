@@ -52,9 +52,9 @@ export default function Login() {
           if (role === "Admin") {
             navigate("/admin");
           } else if (role === "Student") {
-            navigate("/home");
+            navigate("/courses");
           } else if (role === "Teacher") {
-            navigate("/home");
+            navigate("/courses");
           } else {
             setError("Invalid role.");
           }
