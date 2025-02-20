@@ -1,0 +1,61 @@
+.learn-course {
+    padding: 50px 0;
+}
+
+.learn-course .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.learn-course h2 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.learn-course .sidebar {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.learn-course .sidebar h4 {
+    margin-bottom: 20px;
+}
+
+.learn-course .sidebar .list-unstyled {
+    padding-left: 0;
+}
+
+.learn-course .sidebar .content-item {
+    margin-bottom: 10px;
+}
+
+.learn-course .sidebar .content-item button {
+    color: #007bff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.learn-course .sidebar .content-item button:hover {
+    text-decoration: underline;
+}
+
+.learn-course .video-section {
+    margin-top: 30px;
+}
+
+.learn-course .video-section iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.learn-course .video-section p {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+

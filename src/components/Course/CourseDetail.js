@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PageLayout from "../Common/Page/PageLayout";
+import { jwtDecode } from "jwt-decode";
 
 export default function CourseDetail() {
   const { idCourse } = useParams();
   const [course, setCourse] = useState(null);
+  const navigate = useNavigate();
 
   const fetchCourseDetail = async () => {
     try {
@@ -41,6 +43,11 @@ export default function CourseDetail() {
       console.error("Error while creating payment link:", error);
       alert("An error occurred while processing your payment. Please try again.");
     }
+  };
+
+  const handleEnrollClick = () => {
+    // Navigate to the LearnCourse page
+    navigate(`/learn-course/${idCourse}`);
   };
 
   useEffect(() => {
@@ -122,6 +129,10 @@ export default function CourseDetail() {
                     <li>June 2025</li>
                     <li>September 2025</li>
                   </ul>
+
+                  <button className="btn btn-success" onClick={handleEnrollClick}>
+                    Enroll
+                  </button>
                 </div>
               </div>
             </div>
