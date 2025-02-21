@@ -144,6 +144,9 @@ export default function Courses() {
                         <button className="btn btn-primary mt-3 w-100" onClick={() => navigate(`/course/${course.courseId}`)}>
                           View detail
                         </button>
+                        <button className="btn btn-primary mt-3 w-100" onClick={() => navigate(`/quiz/${course.courseId}`)}>
+                          quiz detail
+                        </button>
                       </div>
                     </div>
                   </div>
