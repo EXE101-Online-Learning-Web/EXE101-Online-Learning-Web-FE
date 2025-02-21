@@ -24,6 +24,7 @@ import Statistic from "./components/Admin/Statistic/Statistic";
 import {PaymentSuccess} from "./components/PaymentSuccess";
 import CourseCreate from "./components/Course/CourseCreate";
 import LearnCourse from "./components/Course/LearnCourse";
+import StudentList from "./components/Admin/Student/StudentrList";
 
 const AppContent = () => (
   <Routes>
@@ -44,7 +45,7 @@ const AppContent = () => (
       <Route path="/admin/statistic" element={<Statistic />} />
       <Route path="/admin" element={<AdminManagement />} />
       <Route path="/admin/teacher/teacherList" element={<TeacherList />} />
-      <Route path="/admin/student/studentList" element={<TeacherList />} />
+      <Route path="/admin/student/studentList" element={<StudentList />} />
     </Route>
   </Routes>
 );
