@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import PageLayout from "../Common/Page/PageLayout";
 import { useState } from "react";
 import SweetAlert from "sweetalert";
+import axios from "axios";
 
 const questions = [
   {
@@ -48,6 +49,7 @@ export default function QuizDetail() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [AIExplain, setAIExplain] = useState("");
 
   const handleOptionSelect = (index) => {
     const newAnswers = [...answers];
@@ -93,6 +95,7 @@ export default function QuizDetail() {
       setSubmitAttempted(true);
       return;
     }
+    sendMessage();
     setShowScore(true);
   };
 
@@ -105,6 +108,41 @@ export default function QuizDetail() {
 
   const isCurrentUnanswered =
     submitAttempted && answers[currentQuestion] === null;
+
+  async function sendMessage() {
+    let question = "I am doing the educate app. I have these question and options for answer:"
+
+    questions.forEach((element, index) => {
+      question += (index  + ". " + element.questionText)
+      element.options.forEach((option, indexes) => {
+        question += "\n" + String.fromCharCode(97 + indexes) + ". " + option
+      })
+      question += "\n" + ". True answer:" + String.fromCharCode(97 + element.correctAnswer) + "\n"
+    });
+
+    question += "The user in my app is answer those: "
+    answers.forEach((element, index) => {
+      question += (index + 1) + ". " + String.fromCharCode(97 + element) + " "
+    })
+
+    question += "Explain why user answer right, and why user answer wrong base on correct answer I have given, each answer is explain in 1 line (20 words) format by: 1. ... 2. ..."
+
+    try {
+      const response = await axios.get(
+        `https://localhost:7091/api/ChatGPTTest/get-answer`,
+        {
+          params: {
+            question: question
+          }
+        }
+      );
+
+    setAIExplain(response.data.answer)
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 
   return (
     <PageLayout>
@@ -130,6 +168,7 @@ export default function QuizDetail() {
                 <p>
                   Điểm của bạn: {calculateScore()} / {questions.length}
                 </p>
+                <div>{AIExplain}</div>
                 <button className="btn btn-primary" onClick={handleRestart}>
                   Làm lại quiz
                 </button>
