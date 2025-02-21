@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PageLayout from "../Common/Page/PageLayout";
@@ -6,6 +6,7 @@ import { FaPlayCircle } from "react-icons/fa";
 import "../../public/assets/css/LearnCourse.css";
 
 export default function LearnCourse() {
+    const navigate = useNavigate();
     const { idCourse } = useParams();
     const [course, setCourse] = useState(null);
     const [videos, setVideos] = useState([]);
@@ -65,6 +66,10 @@ export default function LearnCourse() {
                                         </li>
                                     ))}
                                 </ul>
+
+                                <button className="btn btn-quiz" onClick={() => navigate(`/quiz/${idCourse}`)}>
+                                    Take Quiz
+                                </button>
                             </div>
                         </div>
 

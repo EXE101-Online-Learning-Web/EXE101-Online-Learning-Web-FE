@@ -76,9 +76,26 @@ export default function Header() {
 
           <nav className="navmenu">
             <ul className="nav-links">
-              <li><a href="/courses">Courses</a></li>
-              <li><a href="/subscriptions">Pricing</a></li>
-            </ul>
+              {userName ? (
+                <>
+                  <li>
+                    <a href="/courses"><i className="fas fa-book"></i> Courses</a>
+                  </li>
+                  <li>
+                    <a href="/subcriptions"><i className="fas fa-dollar-sign"></i> Subcriptions</a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <a href="#hero"><i className="fas fa-home"></i> Home</a>
+                  </li>
+                  <li>
+                    <a href="#about"><i className="fas fa-info-circle"></i> About</a>
+                  </li>
+                </>
+              )}
+              </ul>
           </nav>
 
           <div className="auth-buttons">
@@ -98,8 +115,10 @@ export default function Header() {
                 )}
               </div>
             ) : (
-              <Link to="/login" className="login-btn">Login</Link>
-            )}
+              <>
+                <Link to="/login" className="login-btn">Login</Link>
+                <Link to="/register" className="register-btn">Register</Link>
+              </>)}
           </div>
         </div>
       </div>

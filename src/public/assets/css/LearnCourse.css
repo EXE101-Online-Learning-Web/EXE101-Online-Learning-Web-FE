@@ -1,3 +1,21 @@
+.btn-quiz {
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .btn-quiz:hover {
+    background-color: #e68900;
+  }
+  
+
 /* === General Styling === */
 .learn-course {
     padding: 50px 0;
