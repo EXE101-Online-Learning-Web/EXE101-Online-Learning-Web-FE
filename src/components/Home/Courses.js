@@ -31,10 +31,8 @@ export default function Courses() {
   };
 
   const filteredCourses = courses
-    .filter((course) =>
-      course.courseTitle.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    .filter((course) => (category ? course.categoryId === parseInt(category) : true))
+    .filter((course) => (category ? course.categoryName.toLowerCase() === category.toLowerCase() : true))
+    // .filter((course) => (category ? course.categoryId === parseInt(category) : true))
     .filter((course) => {
       if (priceFilter === "") return true;
       const price = parseFloat(course.price);
@@ -106,21 +104,22 @@ export default function Courses() {
               onChange={(e) => setCategory(e.target.value)}
               className="form-select w-25"
             >
-              <option value="">Tất cả danh mục</option>
-              <option value="1">Web Development</option>
-              <option value="2">Marketing</option>
-              <option value="3">AI & Machine Learning</option>
+              <option value="">All</option>
+              <option value="Programming Languages">Programming Languages</option>
+              <option value="Artificial Intelligence">Artificial Intelligence</option>
+              <option value="Web Development">Web Development</option>
             </select>
             <select
               value={priceFilter}
               onChange={(e) => setPriceFilter(e.target.value)}
               className="form-select w-25"
             >
-              <option value="">Lọc theo giá</option>
-              <option value="low">Dưới 20$</option>
-              <option value="medium">20$ - 50$</option>
-              <option value="high">Trên 50$</option>
+              <option value="">Filter by Price</option>
+              <option value="low">Under $20</option>
+              <option value="medium">$20 - $50</option>
+              <option value="high">Above $50</option>
             </select>
+
           </div>
 
           <div className="row">

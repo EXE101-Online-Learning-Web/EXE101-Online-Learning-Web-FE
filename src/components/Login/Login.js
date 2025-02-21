@@ -48,6 +48,8 @@ export default function Login() {
 
           localStorage.setItem("userName", userName);
           localStorage.setItem("userId", userId);
+          localStorage.setItem("role", role);
+
           if (avatar) {
             localStorage.setItem("avatar", avatar);
           }

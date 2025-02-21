@@ -96,7 +96,7 @@ export default function Home() {
           <div className="container">
             <div className="row">
               {courses.length > 0 ? (
-                  courses.map((item) => (
+                  courses.slice(0, 3).map((item) => (
                       <div
                           key={item.courseId}
                           className="col-lg-4 col-md-6 d-flex align-items-stretch"
@@ -127,15 +127,10 @@ export default function Home() {
                                     className="img-fluid"
                                     alt="Instructor"
                                 />
-                                <a href="#" className="trainer-link">
-                                  Instructor Name {/* Bạn có thể thay đổi tên giảng viên nếu có trong API */}
-                                </a>
                               </div>
-                              <div className="trainer-rank d-flex align-items-center">
-                                <i className="bi bi-person user-icon"></i>&nbsp;120
-                                &nbsp;&nbsp;
-                                <i className="bi bi-heart heart-icon"></i>&nbsp;98
-                              </div>
+                              <button className="btn btn-primary mt-3 w-100" onClick={showLoginAlert}>
+                          View detail
+                        </button>
                             </div>
                           </div>
                         </div>

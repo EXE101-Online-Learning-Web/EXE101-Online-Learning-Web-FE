@@ -14,7 +14,7 @@ export default function Chatbot() {
             `https://localhost:7091/api/ChatGPTTest/get-answer`,
             {
               params: {
-                question: question
+                question: question 
               }
             }
           );

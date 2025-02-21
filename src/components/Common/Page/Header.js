@@ -16,6 +16,7 @@ export default function Header() {
     const storedUserName = localStorage.getItem("userName");
     const storedAvatar = localStorage.getItem("avatar");
     const token = localStorage.getItem("authToken");
+
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
@@ -50,127 +51,77 @@ export default function Header() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
-
   return (
-    <>
-      <header id="header" className="header fixed-top">
-        <div className="topbar d-flex align-items-center">
-          <div className="container d-flex justify-content-center justify-content-md-between">
-            <div className="contact-info d-flex align-items-center">
-              <i className="bi bi-envelope d-flex align-items-center">
-                <a href="mailto:contact@example.com">EduQuest.service@gmail.com</a>
-              </i>
-              <i className="bi bi-phone d-flex align-items-center ms-4">
-                <span>+84386543757</span>
-              </i>
-            </div>
-            <div className="social-links d-none d-md-flex align-items-center">
-              <a href="#" className="twitter">
-                <i className="bi bi-twitter-x"></i>
-              </a>
-              <a href="#" className="facebook">
-                <i className="bi bi-facebook"></i>
-              </a>
-              <a href="#" className="instagram">
-                <i className="bi bi-instagram"></i>
-              </a>
-              <a href="#" className="linkedin">
-                <i className="bi bi-linkedin"></i>
-              </a>
-            </div>
+    <header id="header" className="header fixed-top">
+      <div className="topbar d-flex align-items-center">
+        <div className="container d-flex justify-content-between">
+          <div className="contact-info">
+            <i className="bi bi-envelope"><a href="mailto:contact@example.com">EduQuest.service@gmail.com</a></i>
+            <i className="bi bi-phone">+84386543757</i>
+          </div>
+          <div className="social-links">
+            <a href="#"><i className="bi bi-facebook"></i></a>
+            <a href="#"><i className="bi bi-instagram"></i></a>
+            <a href="#"><i className="bi bi-linkedin"></i></a>
           </div>
         </div>
+      </div>
 
-        <div className="navbar">
-          <div className="container">
-            <Link to="/" className="logo">
-              <img src="/img/EduQuestLogo.png" alt="EduQuest Logo" className="logo-img" />
-              <h1 id="pageName">EduQuest</h1>
-              <span>.</span>
-            </Link>
-            <nav className="navmenu">
-              <ul className="nav-links">
-                {userName ? (
-                  <>
-                    <li>
-                      <a href="/courses"><i className="fas fa-book"></i> Courses</a>
-                    </li>
-                    <li>
-                      <a href="#pricing"><i className="fas fa-dollar-sign"></i> Pricing</a>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <a href="#hero"><i className="fas fa-home"></i> Home</a>
-                    </li>
-                    <li>
-                      <a href="#about"><i className="fas fa-info-circle"></i> About</a>
-                    </li>
-                  </>
-                )}
+      <div className="navbar">
+        <div className="container">
+          <Link to={userName ? "/courses" : "/"} className="logo">
+            <img src="/img/EduQuestLogo.png" alt="EduQuest Logo" />
+            EduQuest<span>.</span>
+          </Link>
+
+          <nav className="navmenu">
+            <ul className="nav-links">
+              {userName ? (
+                <>
+                  <li>
+                    <a href="/courses"><i className="fas fa-book"></i> Courses</a>
+                  </li>
+                  <li>
+                    <a href="/subcriptions"><i className="fas fa-dollar-sign"></i> Subcriptions</a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <a href="#hero"><i className="fas fa-home"></i> Home</a>
+                  </li>
+                  <li>
+                    <a href="#about"><i className="fas fa-info-circle"></i> About</a>
+                  </li>
+                </>
+              )}
               </ul>
+          </nav>
 
-              <div className="auth-buttons">
-                {userName ? (
-                  <div className="nav-item dropdown no-arrow" ref={dropdownRef}>
-                    <button
-                      className="nav-link dropdown-toggle"
-                      onClick={toggleDropdown}
-                      aria-expanded={isDropdownOpen}
-                    >
-                      <span className="ms-2 user-name">{userName}</span>
-                      <img
-                        src={avatar || "../img/client-Avatar/clientAvatar-1.jpg"}
-                        alt="User Avatar"
-                        className="rounded-circle avatar-img"
-                        width="40"
-                        height="40"
-                      />
-                    </button>
-                    {isDropdownOpen && (
-                      <div className={`dropdown-menu ${isDropdownOpen ? "show" : ""} shadow animated--grow-in`}>
-                        <a className="dropdown-item" onClick={() => navigate(`/profile/${userId}`)}>
-                          <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                          Profile
-                        </a>
-                        {isAdmin && (
-                          <a onClick={navigateAdmin} className="dropdown-item">Admin Management</a>
-                        )}
-                        <div className="dropdown-divider"></div>
-                        <a
-                          className="dropdown-item"
-                          data-toggle="modal"
-                          data-target="#logoutModal"
-                          onClick={handleLogout}
-                        >
-                          <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                          Logout
-                        </a>
-                      </div>
-                    )}
+          <div className="auth-buttons">
+            {userName ? (
+              <div className="nav-item dropdown" ref={dropdownRef}>
+                <button className="dropdown-toggle" onClick={toggleDropdown}>
+                  <span>{userName}</span>
+                  <img src={avatar || "../img/client-Avatar/clientAvatar-1.jpg"} alt="Avatar" className="avatar-img" />
+                </button>
+                {isDropdownOpen && (
+                  <div className="dropdown-menu show">
+                    <a className="dropdown-item" onClick={() => navigate(`/profile/${userId}`)}>Profile</a>
+                    {isAdmin && <a onClick={navigateAdmin} className="dropdown-item">Admin Panel</a>}
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" onClick={handleLogout}>Logout</a>
                   </div>
-                ) : (
-                  <>
-                    <Link to="/login" className="login-btn">Login</Link>
-                    <Link to="/register" className="register-btn">Register</Link>
-                  </>
                 )}
               </div>
-            </nav>
+            ) : (
+              <>
+                <Link to="/login" className="login-btn">Login</Link>
+                <Link to="/register" className="register-btn">Register</Link>
+              </>)}
           </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
