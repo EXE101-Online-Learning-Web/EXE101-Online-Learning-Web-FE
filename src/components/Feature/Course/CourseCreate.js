@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PageLayout from "../Common/Page/PageLayout";
+import PageLayout from "../../Common/Page/PageLayout";
 import SweetAlert from "sweetalert";
 
 export default function CourseCreate() {

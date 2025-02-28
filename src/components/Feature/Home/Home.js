@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../../public/assets/css/home.css";
-import "../../public/assets/css/heroSection.css";
-import "../../public/assets/css/pricing.css";
-import PageLayout from "../Common/Page/PageLayout";
+import "../../../public/assets/css/home.css";
+import "../../../public/assets/css/heroSection.css";
+import "../../../public/assets/css/pricing.css";
+import PageLayout from "../../Common/Page/PageLayout";
 import { DivideCircle } from "lucide-react";
-import Chatbot from "../Common/OpenAIChat/Chatbot";
+import Chatbot from "../../Common/OpenAIChat/Chatbot";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import {Banner} from "../Common/Page/Banner";
+import {Banner} from "../../Common/Page/Banner";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);

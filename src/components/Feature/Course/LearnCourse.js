@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import PageLayout from "../Common/Page/PageLayout";
+import PageLayout from "../../Common/Page/PageLayout";
 import { FaPlayCircle } from "react-icons/fa";
-import "../../public/assets/css/LearnCourse.css";
+import "../../../public/assets/css/LearnCourse.css";
 
 export default function LearnCourse() {
     const navigate = useNavigate();

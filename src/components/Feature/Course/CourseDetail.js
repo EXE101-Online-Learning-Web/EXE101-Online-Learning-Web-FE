@@ -1,8 +1,8 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
-import PageLayout from "../Common/Page/PageLayout";
-import "../../public/assets/css/course-detail.css";
+import PageLayout from "../../Common/Page/PageLayout";
+import "../../../public/assets/css/course-detail.css";
 
 export default function CourseDetail() {
     const {idCourse} = useParams();

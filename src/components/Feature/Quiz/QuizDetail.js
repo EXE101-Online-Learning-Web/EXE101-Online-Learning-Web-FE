@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import PageLayout from "../Common/Page/PageLayout";
+import PageLayout from "../../Common/Page/PageLayout";
 import { useState } from "react";
 import SweetAlert from "sweetalert";
 import axios from "axios";

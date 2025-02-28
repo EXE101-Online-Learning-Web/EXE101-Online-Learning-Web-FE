@@ -1,9 +1,10 @@
-import "../../public/assets/css/pricing.css";
-import PageLayout from "../Common/Page/PageLayout";
-import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "../../../public/assets/css/pricing.css";
+import PageLayout from "../../Common/Page/PageLayout";
 
-export default function Subscriptions() 
+export default function IAP() 
 {
+    console.log("IAP Component Rendered");
     return (
         <PageLayout>
             <section id="pricing" class="pricing section">

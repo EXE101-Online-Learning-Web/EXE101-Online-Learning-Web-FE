@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../../public/assets/css/profile.css";
-import PageLayout from "../Common/Page/PageLayout";
+import "../../../public/assets/css/profile.css";
+import PageLayout from "../../Common/Page/PageLayout";
 
 const ProfileDetail = () => {
   const { id } = useParams();

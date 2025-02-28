@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import "../../public/assets/css/courses.css";
-import "../../public/assets/css/pricing.css";
-import "../../public/assets/css/heroSection.css";
-import PageLayout from "../Common/Page/PageLayout";
-import Chatbot from "../Common/OpenAIChat/Chatbot";
-import {Banner} from "../Common/Page/Banner";
+import "../../../public/assets/css/courses.css";
+import "../../../public/assets/css/pricing.css";
+import "../../../public/assets/css/heroSection.css";
+import PageLayout from "../../Common/Page/PageLayout";
+import Chatbot from "../../Common/OpenAIChat/Chatbot";
+import {Banner} from "../../Common/Page/Banner";
 
 export default function Courses() {
     const [courses, setCourses] = useState([]);
