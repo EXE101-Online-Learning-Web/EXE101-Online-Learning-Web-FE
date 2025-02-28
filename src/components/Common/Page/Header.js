@@ -69,7 +69,7 @@ export default function Header() {
 
       <div className="navbar">
         <div className="container">
-          <Link to={userName ? "/courses" : "/"} className="logo">
+          <Link to={"/"} className="logo">
             <img src="/img/EduQuestLogo.png" alt="EduQuest Logo" />
             EduQuest<span>.</span>
           </Link>
@@ -79,19 +79,19 @@ export default function Header() {
               {userName ? (
                 <>
                   <li>
-                    <a href="/courses"><i className="fas fa-book"></i> Courses</a>
+                    <Link to="/courses"><i className="fas fa-book"></i> Courses</Link>
                   </li>
                   <li>
-                    <a href="/subcriptions"><i className="fas fa-dollar-sign"></i> Subcriptions</a>
+                    <Link to="/subcriptions"><i className="fas fa-dollar-sign"></i> Subcriptions</Link>
                   </li>
                 </>
               ) : (
                 <>
                   <li>
-                    <a href="#hero"><i className="fas fa-home"></i> Home</a>
+                    <Link to="#hero"><i className="fas fa-home"></i> Home</Link>
                   </li>
                   <li>
-                    <a href="#about"><i className="fas fa-info-circle"></i> About</a>
+                    <Link to="#about"><i className="fas fa-info-circle"></i> About</Link>
                   </li>
                 </>
               )}
