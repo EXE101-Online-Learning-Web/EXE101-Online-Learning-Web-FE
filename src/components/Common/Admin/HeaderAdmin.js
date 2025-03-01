@@ -4,6 +4,7 @@ import SweetAlert from "sweetalert";
 export function HeaderAdmin() {
   const [userName, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [userId, setUserId] = useState("");
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -20,6 +21,10 @@ export function HeaderAdmin() {
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     const storedAvatar = localStorage.getItem("avatar");
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      setUserId(userId);
+    }
 
     if (storedUserName) {
       setUserName(storedUserName);
@@ -260,7 +265,11 @@ export function HeaderAdmin() {
               class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
               aria-labelledby="userDropdown"
             >
-              <a class="dropdown-item" href="#">
+              <a
+                class="dropdown-item"
+                alt=""
+                onClick={() => navigate(`/profile/${userId}`)}
+              >
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Profile
               </a>
