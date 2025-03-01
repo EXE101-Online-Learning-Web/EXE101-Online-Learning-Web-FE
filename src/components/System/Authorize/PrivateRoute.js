@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import swal from "sweetalert";
 
-const PrivateRouteAdmin = ({ allowedRoles }) => {
+const PrivateRoute = ({ allowedRoles }) => {
   const token = localStorage.getItem("authToken");
 
   if (!token) {
@@ -14,7 +14,9 @@ const PrivateRouteAdmin = ({ allowedRoles }) => {
     const decodedToken = jwtDecode(token);
     const userRole = decodedToken.role;
 
-    if (allowedRoles.includes(userRole)) {
+    const isAllowed = allowedRoles.includes(userRole) || (userRole === "VIP Student" && allowedRoles.includes("Student"));
+
+    if (isAllowed) {
       return <Outlet />;
     } else {
       swal("Cảnh báo!", "Bạn không có quyền truy cập trang này!", "error");
@@ -26,4 +28,4 @@ const PrivateRouteAdmin = ({ allowedRoles }) => {
   }
 };
 
-export default PrivateRouteAdmin;
+export default PrivateRoute;
