@@ -31,6 +31,7 @@ import PageLayout from "./components/Common/Page/PageLayout";
 import {TeacherTest} from "./components/Feature/Teacher/TeacherTest";
 import {VipStudentTest} from "./components/Feature/VipStudent/VipStudentTest";
 import {PaymentPremium} from "./components/Feature/Payment/PaymentPremium";
+import Schedule from "./components/Feature/Schedule/Schedule";
 
 const AppContent = () => (
     <Routes>
@@ -56,6 +57,7 @@ const AppContent = () => (
             <Route path="/learn-course/:idCourse" element={<LearnCourse/>}/>
             <Route path="/subscriptions" element={<PageLayout><Subscriptions/></PageLayout>}/>
             <Route path="/paymentPremium" element={<PaymentPremium/>}/>
+            <Route path="/schedule" element={<PageLayout><Schedule/></PageLayout>}/>
         </Route>
 
         {/* Protected Vip Student Routes */}
