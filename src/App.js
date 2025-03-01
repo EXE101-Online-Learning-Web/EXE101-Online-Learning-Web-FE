@@ -73,7 +73,7 @@ const AppContent = () => (
         {/* Protected Admin Routes */}
         <Route element={<PrivateRoute allowedRoles={["Admin"]}/>}>
             <Route path="/admin/statistic" element={<Statistic/>}/>
-            <Route path="/admin" element={<AdminManagement/>}/>
+            <Route path="/admin" element={<Statistic/>}/>
             <Route path="/admin/teacher/teacherList" element={<TeacherList/>}/>
             <Route path="/admin/student/studentList" element={<StudentList/>}/>
         </Route>
