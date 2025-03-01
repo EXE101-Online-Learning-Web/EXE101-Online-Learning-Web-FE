@@ -4,9 +4,9 @@ import axios from "axios";
 import "../../../public/assets/css/courses.css";
 import "../../../public/assets/css/pricing.css";
 import "../../../public/assets/css/heroSection.css";
-import PageLayout from "../../Common/Page/PageLayout";
 import Chatbot from "../../Common/OpenAIChat/Chatbot";
 import {Banner} from "../../Common/Page/Banner";
+import Swal from "sweetalert2";
 
 export default function Courses() {
     const [courses, setCourses] = useState([]);
@@ -44,8 +44,28 @@ export default function Courses() {
             return true;
         });
 
+    const handleViewDetail = (courseId) => {
+        const role = localStorage.getItem("role"); // Lưu role vào biến để tối ưu
+
+        if (role === "Student" || role === "Teacher") {
+            return navigate(`/course/${courseId}`);
+        }
+
+        Swal.fire({
+            icon: "warning",
+            title: "Login Required",
+            text: "You need to log in to use this feature.",
+            showCancelButton: true,
+            confirmButtonText: "Login",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate("/login");
+            }
+        });
+    };
     return (
-        <PageLayout>
+        <div>
             <Banner/>
 
             <div className="CourseLayout">
@@ -103,7 +123,7 @@ export default function Courses() {
                                                     <a href="#" className="trainer-link">{course.trainerName}</a>
                                                 </div>
                                                 <button className="btn btn-primary mt-3 w-100"
-                                                        onClick={() => navigate(`/course/${course.courseId}`)}>
+                                                        onClick={() => handleViewDetail(course.courseId)}>
                                                     View detail
                                                 </button>
                                             </div>
@@ -128,6 +148,6 @@ export default function Courses() {
                 </div>
             </div>
             <Chatbot/>
-        </PageLayout>
+        </div>
     );
 }

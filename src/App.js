@@ -45,9 +45,9 @@ const AppContent = () => (
             <Route path="/profile/:id" element={<ProfileDetail/>}/>
         </Route>
 
-        {/* Protected Vip Student Routes */}
+        {/* Protected Student Routes */}
         <Route element={<PrivateRoute allowedRoles={["Student"]}/>}>
-            <Route path="/courses" element={<Courses/>}/>
+            <Route path="/courses" element={<PageLayout><Courses/></PageLayout>}/>
             <Route path="/course/create" element={<CourseCreate/>}/>
             <Route path="/course/:idCourse" element={<CourseDetail/>}/>
             <Route path="/quiz/:idCourse" element={<QuizDetail/>}/>
