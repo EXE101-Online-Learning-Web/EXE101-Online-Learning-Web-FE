@@ -1,42 +1,108 @@
 import { useParams } from "react-router-dom";
-import PageLayout from "../Common/Page/PageLayout";
+import PageLayout from "../../Common/Page/PageLayout";
 import { useState } from "react";
 import SweetAlert from "sweetalert";
+import axios from "axios";
 
 const questions = [
   {
     id: 1,
     questionText: "React là gì?",
     options: [
-      "Thư viện JavaScript để xây dựng giao diện người dùng",
       "Ngôn ngữ lập trình",
+      "Thư viện JavaScript để xây dựng giao diện người dùng",
       "Framework backend",
       "Công cụ quản lý state",
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
   },
   {
     id: 2,
     questionText: "Bootstrap được sử dụng để làm gì?",
     options: [
-      "Tạo giao diện responsive",
+      "Kết nối CSDL",
       "Xử lý logic nghiệp vụ",
-      "Kết nối CSDL",
-      "Kết nối CSDL",
-      "Kết nối CSDL",
-      "Kết nối CSDL",
-      "Kết nối CSDL",
-      "Kết nối CSDL",
-      "Kết nối CSDL",
-      "Kết nối CSDL",
+      "Tạo giao diện responsive",
       "Tối ưu SEO",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    id: 3,
+    questionText: "Node.js là gì?",
+    options: [
+      "Môi trường chạy JavaScript phía server",
+      "Thư viện của React",
+      "Trình biên dịch Java",
+      "Công cụ tạo API tự động",
     ],
     correctAnswer: 0,
   },
   {
-    id: 3,
-    questionText: "Nodejs is backend?",
-    options: ["Yes", "No"],
+    id: 4,
+    questionText: "JavaScript được sử dụng chủ yếu để làm gì?",
+    options: [
+      "Viết mã backend",
+      "Lập trình hệ thống nhúng",
+      "Phát triển ứng dụng mobile",
+      "Lập trình phía client ",
+    ],
+    correctAnswer: 3,
+  },
+  {
+    id: 5,
+    questionText: "Trong React, state là gì?",
+    options: [
+      "Phương thức để thay đổi props",
+      "Một loại biến toàn cục",
+      "Cấu trúc dữ liệu trong Redux",
+      "Một đối tượng chứa dữ liệu động của component ",
+    ],
+    correctAnswer: 3,
+  },
+  {
+    id: 6,
+    questionText: "CSS Grid được sử dụng để?",
+    options: [
+      "Quản lý database",
+      "Thay thế JavaScript",
+      "Xử lý backend",
+      "Tạo bố cục trang web linh hoạt ",
+    ],
+    correctAnswer: 3,
+  },
+  {
+    id: 7,
+    questionText: "Thành phần nào của HTTP giúp định danh loại nội dung trả về?",
+    options: ["Header", "Body", "Status Code", "Method"],
+    correctAnswer: 0,
+  },
+  {
+    id: 8,
+    questionText: "Cấu trúc dữ liệu nào được sử dụng trong Redux?",
+    options: [
+      "Stack",
+      "Queue",
+      "Store",
+      "Graph",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    id: 9,
+    questionText: "Câu lệnh nào dùng để tạo component trong React?",
+    options: [
+      "new Component()",
+      "createComponent()",
+      "function Component() {} ",
+      "class Component()",
+    ],
+    correctAnswer: 2,
+  },
+  {
+    id: 10,
+    questionText: "API RESTful sử dụng phương thức HTTP nào để cập nhật dữ liệu?",
+    options: ["PUT", "GET", "POST", "DELETE"],
     correctAnswer: 0,
   },
 ];
@@ -48,6 +114,7 @@ export default function QuizDetail() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [submitAttempted, setSubmitAttempted] = useState(false);
+  const [AIExplain, setAIExplain] = useState("");
 
   const handleOptionSelect = (index) => {
     const newAnswers = [...answers];
@@ -93,6 +160,7 @@ export default function QuizDetail() {
       setSubmitAttempted(true);
       return;
     }
+    sendMessage();
     setShowScore(true);
   };
 
@@ -105,6 +173,41 @@ export default function QuizDetail() {
 
   const isCurrentUnanswered =
     submitAttempted && answers[currentQuestion] === null;
+
+  async function sendMessage() {
+    let question = "I am doing the educate app. I have these question and options for answer:"
+
+    questions.forEach((element, index) => {
+      question += (index  + ". " + element.questionText)
+      element.options.forEach((option, indexes) => {
+        question += "\n" + String.fromCharCode(97 + indexes) + ". " + option
+      })
+      question += "\n" + ". True answer:" + String.fromCharCode(97 + element.correctAnswer) + "\n"
+    });
+
+    question += "The user in my app is answer those: "
+    answers.forEach((element, index) => {
+      question += (index + 1) + ". " + String.fromCharCode(97 + element) + " "
+    })
+
+    question += "Explain why user answer right, and why user answer wrong base on correct answer I have given, each answer is explain in 1 line (20 words) format by: 1. ... 2. ..."
+
+    try {
+      const response = await axios.get(
+        `https://localhost:7091/api/ChatGPTTest/get-answer`,
+        {
+          params: {
+            question: question
+          }
+        }
+      );
+
+    setAIExplain(response.data.answer)
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 
   return (
     <PageLayout>
@@ -130,6 +233,7 @@ export default function QuizDetail() {
                 <p>
                   Điểm của bạn: {calculateScore()} / {questions.length}
                 </p>
+                <div>{AIExplain}</div>
                 <button className="btn btn-primary" onClick={handleRestart}>
                   Làm lại quiz
                 </button>

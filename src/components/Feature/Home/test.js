@@ -1,4 +1,4 @@
-import PageLayout from "../Common/Page/PageLayout";
+import PageLayout from "../../Common/Page/PageLayout";
 export default function Test() {
     return (
  <PageLayout>

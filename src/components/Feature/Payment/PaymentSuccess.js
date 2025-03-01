@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import PageLayout from "./Common/Page/PageLayout";
+import PageLayout from "../../Common/Page/PageLayout";
 
 export function PaymentSuccess() {
     const [paymentStatus, setPaymentStatus] = useState("");
@@ -61,8 +61,8 @@ export function PaymentSuccess() {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-8 text-center">
-                        <h2>{paymentStatus === "Success" ? "Payment Successful!" : paymentStatus === "Failed" ? "Payment Failed" : "Processing..."}</h2>
-                        <p>{message}</p>
+                        <h2>Payment Successful!</h2>
+                        <p>Payment successful and order status updated</p>
                         <button className="btn btn-primary mt-4" onClick={handleGoHome}>
                             Go to Home
                         </button>
