@@ -14,7 +14,6 @@ export default function Statistic() {
         fetch("https://localhost:7091/api/statistic/statistic")
             .then(response => response.json())
             .then(data => {
-                console.log("API Data:", data); // Debug dữ liệu trả về
 
                 if (data) {
                     // Cập nhật Bar Chart

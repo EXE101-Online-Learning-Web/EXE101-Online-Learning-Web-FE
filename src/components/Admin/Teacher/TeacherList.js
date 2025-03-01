@@ -1,48 +1,69 @@
+import { useEffect, useState } from "react";
 import AdminLayout from "../../Common/Admin/AdminLayout";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function TeacherList() {
-  const teachers = [
-    {
-      name: "Nguyễn Văn A",
-      position: "Mathematics Teacher",
-      office: "Hà Nội",
-      age: 40,
-      startDate: "2008/09/15",
-      salary: "$45,000",
-    },
-    {
-      name: "Trần Thị B",
-      position: "English Teacher",
-      office: "TP. Hồ Chí Minh",
-      age: 35,
-      startDate: "2012/06/23",
-      salary: "$50,500",
-    },
-    {
-      name: "Phạm Hữu C",
-      position: "Physics Teacher",
-      office: "Đà Nẵng",
-      age: 42,
-      startDate: "2005/04/12",
-      salary: "$47,800",
-    },
-    {
-      name: "Lê Minh D",
-      position: "Chemistry Teacher",
-      office: "Cần Thơ",
-      age: 38,
-      startDate: "2010/11/08",
-      salary: "$48,200",
-    },
-    {
-      name: "Hoàng Thị E",
-      position: "Biology Teacher",
-      office: "Hải Phòng",
-      age: 33,
-      startDate: "2015/02/20",
-      salary: "$46,000",
-    },
-  ];
+  const [teachers, setTeachers] = useState([]);
+
+  useEffect(() => {
+    fetchTeachers();
+  }, []);
+
+  const fetchTeachers = async () => {
+    try {
+      const result = await axios.get("https://localhost:7091/api/teachers/all");
+      setTeachers(result.data);
+    } catch (error) {
+      console.error("Error when fetching teacher data:", error);
+      setTeachers([]);
+    }
+  };
+
+  const handleToggleBanTeacher = async (teacherId, teacherName, isBanned) => {
+    const action = isBanned ? "Unban" : "Ban";
+    const apiUrl = `https://localhost:7091/api/teachers/${
+      isBanned ? "unban" : "ban"
+    }/${teacherId}`;
+
+    Swal.fire({
+      title: `Do you want to ${action.toLowerCase()} the account of ${teacherName}?`,
+      text: isBanned
+        ? "The account will be reactivated and can log in again."
+        : "Once locked, this account will not be able to log in!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: isBanned ? "#28a745" : "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: `Yes, ${action.toLowerCase()} now!`,
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const token = localStorage.getItem("authToken");
+          await axios.put(
+            apiUrl,
+            {},
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+
+          Swal.fire(
+            `${action}ned!`,
+            `The account of ${teacherName} has been ${action.toLowerCase()}ned.`,
+            "success"
+          );
+          fetchTeachers();
+        } catch (error) {
+          console.error(`Error ${action.toLowerCase()}ning teacher:`, error);
+          Swal.fire(
+            "Error!",
+            `Unable to ${action.toLowerCase()} account. Please try again!`,
+            "error"
+          );
+        }
+      }
+    });
+  };
 
   return (
     <AdminLayout>
@@ -67,25 +88,59 @@ export default function TeacherList() {
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Account</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {teachers.map((teacher, index) => (
-                    <tr key={index}>
-                      <td>{teacher.name}</td>
-                      <td>{teacher.position}</td>
-                      <td>{teacher.office}</td>
-                      <td>{teacher.age}</td>
-                      <td>{teacher.startDate}</td>
-                      <td>{teacher.salary}</td>
+                  {teachers.length > 0 ? (
+                    teachers.map((teacher, index) => (
+                      <tr key={index}>
+                        <td>
+                          <img
+                            style={{ marginRight: "6px" }}
+                            width="40"
+                            height="40"
+                            alt=""
+                            src={
+                              teacher.image
+                                ? teacher.image
+                                : "../../img/client-Avatar/clientAvatar-1.jpg"
+                            }
+                            className="avatar-img"
+                          />
+                          {teacher.email || "N/A"}
+                        </td>
+                        <td style={{ color: teacher.isBan ? "red" : "" }}>
+                          {teacher.isBan ? "Ban" : "Normal" || "N/A"}
+                        </td>
+                        <td>
+                          <button
+                            className={`btn btn-sm ${
+                              teacher.isBan ? "btn-success" : "btn-danger"
+                            }`}
+                            style={{ width: "100px" }}
+                            onClick={() =>
+                              handleToggleBanTeacher(
+                                teacher.id,
+                                teacher.email,
+                                teacher.isBan
+                              )
+                            }
+                          >
+                            {teacher.isBan ? "Unban" : "Lock Account"}
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="text-center text-muted">
+                        No data available
+                      </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>

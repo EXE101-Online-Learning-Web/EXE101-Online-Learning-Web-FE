@@ -24,7 +24,7 @@ import Statistic from "./components/Admin/Statistic/Statistic";
 import {PaymentSuccess} from "./components/Feature/Payment/PaymentSuccess";
 import CourseCreate from "./components/Feature/Course/CourseCreate";
 import LearnCourse from "./components/Feature/Course/LearnCourse";
-import StudentList from "./components/Admin/Student/StudentrList";
+import StudentList from "./components/Admin/Student/StudentList";
 import Subscriptions from "./components/Feature/Home/Subscriptions";
 import {About} from "./components/Feature/Home/About";
 import PageLayout from "./components/Common/Page/PageLayout";
@@ -43,12 +43,12 @@ const AppContent = () => (
         <Route path="/about" element={<PageLayout><About/></PageLayout>}/>
 
         {/* Protected Common for Student, Teacher Routes */}
-        <Route element={<PrivateRoute allowedRoles={["Student", "Teacher"]}/>}>
+        <Route element={<PrivateRoute allowedRoles={["Student", "Teacher", "Admin"]}/>}>
             <Route path="/profile/:id" element={<ProfileDetail/>}/>
         </Route>
 
         {/* Protected Student Routes */}
-        <Route element={<PrivateRoute allowedRoles={["Student"]}/>}>
+        <Route element={<PrivateRoute allowedRoles={["Student","Admin"]}/>}>
             <Route path="/courses" element={<PageLayout><Courses/></PageLayout>}/>
             <Route path="/course/create" element={<CourseCreate/>}/>
             <Route path="/course/:idCourse" element={<CourseDetail/>}/>
@@ -61,7 +61,7 @@ const AppContent = () => (
         </Route>
 
         {/* Protected Vip Student Routes */}
-        <Route element={<PrivateRoute allowedRoles={["VIP Student"]}/>}>
+        <Route element={<PrivateRoute allowedRoles={["VIP Student","Admin"]}/>}>
             <Route path="/vip/test" element={<VipStudentTest/>}></Route>
         </Route>
 

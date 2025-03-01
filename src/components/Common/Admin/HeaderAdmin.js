@@ -250,9 +250,10 @@ export function HeaderAdmin() {
               </span>
               <img
                 class="img-profile rounded-circle"
-                src={avatar || "/img/icon-default.png"}
+                src={avatar || "../../img/client-Avatar/clientAvatar-1.jpg"}
                 width="40"
                 height="40"
+                alt=""
               ></img>
             </a>
             <div
