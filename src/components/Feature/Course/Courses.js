@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../../../public/assets/css/courses.css";
 import "../../../public/assets/css/pricing.css";
@@ -44,26 +44,6 @@ export default function Courses() {
             return true;
         });
 
-    const handleViewDetail = (courseId) => {
-        const role = localStorage.getItem("role"); // Lưu role vào biến để tối ưu
-
-        if (role === "Student" || role === "Teacher") {
-            return navigate(`/course/${courseId}`);
-        }
-
-        Swal.fire({
-            icon: "warning",
-            title: "Login Required",
-            text: "You need to log in to use this feature.",
-            showCancelButton: true,
-            confirmButtonText: "Login",
-            cancelButtonText: "Cancel"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                navigate("/login");
-            }
-        });
-    };
     return (
         <div>
             <Banner/>
@@ -106,13 +86,13 @@ export default function Courses() {
                             filteredCourses.map((course) => (
                                 <div key={course.courseId}
                                      className="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
-                                    <div className="course-item" onClick={() => navigate(`/course/${course.courseId}`)}>
+                                    <div className="course-item">
                                         <img src="../img/courses/course-1.jpg" className="img-fluid"
                                              alt={course.courseTitle}/>
                                         <div className="course-content">
                                             <div className="d-flex justify-content-between align-items-center mb-3">
                                                 <p className="category">{course.categoryName}</p>
-                                                <p className="price">${course.price}</p>
+                                                <p className="price">{course.price} VND</p>
                                             </div>
                                             <h3>{course.courseTitle}</h3>
                                             <p className="description">{course.description}</p>
@@ -120,10 +100,10 @@ export default function Courses() {
                                                 <div className="trainer-profile d-flex align-items-center">
                                                     <img src="/img/trainers/trainer-1-2.jpg" className="img-fluid"
                                                          alt="Trainer"/>
-                                                    <a href="#" className="trainer-link">{course.trainerName}</a>
+                                                    <Link to="/" className="trainer-link">{course.trainerName}</Link>
                                                 </div>
                                                 <button className="btn btn-primary mt-3 w-100"
-                                                        onClick={() => handleViewDetail(course.courseId)}>
+                                                        onClick={() => navigate(`/course/${course.courseId}`)}>
                                                     View detail
                                                 </button>
                                             </div>
