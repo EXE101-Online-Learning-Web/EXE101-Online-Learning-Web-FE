@@ -127,7 +127,8 @@ export default function Courses() {
                     </div>
                 </div>
             </div>
-            <Chatbot/>
+
+            {localStorage.getItem("role") === 'VIP Student' && <Chatbot />}
         </div>
     );
 }

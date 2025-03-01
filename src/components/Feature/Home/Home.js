@@ -14,7 +14,6 @@ export default function Home() {
             <Courses/>
             <About/>
             <Subscriptions/>
-            <Chatbot></Chatbot>
         </main>
     </PageLayout>);
 }

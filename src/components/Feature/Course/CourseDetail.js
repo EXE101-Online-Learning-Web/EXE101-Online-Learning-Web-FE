@@ -99,7 +99,7 @@ export default function CourseDetail() {
                     <div className="course-video">
                         <h3>Introduction Video</h3>
                         <iframe
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            src="https://www.youtube.com/embed/x0fSBAgBrOQ"
                             title="Course Video"
                             allowFullScreen
                         ></iframe>
