@@ -79,7 +79,7 @@ export function SidebarAdmin() {
             aria-controls="collapseUtilities"
           >
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
+            <span>Courses</span>
           </a>
           <div
             id="collapseUtilities"
@@ -88,9 +88,9 @@ export function SidebarAdmin() {
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Custom Utilities:</h6>
+              <h6 class="collapse-header">Course Management:</h6>
               <Link class="collapse-item" href="utilities-color.html">
-                Colors
+                List courses
               </Link>
               <Link class="collapse-item" href="utilities-border.html">
                 Borders
