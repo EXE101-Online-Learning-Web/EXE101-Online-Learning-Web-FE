@@ -23,7 +23,7 @@ export function DemoCourses() {
     const [courses, setCourses] = useState([]);
     const fetchApi = async () => {
         try {
-            const result = await axios.get("https://localhost:7091/api/Course");
+            const result = await axios.get("https://localhost:7091/api/Courses");
             setCourses(result.data);
         } catch (error) {
             console.log(error);
