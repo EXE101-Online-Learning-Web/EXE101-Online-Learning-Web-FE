@@ -10,11 +10,10 @@ import Courses from "../Course/Courses";
 
 export default function Home() {
     return (<PageLayout>
-        <main class="main">
+        <main className="main">
             <Courses/>
             <About/>
             <Subscriptions/>
-            <Chatbot></Chatbot>
         </main>
     </PageLayout>);
 }

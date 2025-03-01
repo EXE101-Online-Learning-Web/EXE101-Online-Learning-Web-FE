@@ -58,7 +58,7 @@ export default function Login() {
 
                     if (role === "Admin") {
                         navigate("/admin");
-                    } else if (role === "Student") {
+                    } else if (role === "Student" || role === "VIP Student") {
                         navigate("/courses");
                     } else if (role === "Teacher") {
                         navigate("/courses");

@@ -1,8 +1,36 @@
 import "../../../public/assets/css/pricing.css";
-import PageLayout from "../../Common/Page/PageLayout";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import axios from "axios";
 
 export default function Subscriptions() {
+    const handleBuyClick = async () => {
+        try {
+            const paymentData = {
+                "userId": localStorage.getItem("userId"),
+                "orderName": "Premium Plan",
+                "description": "Premium Plan",
+                "totalPrice": 15000,
+                "paymentMethod": "Online",
+                "returnUrl": "http://localhost:3000/PaymentPremium/",
+                "cancelUrl": "http://localhost:3000/"
+            };
+
+            // Gửi request tới API để tạo payment link
+            const response = await axios.post("https://localhost:7091/api/Payment/payment-link", paymentData);
+
+            console.log(response);
+            if (response.data && response.data.paymentLink) {
+                // Chuyển hướng người dùng đến link thanh toán
+                window.location.href = response.data.paymentLink;
+            }
+        } catch (error) {
+            console.error("Error while creating payment link:", error);
+            alert("An error occurred while processing your payment. Please try again.");
+        }
+    };
+
+
     return (
         <section id="pricing" className="pricing section">
             <div className="container" data-aos="zoom-in" data-aos-delay="100">
@@ -14,7 +42,7 @@ export default function Subscriptions() {
                             </div>
                             <h4 className="fw-semibold fs-5">Free Plan</h4>
                             <h5 className="price">
-                                $0<span>/month</span>
+                                0 VND<span>/month</span>
                             </h5>
                             <ul className="list-unstyled">
                                 <li>
@@ -30,7 +58,10 @@ export default function Subscriptions() {
                                     <i className="bi bi-x"></i> No certification
                                 </li>
                             </ul>
-                            <button className="buy-btn">Get Started</button>
+                            <Link to="/courses">
+                                <button className="buy-btn">Get Started</button>
+                            </Link>
+
                         </div>
                     </div>
 
@@ -41,7 +72,7 @@ export default function Subscriptions() {
                             </div>
                             <h4 className="fw-semibold fs-5">Premium Plan</h4>
                             <h5 className="price">
-                                $29<span>/month</span>
+                                15000 VND<span>/month</span>
                             </h5>
                             <ul className="list-unstyled">
                                 <li>
@@ -57,36 +88,44 @@ export default function Subscriptions() {
                                     <i className="bi bi-check"></i> Certification included
                                 </li>
                             </ul>
-                            <button className="buy-btn">Subscribe Now</button>
+                            {localStorage.getItem('role') === 'VIP Student' ?
+                                (
+                                    <Link to="/courses">
+                                        <button className="buy-btn">Get Started</button>
+                                    </Link>
+                                ) : (
+                                    <button className="buy-btn" onClick={handleBuyClick}>Subscribe Now</button>
+                                )}
+
                         </div>
                     </div>
 
-                    <div className="col-lg-4 col-md-5">
-                        <div className="pricing-item">
-                            <div className="icon">
-                                <i className="bi bi-person-video3"></i>
-                            </div>
-                            <h4 className="fw-semibold fs-5">Instructor Plan</h4>
-                            <h5 className="price">
-                                $49<span>/month</span>
-                            </h5>
-                            <ul className="list-unstyled">
-                                <li>
-                                    <i className="bi bi-check"></i> Unlimited course uploads
-                                </li>
-                                <li>
-                                    <i className="bi bi-check"></i> AI-powered student insights
-                                </li>
-                                <li>
-                                    <i className="bi bi-check"></i> Revenue sharing & analytics
-                                </li>
-                                <li>
-                                    <i className="bi bi-check"></i> Advanced tracking & reports
-                                </li>
-                            </ul>
-                            <button className="buy-btn">Join as Instructor</button>
-                        </div>
-                    </div>
+                    {/*<div className="col-lg-4 col-md-5">*/}
+                    {/*    <div className="pricing-item">*/}
+                    {/*        <div className="icon">*/}
+                    {/*            <i className="bi bi-person-video3"></i>*/}
+                    {/*        </div>*/}
+                    {/*        <h4 className="fw-semibold fs-5">Instructor Plan</h4>*/}
+                    {/*        <h5 className="price">*/}
+                    {/*            $49<span>/month</span>*/}
+                    {/*        </h5>*/}
+                    {/*        <ul className="list-unstyled">*/}
+                    {/*            <li>*/}
+                    {/*                <i className="bi bi-check"></i> Unlimited course uploads*/}
+                    {/*            </li>*/}
+                    {/*            <li>*/}
+                    {/*                <i className="bi bi-check"></i> AI-powered student insights*/}
+                    {/*            </li>*/}
+                    {/*            <li>*/}
+                    {/*                <i className="bi bi-check"></i> Revenue sharing & analytics*/}
+                    {/*            </li>*/}
+                    {/*            <li>*/}
+                    {/*                <i className="bi bi-check"></i> Advanced tracking & reports*/}
+                    {/*            </li>*/}
+                    {/*        </ul>*/}
+                    {/*        <button className="buy-btn">Join as Instructor</button>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </section>
