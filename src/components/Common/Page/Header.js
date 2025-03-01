@@ -77,21 +77,24 @@ export default function Header() {
           <nav className="navmenu">
             <ul className="nav-links">
               {userName ? (
-                <>
-                  <li>
-                    <Link to="/courses"><i className="fas fa-book"></i> Courses</Link>
-                  </li>
-                  <li>
-                    <Link to="/subcriptions"><i className="fas fa-dollar-sign"></i> Subcriptions</Link>
-                  </li>
-                </>
+                  <>
+                    <li>
+                      <Link to="/courses"><i className="fas fa-book"></i> Courses</Link>
+                    </li>
+                    <li>
+                      <Link to="/subscriptions"><i className="fas fa-dollar-sign"></i> Subscriptions</Link>
+                    </li>
+                    <li>
+                      <Link to="/about"><i className="fas fa-info-circle"></i> About</Link>
+                    </li>
+                  </>
               ) : (
-                <>
-                  <li>
-                    <Link to="#hero"><i className="fas fa-home"></i> Home</Link>
+                  <>
+                    <li>
+                      <Link to="/"><i className="fas fa-home"></i> Home</Link>
                   </li>
                   <li>
-                    <Link to="#about"><i className="fas fa-info-circle"></i> About</Link>
+                    <Link to="/about"><i className="fas fa-info-circle"></i> About</Link>
                   </li>
                 </>
               )}
