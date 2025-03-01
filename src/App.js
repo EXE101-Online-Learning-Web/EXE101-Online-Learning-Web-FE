@@ -40,13 +40,17 @@ const AppContent = () => (
         <Route path="/test" element={<Test/>}/>
         <Route path="/about" element={<PageLayout><About/></PageLayout>}/>
 
+        {/* Protected Common for Student, Teacher Routes */}
+        <Route element={<PrivateRoute allowedRoles={["Student", "Teacher"]}/>}>
+            <Route path="/profile/:id" element={<ProfileDetail/>}/>
+        </Route>
+
         {/* Protected Vip Student Routes */}
         <Route element={<PrivateRoute allowedRoles={["Student"]}/>}>
             <Route path="/courses" element={<Courses/>}/>
             <Route path="/course/create" element={<CourseCreate/>}/>
             <Route path="/course/:idCourse" element={<CourseDetail/>}/>
             <Route path="/quiz/:idCourse" element={<QuizDetail/>}/>
-            <Route path="/profile/:id" element={<ProfileDetail/>}/>
             <Route path="/paymentSuccess" element={<PaymentSuccess/>}/>
             <Route path="/learn-course/:idCourse" element={<LearnCourse/>}/>
             <Route path="/subscriptions" element={<PageLayout><Subscriptions/></PageLayout>}/>
