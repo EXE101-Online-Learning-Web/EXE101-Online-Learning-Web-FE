@@ -1,10 +1,14 @@
 import { useState } from "react";
 import PageLayout from "../../Common/Page/PageLayout";
 import SweetAlert from "sweetalert";
+import axios from "axios"; // Đảm bảo đã cài axios để gửi HTTP requests
 
 export default function CourseCreate() {
   const [courseTitle, setCourseTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [categoryId, setCategoryId] = useState(1); 
+  const [price, setPrice] = useState(0); 
+  const [teacherId, setTeacherId] = useState("");
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
@@ -15,31 +19,43 @@ export default function CourseCreate() {
       SweetAlert("Lỗi", "Vui lòng nhập câu hỏi và chọn đáp án đúng!", "error");
       return;
     }
-    
+
     setQuestions([
       ...questions,
       { questionText: newQuestion, options, correctAnswer },
     ]);
-    
+
     setNewQuestion("");
     setOptions(["", "", "", ""]);
     setCorrectAnswer(null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (courseTitle.trim() === "" || questions.length === 0) {
       SweetAlert("Lỗi", "Vui lòng nhập tiêu đề và ít nhất một câu hỏi!", "error");
       return;
     }
 
     const courseData = {
-      title: courseTitle,
+      courseTitle,
       description,
-      questions,
+      teacherId,
+      categoryId,
+      price,
+      questions, // Nếu backend yêu cầu thông tin câu hỏi, gửi thêm vào
     };
 
-    console.log("Dữ liệu khóa học:", courseData);
-    SweetAlert("Thành công", "Khóa học đã được tạo!", "success");
+    try {
+      // Gửi request POST lên API tạo khóa học
+      const response = await axios.post("http://yourapiurl.com/courses", courseData);
+      if (response.status === 200) {
+        SweetAlert("Thành công", "Khóa học đã được tạo!", "success");
+      } else {
+        SweetAlert("Lỗi", "Có lỗi khi tạo khóa học!", "error");
+      }
+    } catch (error) {
+      SweetAlert("Lỗi", "Không thể kết nối đến server!", "error");
+    }
   };
 
   return (
@@ -67,6 +83,37 @@ export default function CourseCreate() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Giá</label>
+              <input
+                type="number"
+                className="form-control"
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Teacher ID</label>
+              <input
+                type="text"
+                className="form-control"
+                value={teacherId}
+                onChange={(e) => setTeacherId(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Danh mục khóa học</label>
+              <select
+                className="form-select"
+                value={categoryId}
+                onChange={(e) => setCategoryId(Number(e.target.value))}
+              >
+                {/* Chắc chắn rằng bạn có danh sách Category để chọn */}
+                <option value="1">Lập trình</option>
+                <option value="2">Thiết kế đồ họa</option>
+                <option value="3">Kinh doanh</option>
+              </select>
             </div>
             <hr />
             <h5>Thêm câu hỏi</h5>
