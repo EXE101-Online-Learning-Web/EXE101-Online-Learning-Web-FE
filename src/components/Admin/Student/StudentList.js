@@ -92,6 +92,7 @@ export default function StudentList() {
                         </td>
                         <td>
                           <button
+                            style={{ width: "120px" }}
                             className={`btn btn-sm ${student.isBan ? "btn-success" : "btn-danger"}`}
                             onClick={() => handleBanUnbanStudent(student.id, student.email, student.isBan)}
                           >

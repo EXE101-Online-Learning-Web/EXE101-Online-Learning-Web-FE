@@ -120,7 +120,7 @@ export default function TeacherList() {
                             className={`btn btn-sm ${
                               teacher.isBan ? "btn-success" : "btn-danger"
                             }`}
-                            style={{ width: "100px" }}
+                            style={{ width: "120px" }}
                             onClick={() =>
                               handleToggleBanTeacher(
                                 teacher.id,
@@ -129,7 +129,7 @@ export default function TeacherList() {
                               )
                             }
                           >
-                            {teacher.isBan ? "Unban" : "Lock Account"}
+                            {teacher.isBan ? "Unban" : "Ban"} Account
                           </button>
                         </td>
                       </tr>
