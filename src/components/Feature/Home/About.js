@@ -1,5 +1,4 @@
 import React from "react";
-import PageLayout from "../../Common/Page/PageLayout";
 
 export function About() {
     return (

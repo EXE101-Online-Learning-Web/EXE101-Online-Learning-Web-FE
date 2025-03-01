@@ -21,7 +21,7 @@ import CourseDetail from "./components/Feature/Course/CourseDetail";
 import QuizDetail from "./components/Feature/Quiz/QuizDetail";
 import ProfileDetail from "./components/Feature/Profile/ProfileDetail";
 import Statistic from "./components/Admin/Statistic/Statistic";
-import {PaymentSuccess} from "./components/PaymentSuccess";
+import {PaymentSuccess} from "./components/Feature/Payment/PaymentSuccess";
 import CourseCreate from "./components/Feature/Course/CourseCreate";
 import LearnCourse from "./components/Feature/Course/LearnCourse";
 import StudentList from "./components/Admin/Student/StudentrList";
@@ -30,6 +30,7 @@ import {About} from "./components/Feature/Home/About";
 import PageLayout from "./components/Common/Page/PageLayout";
 import {TeacherTest} from "./components/Feature/Teacher/TeacherTest";
 import {VipStudentTest} from "./components/Feature/VipStudent/VipStudentTest";
+import {PaymentPremium} from "./components/Feature/Payment/PaymentPremium";
 import Schedule from "./components/Feature/Schedule/Schedule";
 
 const AppContent = () => (
@@ -46,15 +47,16 @@ const AppContent = () => (
             <Route path="/profile/:id" element={<ProfileDetail/>}/>
         </Route>
 
-        {/* Protected Vip Student Routes */}
+        {/* Protected Student Routes */}
         <Route element={<PrivateRoute allowedRoles={["Student"]}/>}>
-            <Route path="/courses" element={<Courses/>}/>
+            <Route path="/courses" element={<PageLayout><Courses/></PageLayout>}/>
             <Route path="/course/create" element={<CourseCreate/>}/>
             <Route path="/course/:idCourse" element={<CourseDetail/>}/>
             <Route path="/quiz/:idCourse" element={<QuizDetail/>}/>
             <Route path="/paymentSuccess" element={<PaymentSuccess/>}/>
             <Route path="/learn-course/:idCourse" element={<LearnCourse/>}/>
             <Route path="/subscriptions" element={<PageLayout><Subscriptions/></PageLayout>}/>
+            <Route path="/paymentPremium" element={<PaymentPremium/>}/>
             <Route path="/schedule" element={<PageLayout><Schedule/></PageLayout>}/>
         </Route>
 
