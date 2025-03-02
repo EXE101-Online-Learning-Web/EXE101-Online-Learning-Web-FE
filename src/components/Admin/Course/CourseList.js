@@ -80,6 +80,20 @@ export default function CourseList() {
   };
 
   const handleSearch = async () => {
+    if (searchKeyword.length > 60) {
+        const trimmedKeyword = searchKeyword.substring(0, 60);
+        setSearchKeyword(trimmedKeyword);
+        
+        Swal.fire(
+          "Error!",
+          "Your search input is too long, it has been trimmed to 99 characters.",
+          "error"
+        );
+        
+        fetchCourses();
+        return;
+      }
+
     if (!searchKeyword.trim()) {
       fetchCourses();
       return;
@@ -111,6 +125,7 @@ export default function CourseList() {
             <input
               type="text"
               className="form-control"
+              style={{ width: "25%" }}
               placeholder="Search courses by name..."
               value={searchKeyword}
               onChange={(e) => setSearchKeyword(e.target.value)}
