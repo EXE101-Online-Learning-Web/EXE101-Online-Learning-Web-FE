@@ -86,7 +86,7 @@ export default function TeacherList() {
                 width="100%"
                 cellSpacing="0"
               >
-                <thead>
+                <thead className="thead-dark">
                   <tr>
                     <th>Account</th>
                     <th>Status</th>
@@ -104,8 +104,8 @@ export default function TeacherList() {
                             height="40"
                             alt=""
                             src={
-                              teacher.image
-                                ? teacher.image
+                              teacher.avatar
+                                ? teacher.avatar
                                 : "../../img/client-Avatar/clientAvatar-1.jpg"
                             }
                             className="avatar-img"

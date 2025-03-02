@@ -32,6 +32,7 @@ import {TeacherTest} from "./components/Feature/Teacher/TeacherTest";
 import {VipStudentTest} from "./components/Feature/VipStudent/VipStudentTest";
 import {PaymentPremium} from "./components/Feature/Payment/PaymentPremium";
 import Schedule from "./components/Feature/Schedule/Schedule";
+import CourseList from "./components/Admin/Course/CourseList";
 
 const AppContent = () => (
     <Routes>
@@ -74,6 +75,7 @@ const AppContent = () => (
         <Route element={<PrivateRoute allowedRoles={["Admin"]}/>}>
             <Route path="/admin/statistic" element={<Statistic/>}/>
             <Route path="/admin" element={<Statistic/>}/>
+            <Route path="/admin/course/courseList" element={<CourseList/>}/>
             <Route path="/admin/teacher/teacherList" element={<TeacherList/>}/>
             <Route path="/admin/student/studentList" element={<StudentList/>}/>
         </Route>
