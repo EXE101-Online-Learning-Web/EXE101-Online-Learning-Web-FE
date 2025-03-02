@@ -5,10 +5,19 @@ import Swal from "sweetalert2";
 
 export default function CourseList() {
   const [courses, setCourses] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     fetchCourses();
   }, []);
+
+  useEffect(() => {
+    const delaySearch = setTimeout(() => {
+      handleSearch();
+    }, 500);
+
+    return () => clearTimeout(delaySearch);
+  }, [searchKeyword]);
 
   const fetchCourses = async () => {
     try {
@@ -70,6 +79,23 @@ export default function CourseList() {
     });
   };
 
+  const handleSearch = async () => {
+    if (!searchKeyword.trim()) {
+      fetchCourses();
+      return;
+    }
+
+    try {
+      const result = await axios.get(
+        `https://localhost:7091/api/Course/search?keyword=${searchKeyword}`
+      );
+      setCourses(result.data);
+    } catch (error) {
+      console.error("Error searching courses:", error);
+      setCourses([]);
+    }
+  };
+
   const truncateText = (text, maxLength) => {
     return text.length > maxLength
       ? text.substring(0, maxLength) + "..."
@@ -78,16 +104,17 @@ export default function CourseList() {
 
   return (
     <AdminLayout>
-      <div className="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-      </div>
       <div className="container-fluid">
-        <h1 className="h3 mb-2 text-gray-800">Course List</h1>
+        <h1 className="h3 mb-2 text-gray-800">Management course</h1>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">
-              Course Management
-            </h6>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search courses by name..."
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+            />
           </div>
           <div className="card-body">
             <div className="table-responsive">
