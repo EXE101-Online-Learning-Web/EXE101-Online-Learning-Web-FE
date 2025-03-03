@@ -56,8 +56,29 @@ const ProfileDetail = () => {
           profilePicture: downloadURL,
         }));
 
-        console.log("File available at:", downloadURL);
-        
+        console.log(profile)
+        try {
+          const response = await fetch("https://localhost:7091/api/Auth/profile", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              AccountId: id,
+              avatar: downloadURL,
+            }),
+          });
+
+          localStorage.setItem("avatar", downloadURL);
+
+          if (!response.ok) {
+            throw new Error("Failed to update avatar");
+          }
+
+
+        } catch (error) {
+          console.error("Error updating profile:", error);
+        }
       }
     );
   };
@@ -97,7 +118,7 @@ const ProfileDetail = () => {
           <img
             src={
               downloadURL ||
-              profile.profilePicture ||
+              profile.avatar ||
               "../img/client-Avatar/clientAvatar-1.jpg"
             }
             alt="Profile"
