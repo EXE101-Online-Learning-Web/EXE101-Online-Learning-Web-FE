@@ -54,11 +54,11 @@ export default function Statistic() {
     useEffect(() => {
         // Dữ liệu khóa học
         const courses = [
-            { name: "React", sales: 120, price: 500000 },
-            { name: "Advanced Python", sales: 80, price: 400000 },
-            { name: "Angular", sales: 60, price: 600000 },
-            { name: "Introduction to AI", sales: 40, price: 300000 },
-            { name: "Node.js", sales: 100, price: 450000 }
+            { name: "React", sales: 3, price: 500000 },
+            { name: "Advanced Python", sales: 10, price: 400000 },
+            { name: "Angular", sales: 4, price: 600000 },
+            { name: "Introduction to AI", sales: 7, price: 300000 },
+            { name: "Node.js", sales: 1, price: 450000 }
         ];
 
         // *1. Dữ liệu cho Bar Chart (Số lượng mua)*
