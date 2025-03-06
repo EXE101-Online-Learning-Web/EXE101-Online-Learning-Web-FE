@@ -38,7 +38,7 @@ export default function Login() {
                     console.log(decodedToken);
                     const role = decodedToken.role;
                     const userName = decodedToken.sub;
-                    const avatar = decodedToken.avatar;
+                    const avatar = response.data.avatar;
                     const emailConfirmed = decodedToken.emailConfirmed;
                     const userId = decodedToken.nameid;
 
@@ -58,7 +58,7 @@ export default function Login() {
 
                     if (role === "Admin") {
                         navigate("/admin");
-                    } else if (role === "Student") {
+                    } else if (role === "Student" || role === "VIP Student") {
                         navigate("/courses");
                     } else if (role === "Teacher") {
                         navigate("/courses");

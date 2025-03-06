@@ -8,6 +8,8 @@ export default function CourseDetail() {
     const {idCourse} = useParams();
     const [course, setCourse] = useState(null);
     const navigate = useNavigate();
+    const [purchaseOrders, setPurchaseOrders] = useState([]);
+    const [hasPurchased, setHasPurchased] = useState(false);
 
     const fetchCourseDetail = async () => {
         try {
@@ -18,14 +20,28 @@ export default function CourseDetail() {
         }
     };
 
+    // Fetch purchase history for the current user
+    const fetchPurchaseHistory = async () => {
+        try {
+            const userId = localStorage.getItem("userId");
+            if (userId) {
+                const response = await axios.get(`https://localhost:7091/api/Payment/purchaseHistory?userId=${userId}`);
+                setPurchaseOrders(response.data);
+            }
+        } catch (error) {
+            console.error("Error fetching purchase history:", error);
+        }
+    };
+
     const handleBuyClick = async () => {
         try {
             const paymentData = {
                 "userId": localStorage.getItem("userId"),
-                "orderName": course.courseTitle,
+                "orderName": course.courseId.toString(),
                 "description": course.courseTitle,
                 "totalPrice": course.price,
-                "returnUrl": "http://localhost:3000/PaymentSuccess",
+                "paymentMethod": "Online",
+                "returnUrl": "http://localhost:3000/PaymentSuccess/",
                 "cancelUrl": "http://localhost:3000/"
             };
 
@@ -45,9 +61,18 @@ export default function CourseDetail() {
         }
     };
 
+    useEffect(() => {
+        if (course && purchaseOrders.length > 0) {
+            const purchased = purchaseOrders.some(
+                (order) => +order.orderName === course.courseId && order.status === 1
+            );
+            setHasPurchased(purchased);
+        }
+    }, [course, purchaseOrders]);
 
     useEffect(() => {
         fetchCourseDetail();
+        fetchPurchaseHistory();
     }, [idCourse]);
 
     if (!course) {
@@ -65,7 +90,7 @@ export default function CourseDetail() {
 
                     <div className="course-meta">
                         <p><strong>Category:</strong> {course.categoryName}</p>
-                        <p><strong>Price:</strong> ${course.price / 100}</p>
+                        <p><strong>Price:</strong> {course.price} VND</p>
                         <p><strong>Start Date:</strong> {new Date(course.createDate).toLocaleDateString()}</p>
                         <p><strong>Status:</strong> {course.status === 1 ? "Available" : "Not Available"}</p>
                     </div>
@@ -74,7 +99,7 @@ export default function CourseDetail() {
                     <div className="course-video">
                         <h3>Introduction Video</h3>
                         <iframe
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                            src="https://www.youtube.com/embed/x0fSBAgBrOQ"
                             title="Course Video"
                             allowFullScreen
                         ></iframe>
@@ -96,22 +121,28 @@ export default function CourseDetail() {
                 {/* Sidebar */}
                 {/* Sidebar Buy Now Section */}
                 <div className="sidebar">
-                    <h4>Buy Now</h4>
-                    <p className="price">${(course.price / 100).toFixed(2)}</p>
-
-                    <button className="btn btn-buy" onClick={handleBuyClick}>
-                        Buy Course
-                    </button>
+                    <h4>{hasPurchased ? "Course Purchased" : "Buy Now"}</h4>
+                    {hasPurchased ? (
+                        <button
+                            className="btn btn-enroll"
+                            onClick={() => navigate(`/learn-course/${idCourse}`)}
+                        >
+                            Enroll Now
+                        </button>
+                    ) : (
+                        <>
+                            <p className="price">{course.price} VND</p>
+                            <button className="btn btn-buy" onClick={handleBuyClick}>
+                                Buy Course
+                            </button>
+                        </>
+                    )}
 
                     <h5>Upcoming Sessions</h5>
                     <ul>
-                        <li>March 2025</li>
+                    <li>March 2025</li>
                         <li>June 2025</li>
                     </ul>
-
-                    <button className="btn btn-enroll" onClick={() => navigate(`/learn-course/${idCourse}`)}>
-                        Enroll Now
-                    </button>
                 </div>
 
             </div>

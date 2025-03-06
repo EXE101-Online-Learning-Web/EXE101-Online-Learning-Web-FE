@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../../../public/assets/css/courses.css";
 import "../../../public/assets/css/pricing.css";
 import "../../../public/assets/css/heroSection.css";
-import PageLayout from "../../Common/Page/PageLayout";
 import Chatbot from "../../Common/OpenAIChat/Chatbot";
 import {Banner} from "../../Common/Page/Banner";
+import Swal from "sweetalert2";
 
 export default function Courses() {
     const [courses, setCourses] = useState([]);
@@ -23,8 +23,7 @@ export default function Courses() {
 
     const fetchCourses = async () => {
         try {
-            const result = await axios.get("https://localhost:7091/api/Course");
-            console.log("aaaaaaa", result.data)
+            const result = await axios.get("https://localhost:7091/api/Courses");
             setCourses(result.data);
         } catch (error) {
             console.error("Error when fetching course data:", error);
@@ -45,7 +44,7 @@ export default function Courses() {
         });
 
     return (
-        <PageLayout>
+        <div>
             <Banner/>
 
             <div className="CourseLayout">
@@ -86,13 +85,13 @@ export default function Courses() {
                             filteredCourses.map((course) => (
                                 <div key={course.courseId}
                                      className="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
-                                    <div className="course-item" onClick={() => navigate(`/course/${course.courseId}`)}>
+                                    <div className="course-item">
                                         <img src="../img/courses/course-1.jpg" className="img-fluid"
                                              alt={course.courseTitle}/>
                                         <div className="course-content">
                                             <div className="d-flex justify-content-between align-items-center mb-3">
                                                 <p className="category">{course.categoryName}</p>
-                                                <p className="price">${course.price}</p>
+                                                <p className="price">{course.price} VND</p>
                                             </div>
                                             <h3>{course.courseTitle}</h3>
                                             <p className="description">{course.description}</p>
@@ -100,7 +99,7 @@ export default function Courses() {
                                                 <div className="trainer-profile d-flex align-items-center">
                                                     <img src="/img/trainers/trainer-1-2.jpg" className="img-fluid"
                                                          alt="Trainer"/>
-                                                    <a href="#" className="trainer-link">{course.trainerName}</a>
+                                                    <Link to="/" className="trainer-link">{course.trainerName}</Link>
                                                 </div>
                                                 <button className="btn btn-primary mt-3 w-100"
                                                         onClick={() => navigate(`/course/${course.courseId}`)}>
@@ -127,7 +126,8 @@ export default function Courses() {
                     </div>
                 </div>
             </div>
-            <Chatbot/>
-        </PageLayout>
+
+            {localStorage.getItem("role") === 'VIP Student' && <Chatbot />}
+        </div>
     );
 }

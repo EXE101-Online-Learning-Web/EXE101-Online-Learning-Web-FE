@@ -3,61 +3,57 @@ import AdminLayout from "../../Common/Admin/AdminLayout";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function TeacherList() {
-  const [teachers, setTeachers] = useState([]);
+export default function StudentList() {
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    fetchTeachers();
+    fetchStudents();
   }, []);
 
-  const fetchTeachers = async () => {
+  const fetchStudents = async () => {
     try {
-      const result = await axios.get("https://localhost:7091/api/teachers/all");
-      setTeachers(result.data);
+      const result = await axios.get("https://localhost:7091/api/students/all");
+      setStudents(result.data);
     } catch (error) {
-      console.error("Error when fetching teacher data:", error);
-      setTeachers([]);
+      console.error("Error when fetching student data:", error);
+      setStudents([]);
     }
   };
 
-  const handleToggleBanTeacher = async (teacherId, teacherName, isBanned) => {
-    const action = isBanned ? "Unban" : "Ban";
-    const apiUrl = `https://localhost:7091/api/teachers/${
-      isBanned ? "unban" : "ban"
-    }/${teacherId}`;
+  const handleBanUnbanStudent = async (studentId, studentName, isBan) => {
+    const action = isBan ? "unban" : "ban";
+    const actionText = isBan ? "unlock" : "lock";
 
     Swal.fire({
-      title: `Do you want to ${action.toLowerCase()} the account of ${teacherName}?`,
-      text: isBanned
-        ? "The account will be reactivated and can log in again."
-        : "Once locked, this account will not be able to log in!",
+      title: `Do you want to ${actionText} ${studentName}'s account?`,
+      text: `Once ${actionText}ed, this account will ${
+        isBan ? "be able to log in again" : "not be able to log in"
+      }!`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: isBanned ? "#28a745" : "#d33",
+      confirmButtonColor: isBan ? "#28a745" : "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: `Yes, ${action.toLowerCase()} now!`,
+      confirmButtonText: `Yes, ${actionText} now!`,
       cancelButtonText: "Cancel",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const token = localStorage.getItem("authToken");
           await axios.put(
-            apiUrl,
-            {},
-            { headers: { Authorization: `Bearer ${token}` } }
+            `https://localhost:7091/api/students/${action}/${studentId}`
           );
-
           Swal.fire(
-            `${action}ned!`,
-            `The account of ${teacherName} has been ${action.toLowerCase()}ned.`,
+            isBan ? "Unlocked!" : "Locked!",
+            `${studentName}'s account has been ${
+              isBan ? "unlocked" : "locked"
+            }.`,
             "success"
           );
-          fetchTeachers();
+          fetchStudents();
         } catch (error) {
-          console.error(`Error ${action.toLowerCase()}ning teacher:`, error);
+          console.error(`Error ${action}ning student:`, error);
           Swal.fire(
             "Error!",
-            `Unable to ${action.toLowerCase()} account. Please try again!`,
+            `Unable to ${actionText} account. Please try again!`,
             "error"
           );
         }
@@ -71,7 +67,7 @@ export default function TeacherList() {
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
       </div>
       <div className="container-fluid">
-        <h1 className="h3 mb-2 text-gray-800">Teacher List</h1>
+        <h1 className="h3 mb-2 text-gray-800">Student List</h1>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">
@@ -94,8 +90,8 @@ export default function TeacherList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {teachers.length > 0 ? (
-                    teachers.map((teacher, index) => (
+                  {students.length > 0 ? (
+                    students.map((student, index) => (
                       <tr key={index}>
                         <td>
                           <img
@@ -104,39 +100,39 @@ export default function TeacherList() {
                             height="40"
                             alt=""
                             src={
-                              teacher.avatar
-                                ? teacher.avatar
+                              student.avatar
+                                ? student.avatar
                                 : "../../img/client-Avatar/clientAvatar-1.jpg"
                             }
                             className="avatar-img"
                           />
-                          {teacher.email || "N/A"}
+                          {student.email || "N/A"}
                         </td>
-                        <td style={{ color: teacher.isBan ? "red" : "" }}>
-                          {teacher.isBan ? "Ban" : "Normal" || "N/A"}
+                        <td style={{ color: student.isBan ? "red" : "" }}>
+                          {student.isBan ? "Banned" : "Normal"}
                         </td>
                         <td>
                           <button
-                            className={`btn btn-sm ${
-                              teacher.isBan ? "btn-success" : "btn-danger"
-                            }`}
                             style={{ width: "120px" }}
+                            className={`btn btn-sm ${
+                              student.isBan ? "btn-success" : "btn-danger"
+                            }`}
                             onClick={() =>
-                              handleToggleBanTeacher(
-                                teacher.id,
-                                teacher.email,
-                                teacher.isBan
+                              handleBanUnbanStudent(
+                                student.id,
+                                student.email,
+                                student.isBan
                               )
                             }
                           >
-                            {teacher.isBan ? "Unban" : "Ban"} Account
+                            {student.isBan ? "Unban" : "Ban"} Account
                           </button>
                         </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="6" className="text-center text-muted">
+                      <td colSpan="3" className="text-center text-muted">
                         No data available
                       </td>
                     </tr>
