@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../../public/assets/css/profile.css";
 import PageLayout from "../../Common/Page/PageLayout";
+import { storage   } from "../../../config/firebaseConfig";
 import SweetAlert from "sweetalert";
 
 import {
-  getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
@@ -28,7 +28,6 @@ const ProfileDetail = () => {
   };
 
   const uploadFile = (file) => {
-    const storage = getStorage();
     const storageRef = ref(storage, `profile-images/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
