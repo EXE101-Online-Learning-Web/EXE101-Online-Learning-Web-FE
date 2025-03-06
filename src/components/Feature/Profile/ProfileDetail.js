@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../../../public/assets/css/profile.css";
 import PageLayout from "../../Common/Page/PageLayout";
 import { auth } from "../../../config/firebaseConfig";
+import SweetAlert from "sweetalert";
+
 import {
   getStorage,
   ref,
@@ -38,11 +40,7 @@ const ProfileDetail = () => {
 
     uploadTask.on(
       "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload is ${progress}% done`);
-      },
+      () => {},
       (error) => {
         console.error("Upload failed:", error);
         setUploading(false);
@@ -56,18 +54,20 @@ const ProfileDetail = () => {
           profilePicture: downloadURL,
         }));
 
-        console.log(profile)
         try {
-          const response = await fetch("https://localhost:7091/api/Auth/profile", {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              AccountId: id,
-              avatar: downloadURL,
-            }),
-          });
+          const response = await fetch(
+            "https://localhost:7091/api/Auth/profile",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                AccountId: id,
+                avatar: downloadURL,
+              }),
+            }
+          );
 
           localStorage.setItem("avatar", downloadURL);
 
@@ -75,7 +75,15 @@ const ProfileDetail = () => {
             throw new Error("Failed to update avatar");
           }
 
+          window.dispatchEvent(new Event("avatarUpdated"));
 
+          setTimeout(() => {
+            SweetAlert(
+              "Updating avatar successfully!",
+              "Your avatar has been updated.",
+              "success"
+            );
+          }, 500);
         } catch (error) {
           console.error("Error updating profile:", error);
         }
