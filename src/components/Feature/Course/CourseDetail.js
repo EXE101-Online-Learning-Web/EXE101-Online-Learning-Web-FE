@@ -38,7 +38,7 @@ export default function CourseDetail() {
             const paymentData = {
                 "userId": localStorage.getItem("userId"),
                 "orderName": course.courseId.toString(),
-                "description": course.courseTitle,
+                "description": course.courseTitle.substring(0, 25),
                 "totalPrice": course.price,
                 "paymentMethod": "Online",
                 "returnUrl": "http://localhost:3000/PaymentSuccess/",
