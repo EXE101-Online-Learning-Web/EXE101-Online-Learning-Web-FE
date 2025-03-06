@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../../public/assets/css/profile.css";
 import PageLayout from "../../Common/Page/PageLayout";
-import { auth } from "../../../config/firebaseConfig";
 import SweetAlert from "sweetalert";
 
 import {
@@ -20,20 +19,15 @@ const ProfileDetail = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("courses"); // Tab mặc định
   const [role, setRole] = useState("");
-  const [image, setImage] = useState(null);
-  const [uploading, setUploading] = useState(false);
   const [downloadURL, setDownloadURL] = useState("");
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
-
-    setImage(file);
     uploadFile(file);
   };
 
   const uploadFile = (file) => {
-    setUploading(true);
     const storage = getStorage();
     const storageRef = ref(storage, `profile-images/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -43,12 +37,10 @@ const ProfileDetail = () => {
       () => {},
       (error) => {
         console.error("Upload failed:", error);
-        setUploading(false);
       },
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
         setDownloadURL(downloadURL);
-        setUploading(false);
         setProfile((prevProfile) => ({
           ...prevProfile,
           profilePicture: downloadURL,
