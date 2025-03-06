@@ -89,17 +89,8 @@ export function SidebarAdmin() {
           >
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Course Management:</h6>
-              <Link class="collapse-item" href="utilities-color.html">
+              <Link to={"/admin/course/courseList"} class="collapse-item">
                 List courses
-              </Link>
-              <Link class="collapse-item" href="utilities-border.html">
-                Borders
-              </Link>
-              <Link class="collapse-item" href="utilities-animation.html">
-                Animations
-              </Link>
-              <Link class="collapse-item" href="utilities-other.html">
-                Other
               </Link>
             </div>
           </div>

@@ -26,7 +26,9 @@ export default function StudentList() {
 
     Swal.fire({
       title: `Do you want to ${actionText} ${studentName}'s account?`,
-      text: `Once ${actionText}ed, this account will ${isBan ? "be able to log in again" : "not be able to log in"}!`,
+      text: `Once ${actionText}ed, this account will ${
+        isBan ? "be able to log in again" : "not be able to log in"
+      }!`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: isBan ? "#28a745" : "#d33",
@@ -36,16 +38,24 @@ export default function StudentList() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.put(`https://localhost:7091/api/students/${action}/${studentId}`);
+          await axios.put(
+            `https://localhost:7091/api/students/${action}/${studentId}`
+          );
           Swal.fire(
             isBan ? "Unlocked!" : "Locked!",
-            `${studentName}'s account has been ${isBan ? "unlocked" : "locked"}.`,
+            `${studentName}'s account has been ${
+              isBan ? "unlocked" : "locked"
+            }.`,
             "success"
           );
           fetchStudents();
         } catch (error) {
           console.error(`Error ${action}ning student:`, error);
-          Swal.fire("Error!", `Unable to ${actionText} account. Please try again!`, "error");
+          Swal.fire(
+            "Error!",
+            `Unable to ${actionText} account. Please try again!`,
+            "error"
+          );
         }
       }
     });
@@ -60,12 +70,19 @@ export default function StudentList() {
         <h1 className="h3 mb-2 text-gray-800">Student List</h1>
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Account Management</h6>
+            <h6 className="m-0 font-weight-bold text-primary">
+              Account Management
+            </h6>
           </div>
           <div className="card-body">
             <div className="table-responsive">
-              <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
-                <thead>
+              <table
+                className="table table-bordered"
+                id="dataTable"
+                width="100%"
+                cellSpacing="0"
+              >
+                <thead className="thead-dark">
                   <tr>
                     <th>Account</th>
                     <th>Status</th>
@@ -82,7 +99,11 @@ export default function StudentList() {
                             width="40"
                             height="40"
                             alt=""
-                            src={student.image ? student.image : "../../img/client-Avatar/clientAvatar-1.jpg"}
+                            src={
+                              student.avatar
+                                ? student.avatar
+                                : "../../img/client-Avatar/clientAvatar-1.jpg"
+                            }
                             className="avatar-img"
                           />
                           {student.email || "N/A"}
@@ -93,8 +114,16 @@ export default function StudentList() {
                         <td>
                           <button
                             style={{ width: "120px" }}
-                            className={`btn btn-sm ${student.isBan ? "btn-success" : "btn-danger"}`}
-                            onClick={() => handleBanUnbanStudent(student.id, student.email, student.isBan)}
+                            className={`btn btn-sm ${
+                              student.isBan ? "btn-success" : "btn-danger"
+                            }`}
+                            onClick={() =>
+                              handleBanUnbanStudent(
+                                student.id,
+                                student.email,
+                                student.isBan
+                              )
+                            }
                           >
                             {student.isBan ? "Unban" : "Ban"} Account
                           </button>
@@ -103,7 +132,9 @@ export default function StudentList() {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="3" className="text-center text-muted">No data available</td>
+                      <td colSpan="3" className="text-center text-muted">
+                        No data available
+                      </td>
                     </tr>
                   )}
                 </tbody>
