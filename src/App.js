@@ -33,6 +33,7 @@ import {VipStudentTest} from "./components/Feature/VipStudent/VipStudentTest";
 import {PaymentPremium} from "./components/Feature/Payment/PaymentPremium";
 import Schedule from "./components/Feature/Schedule/Schedule";
 import CourseList from "./components/Admin/Course/CourseList";
+import Certificate from "./components/Feature/Certificate.js/Certificate";
 
 const AppContent = () => (
     <Routes>
@@ -41,6 +42,7 @@ const AppContent = () => (
         <Route path="/register" element={<Register/>}/>
         <Route path="/home" element={<Home/>}/>
         <Route path="/test" element={<Test/>}/>
+        <Route path="/certificate" element={<Certificate/>}/>
         <Route path="/about" element={<PageLayout><About/></PageLayout>}/>
 
         {/* Protected Common for Student, Teacher Routes */}
