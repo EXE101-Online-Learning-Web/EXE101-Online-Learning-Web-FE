@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useLocation } from "react-router-dom";
@@ -10,6 +10,10 @@ const Certificate = ({
   instructorName = "Jane Smith",
   completionDate = new Date().toLocaleDateString(),
 }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   const certificateRef = useRef();
   const location = useLocation();
   const certificateData = location.state;
