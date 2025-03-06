@@ -50,7 +50,7 @@ const Certificate = ({
           <img
             src="/img/EduQuestLogo.png"
             alt="Logo"
-            style={{ width: "130px", position: "absolute", top: "30px", left: "20px" }}
+            style={{ width: "130px", position: "absolute", top: "32px", left: "20px" }}
           />
 
           <h1
