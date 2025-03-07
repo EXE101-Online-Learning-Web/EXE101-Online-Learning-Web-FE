@@ -84,7 +84,7 @@ export default function Survey() {
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    if (token) {
+    if (token && localStorage.getItem("role") === "VIP Student") {
       async function fetchData() {
         try {
           const userId = localStorage.getItem("userId");

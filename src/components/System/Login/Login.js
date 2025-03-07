@@ -5,11 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; // Import Link
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../public/assets/css/login.css";
-import PageLayout from "../../Common/Page/PageLayout"; // Your custom CSS
+import PageLayout from "../../Common/Page/PageLayout";
+import SweetAlert from "sweetalert";
 
 export default function Login() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
+    if (localStorage.getItem("logoutSuccess") === "true") {
+      SweetAlert(
+        "Logged out successfully!",
+        "You have been logged out of the system.",
+        "success"
+      );
+      localStorage.removeItem("logoutSuccess");
+    }
   }, []);
 
   const [email, setEmail] = useState("");

@@ -48,7 +48,8 @@ export default function Header() {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/");
+    localStorage.setItem("logoutSuccess", "true");
+    navigate("/login");
   };
 
   const navigateAdmin = () => {
