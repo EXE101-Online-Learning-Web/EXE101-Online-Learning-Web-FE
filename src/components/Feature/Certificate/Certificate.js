@@ -11,7 +11,7 @@ const Certificate = ({
   completionDate = new Date().toLocaleDateString(),
 }) => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   });
 
   const certificateRef = useRef();
