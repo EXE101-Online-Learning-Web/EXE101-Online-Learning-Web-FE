@@ -39,10 +39,10 @@ const AppContent = () => (
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route path="/home" element={<Home/>}/>
         <Route path="/test" element={<Test/>}/>
         <Route path="/about" element={<PageLayout><About/></PageLayout>}/>
         <Route path="/courses" element={<PageLayout><Courses/></PageLayout>}/>
+        <Route path="/course/:idCourse" element={<CourseDetail/>}/>
 
         {/* Protected Common for Teacher Routes */}
         <Route element={<PrivateRoute allowedRoles={["Teacher", "Admin"]}/>}>
@@ -52,7 +52,6 @@ const AppContent = () => (
         {/* Protected Student, Admin Routes, VIP Student, Teacher */}
         <Route element={<PrivateRoute allowedRoles={["Student","Admin","VIP Student","Teacher"]}/>}>
             <Route path="/profile/:id" element={<ProfileDetail/>}/>
-            <Route path="/course/:idCourse" element={<CourseDetail/>}/>
             <Route path="/quiz/:idCourse" element={<QuizDetail/>}/>
             <Route path="/paymentSuccess" element={<PaymentSuccess/>}/>
             <Route path="/learn-course/:idCourse" element={<LearnCourse/>}/>

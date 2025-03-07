@@ -4,6 +4,10 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 
 export default function Subscriptions() {
+      useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      }, []);
+      
     const handleBuyClick = async () => {
         try {
             const paymentData = {

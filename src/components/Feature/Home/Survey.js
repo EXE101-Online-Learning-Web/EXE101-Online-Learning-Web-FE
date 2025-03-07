@@ -83,27 +83,32 @@ export default function Survey() {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const userId = localStorage.getItem('userId')
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      async function fetchData() {
+        try {
+          const userId = localStorage.getItem("userId");
 
-        const response = await axios.get(
+          const response = await axios.get(
             `https://localhost:7091/api/Schedule/get`,
             {
-                params: {
-                    userId: userId,
-                },
+              params: {
+                userId: userId,
+              },
             }
-        );
-        if(!response.data) {
+          );
+          if (!response.data) {
             setShowForm(true);
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
       }
+      fetchData();
+    } else {
+      setShowForm(false);
     }
-    fetchData();
-}, [])
+  }, []);
 
   return (
     showForm && (
