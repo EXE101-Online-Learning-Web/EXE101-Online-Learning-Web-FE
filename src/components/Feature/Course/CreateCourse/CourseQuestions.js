@@ -1,122 +1,90 @@
 import React, { useState } from 'react';
-import { PlusCircle, Trash2, HelpCircle } from 'lucide-react';
-import { Check } from 'lucide-react';
-import "../../../../public/assets/css/CreateCouse/create-course-questions.css";
+import { FaPlus, FaTrash } from "react-icons/fa";
 
-const CourseQuestions = ({ modules, setModules, moduleIndex, lessonIndex, quizzes }) => {
-  const handleAddQuizToLesson = (moduleIndex, lessonIndex) => {
-    const newQuiz = { questionText: '', options: ['', '', '', ''], correctAnswer: null };
-    const updatedModules = [...modules];
-    updatedModules[moduleIndex].lessons[lessonIndex].quizzes.push(newQuiz);
-    setModules(updatedModules);
-  };
+const CourseQuestions = ({ modules, setModules, quizzes }) => {
+    const [newQuestionText, setNewQuestionText] = useState('');
+    const [newOptions, setNewOptions] = useState(["", "", "", ""]);
+    const [correctAnswer, setCorrectAnswer] = useState(null);
 
-  const [errors, setErrors] = useState({});
-  const [newQuestion, setNewQuestion] = useState("");
-  const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState(null);
-  const safeQuizzes = Array.isArray(quizzes) ? quizzes : [];
+    const handleAddQuestion = () => {
+        if (!newQuestionText.trim() || newOptions.some(opt => opt.trim() === "") || correctAnswer === null) {
+            alert("All fields are required.");
+            return;
+        }
 
-  return (
-    <div className="mb-4">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2 className="h5 d-flex align-items-center">
-          <HelpCircle className="me-2" size={20} />
-          Course Questions
-        </h2>
-        <button
-          type="button"
-          className="btn btn-primary d-flex align-items-center"
-          onClick={() => handleAddQuizToLesson(moduleIndex)}
-        >
-          <PlusCircle className="me-1" size={16} />
-          Add Question
-        </button>
-      </div>
+        const newQuestion = {
+            questionText: newQuestionText,
+            options: [...newOptions],
+            correctAnswer
+        };
 
-      {/* Question Form */}
-      <div className="bg-light p-3 rounded mb-4 course-questions-board">
-        <div className="mb-3">
-          <label className="form-label">Question Text*</label>
-          <input
-            type="text"
-            className={`form-control ${errors.questionText ? 'is-invalid' : ''}`}
-            placeholder="Enter your question"
-            value={newQuestion}
-            onChange={(e) => setNewQuestion(e.target.value)}
-          />
-          {errors.questionText && <div className="invalid-feedback">{errors.questionText}</div>}
-        </div>
+        const updatedModules = [...modules];
+        quizzes.push(newQuestion);
+        setModules(updatedModules);
 
-        <div className="mb-3">
-          <label className="form-label">Answer Options* (select the correct one)</label>
-          {options.map((option, index) => (
-            <div key={index} className="d-flex align-items-center mb-2">
-              <div className="form-check me-2">
-                <input
-                  type="radio"
-                  className="form-check-input"
-                  name="correctAnswer"
-                  id={`option-${index}`}
-                  checked={correctAnswer === index}
-                  onChange={() => setCorrectAnswer(index)}
-                />
-              </div>
-              <input
-                type="text"
-                className={`form-control ${errors.options ? 'is-invalid' : ''}`}
-                placeholder={`Option ${index + 1}`}
-                value={option}
-                onChange={(e) => {
-                  const newOptions = [...options];
-                  newOptions[index] = e.target.value;
-                  setOptions(newOptions);
-                }}
-              />
-            </div>
-          ))}
-        </div>
+        setNewQuestionText('');
+        setNewOptions(["", "", "", ""]);
+        setCorrectAnswer(null);
+    };
 
-        <div className="d-flex justify-content-end gap-2">
-          <button type="button" className="btn btn-outline-secondary">
-            Cancel
-          </button>
-          <button type="button" className="btn btn-primary" onClick={() => handleAddQuizToLesson(moduleIndex, lessonIndex)}>
-            Add Question
-          </button>
-        </div>
-      </div>
+    const handleDeleteQuestion = (quizIndex) => {
+        const updatedModules = [...modules];
+        quizzes.splice(quizIndex, 1);
+        setModules(updatedModules);
+    };
 
-      {/* Questions List */}
-      <div className="mb-4">
-        {safeQuizzes.map((question, index) => (
-          <div key={index} className="card mb-3 question-item">
-            <div className="card-body">
-              <div className="d-flex justify-content-between align-items-start">
-                <div>
-                  <h3 className="h6 fw-bold">{index + 1}. {question.questionText}</h3>
-                  <div className="mt-2">
-                    {question.options.map((option, optIndex) => (
-                      <div key={optIndex} className="d-flex align-items-center mb-1">
-                        <span className={`option-badge ${question.correctAnswer === optIndex ? 'correct' : 'normal'}`}>
-                          {String.fromCharCode(65 + optIndex)}
-                        </span>
-                        <span className={question.correctAnswer === optIndex ? 'correct-answer' : ''}>{option}</span>
-                        {question.correctAnswer === optIndex && <Check className="ms-2 text-success" size={16} />}
-                      </div>
-                    ))}
-                  </div>
+    return (
+        <div className="question-container">
+            <h3>Course Questions</h3>
+            {/* {quizzes.map((quiz, quizIndex) => (
+                <div key={quizIndex} className="quiz-item">
+                    <p><strong>{quizIndex + 1}. {quiz.questionText}</strong></p>
+                    <ul>
+                        {quiz.options.map((option, index) => (
+                            <li key={index} className={index === quiz.correctAnswer ? 'correct' : ''}>{option}</li>
+                        ))}
+                    </ul>
+                    <button className="btn btn-danger" onClick={() => handleDeleteQuestion(quizIndex)}>
+                        <FaTrash /> Delete
+                    </button>
                 </div>
-                <button type="button" className="btn btn-sm text-danger">
-                  <Trash2 size={18} />
+            ))} */}
+
+            <div className="question-form">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Question"
+                    value={newQuestionText}
+                    onChange={(e) => setNewQuestionText(e.target.value)}
+                />
+                {newOptions.map((option, index) => (
+                    <div key={index} className="option-item">
+                        <input
+                            type="radio"
+                            name="correctAnswer"
+                            checked={correctAnswer === index}
+                            onChange={() => setCorrectAnswer(index)}
+                        />
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder={`Option ${index + 1}`}
+                            value={option}
+                            onChange={(e) => {
+                                const updatedOptions = [...newOptions];
+                                updatedOptions[index] = e.target.value;
+                                setNewOptions(updatedOptions);
+                            }}
+                        />
+                    </div>
+                ))}
+                <button className="btn btn-primary mt-2" onClick={handleAddQuestion}>
+                    <FaPlus /> Add Question
                 </button>
-              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default CourseQuestions;

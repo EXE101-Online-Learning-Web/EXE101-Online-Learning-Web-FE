@@ -3,7 +3,7 @@ import CourseQuestions from './CourseQuestions';
 import "../../../../public/assets/css/CreateCouse/create-course-lessons.css";
 import { FaPlus, FaTrash, FaChevronDown, FaChevronUp, FaDropbox } from "react-icons/fa";
 
-const LessonForm = ({ modules, setModules, moduleIndex, lessonIndex }) => {
+const LessonForm = ({ modules, setModules, moduleIndex, lessonIndex, quizzes }) => {
   const [isExpanded, setIsExpanded] = useState(true); // Trạng thái rút gọn/mở rộng
 
   const handleLessonChange = (field, value) => {
@@ -70,8 +70,7 @@ const LessonForm = ({ modules, setModules, moduleIndex, lessonIndex }) => {
           <CourseQuestions
             modules={modules}
             setModules={setModules}
-            moduleIndex={moduleIndex}
-            quizzes={modules[moduleIndex].lessons[lessonIndex].quizzes}
+            quizzes={quizzes}
           />
         </div>
       )}

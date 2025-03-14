@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LessonForm from "../CreateCourse/LessonForm";
 import "../../../../public/assets/css/CreateCouse/create-course-module.css";
-import { FaPlus, FaTrash, FaChevronDown, FaChevronUp, FaArrowCircleRight  } from "react-icons/fa";
+import { FaPlus, FaTrash, FaChevronDown, FaChevronUp, FaArrowCircleRight } from "react-icons/fa";
 
 const ModuleForm = () => {
     const [newModuleTitle, setNewModuleTitle] = useState('');
@@ -87,11 +87,11 @@ const ModuleForm = () => {
                             <div className="lesson-list mb-2">
                                 {module.lessons.map((lesson, lessonIndex) => (
                                     <LessonForm
-                                        key={lessonIndex}
-                                        modules={modules}
+                                        modules={module}
                                         setModules={setModules}
                                         moduleIndex={moduleIndex}
                                         lessonIndex={lessonIndex}
+                                        // quizzes={modules[moduleIndex].lessons[lessonIndex].quizzes}
                                     />
                                 ))}
                             </div>
