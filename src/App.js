@@ -21,7 +21,7 @@ import QuizDetail from "./components/Feature/Quiz/QuizDetail";
 import ProfileDetail from "./components/Feature/Profile/ProfileDetail";
 import Statistic from "./components/Admin/Statistic/Statistic";
 import {PaymentSuccess} from "./components/Feature/Payment/PaymentSuccess";
-import CourseCreate from "./components/Feature/Course/CourseCreate";
+import CourseCreate from "./components/Feature/Course/CreateCourse/CourseCreate";
 import LearnCourse from "./components/Feature/Course/LearnCourse";
 import StudentList from "./components/Admin/Student/StudentList";
 import Subscriptions from "./components/Feature/Home/Subscriptions";
