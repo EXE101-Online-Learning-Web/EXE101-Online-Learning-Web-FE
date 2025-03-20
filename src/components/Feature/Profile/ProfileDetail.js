@@ -193,57 +193,58 @@ const ProfileDetail = () => {
         </div>
 
         {/* Nếu role là "student", hiển thị tabs */}
-        {role === "Student" && (
-          <>
-            {/* Navigation Tabs */}
-            <div className="profile-tabs">
-              <div
-                className={`profile-tab ${
-                  activeTab === "courses" ? "active" : ""
-                }`}
-                onClick={() => setActiveTab("courses")}
-              >
-                Courses Enrolled
+        {role === "Student" ||
+          (role === "VIP Student" && (
+            <>
+              {/* Navigation Tabs */}
+              <div className="profile-tabs">
+                <div
+                  className={`profile-tab ${
+                    activeTab === "courses" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("courses")}
+                >
+                  Courses Enrolled
+                </div>
+                <div
+                  className={`profile-tab ${
+                    activeTab === "certificates" ? "active" : ""
+                  }`}
+                  onClick={() => setActiveTab("certificates")}
+                >
+                  Certificates
+                </div>
               </div>
-              <div
-                className={`profile-tab ${
-                  activeTab === "certificates" ? "active" : ""
-                }`}
-                onClick={() => setActiveTab("certificates")}
-              >
-                Certificates
-              </div>
-            </div>
 
-            {/* Tab Content */}
-            <div className="profile-content">
-              {activeTab === "certificates" && (
-                <div className="certificates-container">
-                  <h3>📜 Certificates</h3>
-                  {profile.certificates && profile.certificates.length > 0 ? (
-                    profile.certificates.map((certificate, index) => (
-                      <div key={index} className="certificate-card">
-                        <div className="certificate-info">
-                          <p
-                            style={{ marginBottom: "4px" }}
-                            className="certificate-title"
-                          >
-                            📜 {certificate.courseName}
-                          </p>
-                          <p
-                            style={{ marginBottom: "4px" }}
-                            className="certificate-instructor"
-                          >
-                            👨‍🏫 {certificate.instructorName}
-                          </p>
-                          <p
-                            style={{ marginBottom: "4px" }}
-                            className="certificate-date"
-                          >
-                            📅 {certificate.completionDate}
-                          </p>
-                        </div>
-                        {/* <button
+              {/* Tab Content */}
+              <div className="profile-content">
+                {activeTab === "certificates" && (
+                  <div className="certificates-container">
+                    <h3>📜 Certificates</h3>
+                    {profile.certificates && profile.certificates.length > 0 ? (
+                      profile.certificates.map((certificate, index) => (
+                        <div key={index} className="certificate-card">
+                          <div className="certificate-info">
+                            <p
+                              style={{ marginBottom: "4px" }}
+                              className="certificate-title"
+                            >
+                              📜 {certificate.courseName}
+                            </p>
+                            <p
+                              style={{ marginBottom: "4px" }}
+                              className="certificate-instructor"
+                            >
+                              👨‍🏫 {certificate.instructorName}
+                            </p>
+                            <p
+                              style={{ marginBottom: "4px" }}
+                              className="certificate-date"
+                            >
+                              📅 {certificate.completionDate}
+                            </p>
+                          </div>
+                          {/* <button
                           style={{
                             marginTop: "4px",
                             padding: "8px",
@@ -269,47 +270,49 @@ const ProfileDetail = () => {
                           View
                         </button> */}
 
-                        <button
-                          style={{
-                            marginTop: "4px",
-                            padding: "8px",
-                            fontSize: "16px",
-                            backgroundColor: "#1c5d99",
-                            color: "white",
-                            border: "none",
-                            cursor: "pointer",
-                            borderRadius: "5px",
-                            fontWeight: "bold",
-                          }}
-                          onClick={() => handleViewCertificate(certificate)}
-                        >
-                          View
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="no-certificates">No certificates available</p>
-                  )}
-                </div>
-              )}
-
-              {activeTab === "courses" && (
-                <div>
-                  <h3>📚 Enrolled Courses</h3>
-                  <ul>
-                    {profile.courses && profile.courses.length > 0 ? (
-                      profile.courses.map((course, index) => (
-                        <li key={index}>{course}</li>
+                          <button
+                            style={{
+                              marginTop: "4px",
+                              padding: "8px",
+                              fontSize: "16px",
+                              backgroundColor: "#1c5d99",
+                              color: "white",
+                              border: "none",
+                              cursor: "pointer",
+                              borderRadius: "5px",
+                              fontWeight: "bold",
+                            }}
+                            onClick={() => handleViewCertificate(certificate)}
+                          >
+                            View
+                          </button>
+                        </div>
                       ))
                     ) : (
-                      <p>No courses enrolled</p>
+                      <p className="no-certificates">
+                        No certificates available
+                      </p>
                     )}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </>
-        )}
+                  </div>
+                )}
+
+                {activeTab === "courses" && (
+                  <div>
+                    <h3>📚 Enrolled Courses</h3>
+                    <ul>
+                      {profile.courses && profile.courses.length > 0 ? (
+                        profile.courses.map((course, index) => (
+                          <li key={index}>{course}</li>
+                        ))
+                      ) : (
+                        <p>No courses enrolled</p>
+                      )}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </>
+          ))}
       </div>
     </PageLayout>
   );

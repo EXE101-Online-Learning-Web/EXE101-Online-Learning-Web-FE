@@ -47,12 +47,9 @@ export default function Header() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("avatar");
-    setUserName("");
-    setAvatar("");
-    navigate("/home");
+    localStorage.clear();
+    localStorage.setItem("logoutSuccess", "true");
+    navigate("/login");
   };
 
   const navigateAdmin = () => {

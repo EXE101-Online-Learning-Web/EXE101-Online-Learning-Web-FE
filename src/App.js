@@ -14,7 +14,6 @@ import Test from "./components/Feature/Home/test";
 import Courses from "./components/Feature/Course/Courses";
 import Login from "./components/System/Login/Login";
 import Register from "./components/System/Register/Register";
-import AdminManagement from "./components/Admin/Admin";
 import TeacherList from "./components/Admin/Teacher/TeacherList";
 import PrivateRoute from "./components/System/Authorize/PrivateRoute";
 import CourseDetail from "./components/Feature/Course/CourseDetail";
@@ -22,7 +21,7 @@ import QuizDetail from "./components/Feature/Quiz/QuizDetail";
 import ProfileDetail from "./components/Feature/Profile/ProfileDetail";
 import Statistic from "./components/Admin/Statistic/Statistic";
 import {PaymentSuccess} from "./components/Feature/Payment/PaymentSuccess";
-import CourseCreate from "./components/Feature/Course/CourseCreate";
+import CourseCreate from "./components/Feature/Course/CreateCourse/CourseCreate";
 import LearnCourse from "./components/Feature/Course/LearnCourse";
 import StudentList from "./components/Admin/Student/StudentList";
 import Subscriptions from "./components/Feature/Home/Subscriptions";
@@ -40,27 +39,26 @@ const AppContent = () => (
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
-        <Route path="/home" element={<Home/>}/>
         <Route path="/test" element={<Test/>}/>
-        <Route path="/certificate" element={<Certificate/>}/>
         <Route path="/about" element={<PageLayout><About/></PageLayout>}/>
+        <Route path="/courses" element={<PageLayout><Courses/></PageLayout>}/>
+        <Route path="/course/:idCourse" element={<CourseDetail/>}/>
 
-        {/* Protected Common for Student, Teacher Routes */}
-        <Route element={<PrivateRoute allowedRoles={["Student", "Teacher", "Admin"]}/>}>
-            <Route path="/profile/:id" element={<ProfileDetail/>}/>
+        {/* Protected Common for Teacher Routes */}
+        <Route element={<PrivateRoute allowedRoles={["Teacher", "Admin"]}/>}>
+            <Route path="/course/create" element={<CourseCreate/>}/>
         </Route>
 
-        {/* Protected Student Routes */}
-        <Route element={<PrivateRoute allowedRoles={["Student","Admin"]}/>}>
-            <Route path="/courses" element={<PageLayout><Courses/></PageLayout>}/>
-            <Route path="/course/create" element={<CourseCreate/>}/>
-            <Route path="/course/:idCourse" element={<CourseDetail/>}/>
+        {/* Protected Student, Admin Routes, VIP Student, Teacher */}
+        <Route element={<PrivateRoute allowedRoles={["Student","Admin","VIP Student","Teacher"]}/>}>
+            <Route path="/profile/:id" element={<ProfileDetail/>}/>
             <Route path="/quiz/:idCourse" element={<QuizDetail/>}/>
             <Route path="/paymentSuccess" element={<PaymentSuccess/>}/>
             <Route path="/learn-course/:idCourse" element={<LearnCourse/>}/>
             <Route path="/subscriptions" element={<PageLayout><Subscriptions/></PageLayout>}/>
             <Route path="/paymentPremium" element={<PaymentPremium/>}/>
             <Route path="/schedule" element={<PageLayout><Schedule/></PageLayout>}/>
+            <Route path="/certificate" element={<Certificate/>}/>
         </Route>
 
         {/* Protected Vip Student Routes */}
@@ -68,11 +66,6 @@ const AppContent = () => (
             <Route path="/vip/test" element={<VipStudentTest/>}></Route>
         </Route>
 
-
-        {/* Protected Teacher Routes */}
-        <Route element={<PrivateRoute allowedRoles={["Admin"]}/>}>
-            <Route path="/teacher/test" element={<TeacherTest/>}></Route>
-        </Route>
         {/* Protected Admin Routes */}
         <Route element={<PrivateRoute allowedRoles={["Admin"]}/>}>
             <Route path="/admin/statistic" element={<Statistic/>}/>
@@ -80,6 +73,7 @@ const AppContent = () => (
             <Route path="/admin/course/courseList" element={<CourseList/>}/>
             <Route path="/admin/teacher/teacherList" element={<TeacherList/>}/>
             <Route path="/admin/student/studentList" element={<StudentList/>}/>
+            <Route path="/teacher/test" element={<TeacherTest/>}></Route>
         </Route>
     </Routes>
 );
